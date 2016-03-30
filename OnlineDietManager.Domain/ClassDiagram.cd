@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OnlineDietManager.Domain.Entities.Abstract.DishComponent">
+    <Position X="7" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAgAAAAAEAAAAQAACAAAIAAAAAAAAAEAAA=</HashCode>
+      <FileName>Entities\Abstract\DishComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineDietManager.Domain.Entities.Dish">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAIAAAAAAAAAAQAQ=</HashCode>
+      <FileName>Entities\Dish.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineDietManager.Domain.Entities.Ingredient">
+    <Position X="8.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAEAAAAAAACAAAIAAAAAAAAAEAAA=</HashCode>
+      <FileName>Entities\Ingredient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="OnlineDietManager.Domain.Entities.Abstract.IDish">
+    <Position X="3.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Entities\Abstract\IDish.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OnlineDietManager.Domain.Entities.Abstract.IDishComponent">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAgAAAAAEAAAAQAACAAAIAAAAAAAAAEAAA=</HashCode>
+      <FileName>Entities\Abstract\IDishComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OnlineDietManager.Domain.Entities.Abstract.IIngredient">
+    <Position X="1" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAEAAAAAAACAAAIAAAAAAAAAEAAA=</HashCode>
+      <FileName>Entities\Abstract\IIngredient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,6 @@
+D:\OnlineDietManager\OnlineDietManager.Domain\bin\Debug\OnlineDietManager.Domain.exe.config
+D:\OnlineDietManager\OnlineDietManager.Domain\obj\Debug\OnlineDietManager.Domain.csprojResolveAssemblyReference.cache
+D:\OnlineDietManager\OnlineDietManager.Domain\bin\Debug\OnlineDietManager.Domain.exe
+D:\OnlineDietManager\OnlineDietManager.Domain\bin\Debug\OnlineDietManager.Domain.pdb
+D:\OnlineDietManager\OnlineDietManager.Domain\obj\Debug\OnlineDietManager.Domain.exe
+D:\OnlineDietManager\OnlineDietManager.Domain\obj\Debug\OnlineDietManager.Domain.pdb
