@@ -20,7 +20,7 @@ namespace OnlineDietManager.Domain.Practice
         public DbSet<Dish>          Dishes          { get; set; }
         public DbSet<User>          Users           { get; set; }
         public DbSet<Meal>          Meals           { get; set; }
-        public DbSet<MealDish>      MealDishes      { get; set; }
-
+        public DbSet<Day>           Days            { get; set; }
+        public DbSet<Course>        Courses         { get; set; }
     }
 }

@@ -50,10 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Abstract\IDescribable.cs" />
-    <Compile Include="Entities\CoursesManagement\Meal.cs" />
-    <Compile Include="Entities\CoursesManagement\MealDish.cs">
+    <Compile Include="Entities\CoursesManagement\ActiveCourse.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entities\CoursesManagement\Course.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\CoursesManagement\Day.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\CoursesManagement\Meal.cs" />
     <Compile Include="Entities\DishesManagement\Abstract\FoodComponent.cs" />
     <Compile Include="Entities\DishesManagement\Dish.cs" />
     <Compile Include="Entities\DishesManagement\DishComponent.cs" />
@@ -84,17 +90,25 @@
     <Compile Include="Migrations\201604061243063_Mig_5.Designer.cs">
       <DependentUpon>201604061243063_Mig_5.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604061255151_Mig_6.cs" />
-    <Compile Include="Migrations\201604061255151_Mig_6.Designer.cs">
-      <DependentUpon>201604061255151_Mig_6.cs</DependentUpon>
+    <Compile Include="Migrations\201604061702155_Mig_6.cs" />
+    <Compile Include="Migrations\201604061702155_Mig_6.Designer.cs">
+      <DependentUpon>201604061702155_Mig_6.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604061259287_Mig_61.cs" />
-    <Compile Include="Migrations\201604061259287_Mig_61.Designer.cs">
-      <DependentUpon>201604061259287_Mig_61.cs</DependentUpon>
+    <Compile Include="Migrations\201604061717341_Mig_7.cs" />
+    <Compile Include="Migrations\201604061717341_Mig_7.Designer.cs">
+      <DependentUpon>201604061717341_Mig_7.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604061301295_Mig_7.cs" />
-    <Compile Include="Migrations\201604061301295_Mig_7.Designer.cs">
-      <DependentUpon>201604061301295_Mig_7.cs</DependentUpon>
+    <Compile Include="Migrations\201604061720291_Mig_8.cs" />
+    <Compile Include="Migrations\201604061720291_Mig_8.Designer.cs">
+      <DependentUpon>201604061720291_Mig_8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604061724298_Mig_9.cs" />
+    <Compile Include="Migrations\201604061724298_Mig_9.Designer.cs">
+      <DependentUpon>201604061724298_Mig_9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604061759544_Mig_10.cs" />
+    <Compile Include="Migrations\201604061759544_Mig_10.Designer.cs">
+      <DependentUpon>201604061759544_Mig_10.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyOnlineDietManagerContext.cs" />
@@ -124,14 +138,20 @@
     <EmbeddedResource Include="Migrations\201604061243063_Mig_5.resx">
       <DependentUpon>201604061243063_Mig_5.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604061255151_Mig_6.resx">
-      <DependentUpon>201604061255151_Mig_6.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604061702155_Mig_6.resx">
+      <DependentUpon>201604061702155_Mig_6.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604061259287_Mig_61.resx">
-      <DependentUpon>201604061259287_Mig_61.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604061717341_Mig_7.resx">
+      <DependentUpon>201604061717341_Mig_7.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604061301295_Mig_7.resx">
-      <DependentUpon>201604061301295_Mig_7.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604061720291_Mig_8.resx">
+      <DependentUpon>201604061720291_Mig_8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061724298_Mig_9.resx">
+      <DependentUpon>201604061724298_Mig_9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061759544_Mig_10.resx">
+      <DependentUpon>201604061759544_Mig_10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -7,13 +7,13 @@ namespace OnlineDietManager.Domain.Practice.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Mig_7 : IMigrationMetadata
+    public sealed partial class Mig_9 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Mig_7));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Mig_9));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604061301295_Mig_7"; }
+            get { return "201604061724298_Mig_9"; }
         }
         
         string IMigrationMetadata.Source

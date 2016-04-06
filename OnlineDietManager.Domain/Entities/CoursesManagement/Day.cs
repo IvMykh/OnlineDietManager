@@ -13,7 +13,7 @@ namespace OnlineDietManager.Domain.Entities.CoursesManagement
     public class Day
         : IDescribable
     {
-        [Key, Column(Order = 0)]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 

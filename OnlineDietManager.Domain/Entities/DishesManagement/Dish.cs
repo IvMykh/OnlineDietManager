@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 using OnlineDietManager.Domain.Entities.DishesManagement.Abstract;
+using OnlineDietManager.Domain.Entities.CoursesManagement;
 
 namespace OnlineDietManager.Domain.Entities.DishesManagement
 {
@@ -25,6 +26,13 @@ namespace OnlineDietManager.Domain.Entities.DishesManagement
         {
             get;
             private set;
+        }
+
+        [Required]
+        public virtual IList<Meal> Meals 
+        { 
+            get; 
+            set; 
         }
 
         public Dish()
