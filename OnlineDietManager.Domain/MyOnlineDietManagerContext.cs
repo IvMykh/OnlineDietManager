@@ -8,6 +8,7 @@ using System.Data.Entity;
 
 using OnlineDietManager.Domain.Entities.DishesManagement;
 using OnlineDietManager.Domain.Entities.UsersManagement;
+using OnlineDietManager.Domain.Entities.CoursesManagement;
 
 namespace OnlineDietManager.Domain.Practice
 {
@@ -18,5 +19,8 @@ namespace OnlineDietManager.Domain.Practice
         public DbSet<DishComponent> DishComponents  { get; set; }
         public DbSet<Dish>          Dishes          { get; set; }
         public DbSet<User>          Users           { get; set; }
+        public DbSet<Meal>          Meals           { get; set; }
+        public DbSet<MealDish>      MealDishes      { get; set; }
+
     }
 }

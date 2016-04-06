@@ -9,11 +9,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 using OnlineDietManager.Domain.Entities.DishesManagement.Abstract;
+using OnlineDietManager.Domain.Entities.Abstract;
 
 namespace OnlineDietManager.Domain.Entities.DishesManagement
 {
     [Table("DishComponents")]
     public class DishComponent
+        : IDescribable
     {
         [ForeignKey("ID")]
         public Ingredient Ingredient { get; set; }
@@ -49,6 +51,11 @@ namespace OnlineDietManager.Domain.Entities.DishesManagement
         public float Caloricity
         {
             get { return Ingredient.Caloricity / SpecialData.STANDARD_PORTION * Weight; }
+        }
+
+        public string Description
+        {
+            get { return Ingredient.Description; }
         }
     }
 }

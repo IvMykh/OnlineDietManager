@@ -49,6 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Abstract\IDescribable.cs" />
+    <Compile Include="Entities\CoursesManagement\Meal.cs" />
+    <Compile Include="Entities\CoursesManagement\MealDish.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Entities\DishesManagement\Abstract\FoodComponent.cs" />
     <Compile Include="Entities\DishesManagement\Dish.cs" />
     <Compile Include="Entities\DishesManagement\DishComponent.cs" />
@@ -75,6 +80,22 @@
     <Compile Include="Migrations\201604061104517_Mig_4.Designer.cs">
       <DependentUpon>201604061104517_Mig_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604061243063_Mig_5.cs" />
+    <Compile Include="Migrations\201604061243063_Mig_5.Designer.cs">
+      <DependentUpon>201604061243063_Mig_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604061255151_Mig_6.cs" />
+    <Compile Include="Migrations\201604061255151_Mig_6.Designer.cs">
+      <DependentUpon>201604061255151_Mig_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604061259287_Mig_61.cs" />
+    <Compile Include="Migrations\201604061259287_Mig_61.Designer.cs">
+      <DependentUpon>201604061259287_Mig_61.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604061301295_Mig_7.cs" />
+    <Compile Include="Migrations\201604061301295_Mig_7.Designer.cs">
+      <DependentUpon>201604061301295_Mig_7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyOnlineDietManagerContext.cs" />
     <Compile Include="Program.cs" />
@@ -100,7 +121,20 @@
     <EmbeddedResource Include="Migrations\201604061104517_Mig_4.resx">
       <DependentUpon>201604061104517_Mig_4.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061243063_Mig_5.resx">
+      <DependentUpon>201604061243063_Mig_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061255151_Mig_6.resx">
+      <DependentUpon>201604061255151_Mig_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061259287_Mig_61.resx">
+      <DependentUpon>201604061259287_Mig_61.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061301295_Mig_7.resx">
+      <DependentUpon>201604061301295_Mig_7.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,10 +8,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using System.Data.Entity;
+using OnlineDietManager.Domain.Entities.Abstract;
 
 namespace OnlineDietManager.Domain.Entities.DishesManagement.Abstract
 {
-    public abstract class FoodComponent
+    public abstract class FoodComponent 
+        : IDescribable
     {
         [Required, Column(Order = 1)]
         public string   Name            { get; set; }
