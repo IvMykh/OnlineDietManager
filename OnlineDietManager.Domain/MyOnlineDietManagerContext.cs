@@ -22,15 +22,5 @@ namespace OnlineDietManager.Domain.Practice
         public DbSet<Meal>          Meals           { get; set; }
         public DbSet<Day>           Days            { get; set; }
         public DbSet<Course>        Courses         { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<Course>()
-            //    .HasOptional(s => s.Owner)
-            //    .WithOptionalDependent(s => s.ID)
-            //    .HasForeignKey(s => s.ContactId);
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
