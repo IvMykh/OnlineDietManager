@@ -8,9 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using System.Data.Entity;
 
-using OnlineDietManager.Domain.Entities.DishesManagement.Abstract;
+using OnlineDietManager.Domain.Practice.Entities.DishesManagement.Abstract;
 
-namespace OnlineDietManager.Domain.Entities.DishesManagement
+namespace OnlineDietManager.Domain.Practice.Entities.DishesManagement
 {
     [Table("Dishes")]
     public class Dish

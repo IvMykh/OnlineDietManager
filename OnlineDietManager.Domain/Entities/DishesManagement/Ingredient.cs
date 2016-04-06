@@ -2,43 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using System.Data.Entity;
 
 using OnlineDietManager.Domain.Entities.DishesManagement.Abstract;
 
 namespace OnlineDietManager.Domain.Entities.DishesManagement
 {
+    [Table("Ingredients")]
     public class Ingredient
-        : DishComponent, IIngredient
+        : FoodComponent
     {
-        public new float Protein
-        {
-            get { return base.Protein; }
-            set { base.Protein = value; }
-        }
+        [Key, Column(Order=0)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
 
-        public new float Fat             
-        {
-            get { return base.Fat; }
-            set { base.Fat = value; }
-        }
-        
-        public new float Carbohydrates   
-        {
-            get { return base.Carbohydrates; }
-            set { base.Carbohydrates = value; }
-        }
-        
-        public new float Caloricity      
-        {
-            get { return base.Caloricity; }
-            set { base.Caloricity = value; }
-        }
-        
-        public new float Weight 
-        {
-            get { return base.Weight; }
-            set { base.Weight = value; }
-        }
+        [Required]
+        public float Protein { get; set; }
+
+        [Required]
+        public float Fat { get; set; }
+
+        [Required]
+        public float Carbohydrates { get; set; }
+
+        [Required]
+        public float Caloricity { get; set; }
     }
 }

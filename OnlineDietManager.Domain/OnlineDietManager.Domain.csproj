@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{87FA2BA3-BB1E-46AF-B016-67CDF1A91490}</ProjectGuid>
+    <ProjectGuid>{C506339A-962D-43A7-8A10-498D34DEA43C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OnlineDietManager.Domain</RootNamespace>
@@ -33,7 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,18 +49,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\DishesManagement\Abstract\DishComponent.cs" />
-    <Compile Include="Entities\DishesManagement\Abstract\IDish.cs" />
-    <Compile Include="Entities\DishesManagement\Abstract\IDishComponent.cs" />
-    <Compile Include="Entities\DishesManagement\Abstract\IIngredient.cs" />
+    <Compile Include="Entities\DishesManagement\Abstract\FoodComponent.cs" />
     <Compile Include="Entities\DishesManagement\Dish.cs" />
+    <Compile Include="Entities\DishesManagement\DishComponent.cs" />
     <Compile Include="Entities\DishesManagement\Ingredient.cs" />
+    <Compile Include="Entities\DishesManagement\SpecialData.cs" />
+    <Compile Include="Entities\UsersManagement\User.cs" />
+    <Compile Include="Migrations\201603312153117_InitialCreate.cs" />
+    <Compile Include="Migrations\201603312153117_InitialCreate.Designer.cs">
+      <DependentUpon>201603312153117_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603312201233_Mig_1.cs" />
+    <Compile Include="Migrations\201603312201233_Mig_1.Designer.cs">
+      <DependentUpon>201603312201233_Mig_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604011821132_Mig_2.cs" />
+    <Compile Include="Migrations\201604011821132_Mig_2.Designer.cs">
+      <DependentUpon>201604011821132_Mig_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604012022525_Mig_3.cs" />
+    <Compile Include="Migrations\201604012022525_Mig_3.Designer.cs">
+      <DependentUpon>201604012022525_Mig_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604061104517_Mig_4.cs" />
+    <Compile Include="Migrations\201604061104517_Mig_4.Designer.cs">
+      <DependentUpon>201604061104517_Mig_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MyOnlineDietManagerContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603312153117_InitialCreate.resx">
+      <DependentUpon>201603312153117_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603312201233_Mig_1.resx">
+      <DependentUpon>201603312201233_Mig_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604011821132_Mig_2.resx">
+      <DependentUpon>201604011821132_Mig_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604012022525_Mig_3.resx">
+      <DependentUpon>201604012022525_Mig_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061104517_Mig_4.resx">
+      <DependentUpon>201604061104517_Mig_4.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

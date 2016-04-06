@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using OnlineDietManager.Domain.Entities.DishesManagement.Abstract;
-
 namespace OnlineDietManager.Domain.Entities.DishesManagement
 {
-    public class DishEditor
-        : IDishEditor
+    public static class SpecialData
     {
-        // TODO: implement;
+        public const float STANDARD_PORTION = 100.0f;
     }
 }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OnlineDietManager.Domain")]
+[assembly: AssemblyTitle("OnlineDietManager.Domain.Practice")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("OnlineDietManager.Domain")]
+[assembly: AssemblyProduct("OnlineDietManager.Domain.Practice")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a11cf01d-7c5b-4f96-91e4-4fc3afd3a85d")]
+[assembly: Guid("70133aed-dc07-4ecb-8cfa-7f6ec9aad3b3")]
 
 // Version information for an assembly consists of the following four values:
 //
