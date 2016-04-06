@@ -110,6 +110,14 @@
     <Compile Include="Migrations\201604061759544_Mig_10.Designer.cs">
       <DependentUpon>201604061759544_Mig_10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604061851190_Mig_11.cs" />
+    <Compile Include="Migrations\201604061851190_Mig_11.Designer.cs">
+      <DependentUpon>201604061851190_Mig_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604061955142_Mig_12.cs" />
+    <Compile Include="Migrations\201604061955142_Mig_12.Designer.cs">
+      <DependentUpon>201604061955142_Mig_12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyOnlineDietManagerContext.cs" />
     <Compile Include="Program.cs" />
@@ -117,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +161,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604061759544_Mig_10.resx">
       <DependentUpon>201604061759544_Mig_10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061851190_Mig_11.resx">
+      <DependentUpon>201604061851190_Mig_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604061955142_Mig_12.resx">
+      <DependentUpon>201604061955142_Mig_12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

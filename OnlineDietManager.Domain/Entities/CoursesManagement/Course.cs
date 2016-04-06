@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnlineDietManager.Domain.Entities.Abstract;
+using OnlineDietManager.Domain.Entities.UsersManagement;
 
 namespace OnlineDietManager.Domain.Entities.CoursesManagement
 {
@@ -21,5 +22,10 @@ namespace OnlineDietManager.Domain.Entities.CoursesManagement
         public IList<Day> Days { get; set; }
 
         public string Description { get; set; }
+
+        public int? OwnerID { get; set; }
+
+        [ForeignKey("OwnerID")]
+        public virtual User Owner { get; set; }
     }
 }
