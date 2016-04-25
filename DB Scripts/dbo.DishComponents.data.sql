@@ -1,0 +1,7 @@
+INSERT INTO [dbo].[DishComponents] ([ID], [DishRefID], [Weight]) VALUES (6, 13, 100)
+INSERT INTO [dbo].[DishComponents] ([ID], [DishRefID], [Weight]) VALUES (7, 13, 150)
+INSERT INTO [dbo].[DishComponents] ([ID], [DishRefID], [Weight]) VALUES (8, 13, 150)
+INSERT INTO [dbo].[DishComponents] ([ID], [DishRefID], [Weight]) VALUES (9, 12, 100)
+INSERT INTO [dbo].[DishComponents] ([ID], [DishRefID], [Weight]) VALUES (22, 12, 50)
+INSERT INTO [dbo].[DishComponents] ([ID], [DishRefID], [Weight]) VALUES (23, 12, 40)
+INSERT INTO [dbo].[DishComponents] ([ID], [DishRefID], [Weight]) VALUES (28, 14, 200)

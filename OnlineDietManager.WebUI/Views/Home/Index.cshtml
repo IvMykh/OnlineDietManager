@@ -1,0 +1,17 @@
+﻿@using OnlineDietManager.Domain.DishesManagement
+@model IEnumerable<Ingredient>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var item in Model)
+{
+    <p>@item.Name</p>
+    <p>@item.Description</p>
+    <p>@item.Protein</p>
+    <p>@item.Fat</p>
+    <p>@item.Carbohydrates</p>
+    <p></p>
+}

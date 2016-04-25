@@ -1,19 +1,18 @@
-namespace OnlineDietManager.Domain.Practice.Migrations
+namespace OnlineDietManager.Domain.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<OnlineDietManager.Domain.Practice.MyOnlineDietManagerContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<OnlineDietManager.Domain.OnlineDietManagerContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "OnlineDietManager.Domain.Practice.MyOnlineDietManagerContext";
         }
 
-        protected override void Seed(OnlineDietManager.Domain.Practice.MyOnlineDietManagerContext context)
+        protected override void Seed(OnlineDietManager.Domain.OnlineDietManagerContext context)
         {
             //  This method will be called after migrating to the latest version.
 

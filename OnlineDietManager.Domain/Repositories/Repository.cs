@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using OnlineDietManager.Domain.Practice;
-using OnlineDietManager.Domain.Repositories.Abstract;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OnlineDietManager.Domain.Repositories
 {
     public class Repository<TEntity>
         : IRepository<TEntity>
-          where TEntity: class
+          where TEntity : class
     {
-        private MyOnlineDietManagerContext  _context;
-        private DbSet<TEntity>              _dbSet;
+        private OnlineDietManagerContext _context;
+        private DbSet<TEntity> _dbSet;
 
-        public Repository(MyOnlineDietManagerContext context)
+        public Repository(OnlineDietManagerContext context)
         {
-            _context    = context;
-            _dbSet      = context.Set<TEntity>();
+            _context = context;
+            _dbSet = context.Set<TEntity>();
         }
 
         public IQueryable<TEntity> GetAll()
