@@ -22,5 +22,15 @@ namespace OnlineDietManager.WebUI.Controllers
         {
             return View(uow.IngredientsRepository.GetAll().ToList());
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
 	}
 }
