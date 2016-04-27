@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using OnlineDietManager.Domain.Abstract;
 using OnlineDietManager.Domain.UsersManagement;
 
@@ -20,6 +21,7 @@ namespace OnlineDietManager.Domain.DishesManagement
         public string Description { get; set; }
 
         [StringLength(128)]
+        [HiddenInput(DisplayValue = false)]
         public string OwnerID { get; set; }
 
         [ForeignKey("OwnerID")]

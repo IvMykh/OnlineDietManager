@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B8EDF30D-E1C5-4F56-BA62-39365E0E9A8E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OnlineDietManager.Domain</RootNamespace>
     <AssemblyName>OnlineDietManager.Domain</AssemblyName>
@@ -113,6 +113,10 @@
     <Compile Include="Migrations\201604271107139_Mig_4.Designer.cs">
       <DependentUpon>201604271107139_Mig_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604271430130_Mig_5.cs" />
+    <Compile Include="Migrations\201604271430130_Mig_5.Designer.cs">
+      <DependentUpon>201604271430130_Mig_5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyApp.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604271107139_Mig_4.resx">
       <DependentUpon>201604271107139_Mig_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604271430130_Mig_5.resx">
+      <DependentUpon>201604271430130_Mig_5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -25,9 +25,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("My Ingredients", "Index", "Ingredients")</li>
+                    <li>@Html.ActionLink("My Dishes", "Index", "Dishes")</li>
                 </ul>
 
                 @Html.Partial("_LoginPartial")
@@ -35,10 +34,14 @@
         </div>
     </div>
     <div class="container body-content">
+        @if (TempData["message"] != null) {
+            <div class="alert alert-success">@TempData["message"]</div>
+        }
+        
         @RenderBody()
         <hr/>
         <footer class="panel panel-footer">
-            <p>&copy; @DateTime.Now.Year - Confectionary</p>
+            <p>&copy; @DateTime.Now.Year - Online Diet Manager</p>
         </footer>
     </div>
 </body>
