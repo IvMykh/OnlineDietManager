@@ -27,22 +27,13 @@ namespace OnlineDietManager.WebUI
             });
 
             // configure the user manager
-            UserManagerFactory = () =>
-            {
-                var usermanager = new UserManager<AppUser>(
-                    new UserStore<AppUser>(new OnlineDietManagerContext()));
-                // allow alphanumeric characters in username
-                usermanager.UserValidator = new UserValidator<AppUser>(usermanager)
-                {
-                    AllowOnlyAlphanumericUserNames = false
-                };
-            
-                return usermanager;
-            };
+            // ...
+            // taken from Roman's link; now replaced.
 
             // Roles management config.
-            //app.CreatePerOwinContext<OnlineDietManagerContext>(OnlineDietManagerContext.Create);
-            //app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
+            app.CreatePerOwinContext<OnlineDietManagerContext>(OnlineDietManagerContext.Create);
+            app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
+            app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
         }
     }
 }

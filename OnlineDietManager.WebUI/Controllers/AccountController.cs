@@ -19,35 +19,13 @@ namespace OnlineDietManager.WebUI.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly UserManager<AppUser> userManager;
-        private readonly RoleManager<AppRole> roleManager;
-
         public AccountController()
-            : this(Startup.UserManagerFactory.Invoke())
         {
-        }
-
-        public AccountController(UserManager<AppUser> userManagerParam)
-        {
-            userManager = userManagerParam;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && userManager != null)
-            {
-                userManager.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            //var rolesmanager = new AppRoleManager(new RoleStore<AppRole>());
-            //rolesmanager.Create(new AppRole("Admin"));
-            //rolesmanager.Create(new AppRole("User"));
-
             var model = new LogInModel
                 {
                     ReturnUrl = returnUrl
@@ -64,11 +42,11 @@ namespace OnlineDietManager.WebUI.Controllers
                 return View();
             }
 
-            var user = await userManager.FindAsync(model.UserName, model.Password);
+            var user = await UserManager.FindAsync(model.UserName, model.Password);
 
             if (user != null)
             {
-                var identity = await userManager.CreateIdentityAsync(
+                var identity = await UserManager.CreateIdentityAsync(
                     user, DefaultAuthenticationTypes.ApplicationCookie);
 
                 GetAuthenticationManager().SignIn(identity);
@@ -116,10 +94,11 @@ namespace OnlineDietManager.WebUI.Controllers
 
             var user = new AppUser
             {
-                UserName = model.UserName //model.Email,
+                UserName = model.UserName 
             };
 
-            var result = await userManager.CreateAsync(user, model.Password);
+            var result = await UserManager.CreateAsync(user, model.Password);
+            UserManager.AddToRole(user.Id, "User");
 
             if (result.Succeeded)
             {
@@ -143,9 +122,25 @@ namespace OnlineDietManager.WebUI.Controllers
 
         private async Task SignIn(AppUser user)
         {
-            var identity = await userManager.CreateIdentityAsync(
+            var identity = await UserManager.CreateIdentityAsync(
                 user, DefaultAuthenticationTypes.ApplicationCookie);
             GetAuthenticationManager().SignIn(identity);
+        }
+
+        private AppUserManager UserManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+            }
+        }
+
+        private AppRoleManager RoleManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<AppRoleManager>();
+            }
         }
 	}
 }

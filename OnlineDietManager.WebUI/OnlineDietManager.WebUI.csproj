@@ -173,6 +173,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AppRoleManager.cs" />
+    <Compile Include="Infrastructure\AppUserManager.cs" />
     <Compile Include="Infrastructure\AppViewPage.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AppUserPrincipal.cs" />
