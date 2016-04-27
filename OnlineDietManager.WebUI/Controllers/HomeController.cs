@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+
+using Microsoft.AspNet.Identity;
+
 using OnlineDietManager.Domain.UnitsOfWork;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AppController
     {
-        private IUnitOfWork uow;
-
-        public HomeController(IUnitOfWork uowParam)
-        {
-            uow = uowParam;
-        }
+        //private IUnitOfWork uow;
+        //
+        //public HomeController(IUnitOfWork uowParam)
+        //{
+        //    uow = uowParam;
+        //}
 
         //
         // GET: /Home/
         public ActionResult Index()
         {
-            return View(uow.IngredientsRepository.GetAll().ToList());
+            return View();
         }
 
         public ActionResult About()

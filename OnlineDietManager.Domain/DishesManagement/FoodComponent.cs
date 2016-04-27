@@ -19,9 +19,10 @@ namespace OnlineDietManager.Domain.DishesManagement
         [Required, Column(Order = 2)]
         public string Description { get; set; }
 
-        public int? OwnerID { get; set; }
+        [StringLength(128)]
+        public string OwnerID { get; set; }
 
         [ForeignKey("OwnerID")]
-        public virtual User Owner { get; set; }
+        public virtual AppUser Owner { get; set; }
     }
 }

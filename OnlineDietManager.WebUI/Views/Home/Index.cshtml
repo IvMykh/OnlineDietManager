@@ -1,17 +1,13 @@
-﻿@using OnlineDietManager.Domain.DishesManagement
-@model IEnumerable<Ingredient>
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Log In";
 }
 
-<h2>Index</h2>
+<h2>Log In</h2>
 
-@foreach (var item in Model)
-{
-    <p>@item.Name</p>
-    <p>@item.Description</p>
-    <p>@item.Protein</p>
-    <p>@item.Fat</p>
-    <p>@item.Carbohydrates</p>
-    <p></p>
-}
+<p>
+    Hello @CurrentUser.Name!
+</p>
+
+<p>
+    <a href="@Url.Action("Logout", "Account")">Log Out</a>
+</p>

@@ -7,7 +7,10 @@
 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
 
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -26,18 +29,17 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr/>
         <footer class="panel panel-footer">
             <p>&copy; @DateTime.Now.Year - Confectionary</p>
         </footer>
     </div>
-
-    @RenderSection("scripts", required: false)
 </body>
 </html>

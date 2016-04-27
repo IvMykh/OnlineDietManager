@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace OnlineDietManager.Domain.Repositories
 {
-    public class Repository<TEntity>
-        : IRepository<TEntity>
-          where TEntity : class
+    public class GenericRepository<TEntity>
+         : IRepository<TEntity>
+           where TEntity : class
     {
         private OnlineDietManagerContext _context;
         private DbSet<TEntity> _dbSet;
 
-        public Repository(OnlineDietManagerContext context)
+        public GenericRepository(OnlineDietManagerContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();

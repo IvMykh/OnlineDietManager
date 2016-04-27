@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 using OnlineDietManager.Domain.CoursesManagement;
 using OnlineDietManager.Domain.DishesManagement;
 using OnlineDietManager.Domain.Repositories;
-using OnlineDietManager.Domain.UsersManagement;
 
 namespace OnlineDietManager.Domain.UnitsOfWork
 {
-    public class UnitOfWork
+    public class ODMUnitOfWork
         : IUnitOfWork,
           IDisposable
     {
@@ -20,12 +19,12 @@ namespace OnlineDietManager.Domain.UnitsOfWork
         IRepository<Ingredient> _ingredientsRepository;
         IRepository<DishComponent> _dishComponentsRepository;
         IRepository<Dish> _dishesRepository;
-        IRepository<User> _usersRepository;
+        //IRepository<User> _usersRepository;
         IRepository<Meal> _mealsRepository;
         IRepository<Day> _daysRepository;
         IRepository<Course> _coursesRepository;
 
-        public UnitOfWork()
+        public ODMUnitOfWork()
         {
             this._context = new OnlineDietManagerContext();
             this._isDisposed = false;
@@ -37,7 +36,7 @@ namespace OnlineDietManager.Domain.UnitsOfWork
             {
                 if (_ingredientsRepository == null)
                 {
-                    _ingredientsRepository = new Repository<Ingredient>(this._context);
+                    _ingredientsRepository = new GenericRepository<Ingredient>(this._context);
                 }
 
                 return _ingredientsRepository;
@@ -50,7 +49,7 @@ namespace OnlineDietManager.Domain.UnitsOfWork
             {
                 if (_dishComponentsRepository == null)
                 {
-                    _dishComponentsRepository = new Repository<DishComponent>(this._context);
+                    _dishComponentsRepository = new GenericRepository<DishComponent>(this._context);
                 }
 
                 return _dishComponentsRepository;
@@ -63,25 +62,25 @@ namespace OnlineDietManager.Domain.UnitsOfWork
             {
                 if (_dishesRepository == null)
                 {
-                    _dishesRepository = new Repository<Dish>(this._context);
+                    _dishesRepository = new GenericRepository<Dish>(this._context);
                 }
 
                 return _dishesRepository;
             }
         }
 
-        public IRepository<User> UsersRepository
-        {
-            get
-            {
-                if (_usersRepository == null)
-                {
-                    _usersRepository = new Repository<User>(this._context);
-                }
-
-                return _usersRepository;
-            }
-        }
+        //public IRepository<User> UsersRepository
+        //{
+        //    get
+        //    {
+        //        if (_usersRepository == null)
+        //        {
+        //            _usersRepository = new Repository<User>(this._context);
+        //        }
+        //
+        //        return _usersRepository;
+        //    }
+        //}
 
         public IRepository<Meal> MealsRepository
         {
@@ -89,7 +88,7 @@ namespace OnlineDietManager.Domain.UnitsOfWork
             {
                 if (_mealsRepository == null)
                 {
-                    _mealsRepository = new Repository<Meal>(this._context);
+                    _mealsRepository = new GenericRepository<Meal>(this._context);
                 }
 
                 return _mealsRepository;
@@ -102,7 +101,7 @@ namespace OnlineDietManager.Domain.UnitsOfWork
             {
                 if (_daysRepository == null)
                 {
-                    _daysRepository = new Repository<Day>(this._context);
+                    _daysRepository = new GenericRepository<Day>(this._context);
                 }
 
                 return _daysRepository;
@@ -115,7 +114,7 @@ namespace OnlineDietManager.Domain.UnitsOfWork
             {
                 if (_coursesRepository == null)
                 {
-                    _coursesRepository = new Repository<Course>(this._context);
+                    _coursesRepository = new GenericRepository<Course>(this._context);
                 }
 
                 return _coursesRepository;

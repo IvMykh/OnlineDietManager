@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using Ninject;
-
 using OnlineDietManager.Domain.UnitsOfWork;
+using OnlineDietManager.WebUI.UnitsOfWork;
 
 namespace OnlineDietManager.WebUI.Infrastructure
 {
@@ -24,7 +23,7 @@ namespace OnlineDietManager.WebUI.Infrastructure
         private void addBindings()
         {
             kernel.Bind<IUnitOfWork>()
-                  .To<UnitOfWork>();
+                  .To<ODMUnitOfWork>();
         }
 
         public object GetService(Type serviceType)
