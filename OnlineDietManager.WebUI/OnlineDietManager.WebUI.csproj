@@ -167,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\DishComponentsController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsController.cs" />
@@ -178,13 +179,16 @@
     <Compile Include="Infrastructure\AppViewPage.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AppUserPrincipal.cs" />
+    <Compile Include="Models\CreateDishComponentViewModel.cs" />
+    <Compile Include="Models\DishComponentViewModel.cs" />
+    <Compile Include="Models\DishViewModel.cs" />
+    <Compile Include="Models\IngredientViewModel.cs" />
+    <Compile Include="Models\ListDishComponentsViewModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="UnitsOfWork\ODMUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -201,6 +205,11 @@
     <Content Include="Views\Ingredients\Index.cshtml" />
     <Content Include="Views\Dishes\Index.cshtml" />
     <Content Include="Views\Ingredients\Edit.cshtml" />
+    <Content Include="Views\Dishes\Edit.cshtml" />
+    <Content Include="Views\Shared\_ListDishComponentsPartial.cshtml" />
+    <Content Include="Views\DishComponents\Edit.cshtml" />
+    <Content Include="Views\Shared\_SaveCancelPartial.cshtml" />
+    <Content Include="Views\Shared\_CreateDishComponentPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

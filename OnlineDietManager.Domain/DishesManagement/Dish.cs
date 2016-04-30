@@ -17,14 +17,14 @@ namespace OnlineDietManager.Domain.DishesManagement
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Required]
+        //[Required]
         public virtual IList<DishComponent> Components
         {
             get;
             private set;
         }
 
-        [Required]
+        //[Required]
         public virtual IList<Meal> Meals
         {
             get;

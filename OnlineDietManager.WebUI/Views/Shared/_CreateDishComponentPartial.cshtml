@@ -1,0 +1,17 @@
+﻿@model OnlineDietManager.WebUI.Models.CreateDishComponentViewModel
+
+
+@using (Html.BeginForm("Create", "DishComponents"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    @Html.HiddenFor(model => model.DishRefId, Model.DishRefId)
+    @Html.HiddenFor(model => model.ReturnUrl)
+    
+    <tr>
+        <td>@Html.DropDownList("Id", String.Empty)</td>
+        <td>@Html.EditorFor(model => model.Weight)</td>
+        <td><input type="submit" value="Add" class="btn btn-primary btn-xs" /></td>
+    </tr>
+}

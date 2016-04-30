@@ -1,0 +1,44 @@
+﻿@model OnlineDietManager.WebUI.Models.DishViewModel
+
+@{
+    if (string.IsNullOrEmpty(Model.Dish.Name)) {
+        ViewBag.Title = "Create new Dish";
+    } else {
+        ViewBag.Title = string.Format("Edit {0}", Model.Dish.Name);
+    }
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Dish.ID)
+        @Html.HiddenFor(model => model.Dish.OwnerID)
+        
+        @Html.HiddenFor(model => model.ReturnUrl)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dish.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Dish.Name)
+                @Html.ValidationMessageFor(model => model.Dish.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dish.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Dish.Description)
+                @Html.ValidationMessageFor(model => model.Dish.Description)
+            </div>
+        </div>
+
+        @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+    </div>
+}
+
+@Html.Action("Index", "DishComponents", new { dishRefId = Model.Dish.ID, returnUrl = Request.Url })

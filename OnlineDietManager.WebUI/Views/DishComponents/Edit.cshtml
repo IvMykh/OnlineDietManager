@@ -1,0 +1,48 @@
+﻿@model OnlineDietManager.WebUI.Models.DishComponentViewModel
+
+@{
+    if (string.IsNullOrEmpty(Model.DishComponent.Ingredient.Name)) {
+        ViewBag.Title = "Create new Dish";
+    } else {
+        ViewBag.Title = string.Format("Edit {0}", Model.DishComponent.Ingredient.Name);
+    }
+}
+
+<h3>Edit @Html.ActionLink(
+    linkText:       Model.DishComponent.Ingredient.Name, 
+    actionName:     "Edit",
+    controllerName: "Ingredients", 
+    routeValues:    new { Id = Model.DishComponent.ID, returnUrl = Request.Url }, 
+    htmlAttributes: null) 
+        component</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.DishComponent.ID)
+        @Html.HiddenFor(model => model.DishComponent.DishRefID)
+
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.ID)
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.Name)
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.Description)
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.OwnerID)
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.Protein)
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.Fat)
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.Carbohydrates)
+        @Html.HiddenFor(model => model.DishComponent.Ingredient.Caloricity)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DishComponent.Weight, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DishComponent.Weight)
+                @Html.ValidationMessageFor(model => model.DishComponent.Weight)
+            </div>
+        </div>
+
+        @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+
+    </div>
+}

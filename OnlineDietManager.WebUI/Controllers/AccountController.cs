@@ -98,10 +98,10 @@ namespace OnlineDietManager.WebUI.Controllers
             };
 
             var result = await UserManager.CreateAsync(user, model.Password);
-            UserManager.AddToRole(user.Id, "User");
 
             if (result.Succeeded)
             {
+                UserManager.AddToRole(user.Id, "User");
                 await SignIn(user);
                 return RedirectToAction("Index", "Home");
             }

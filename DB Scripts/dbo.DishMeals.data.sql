@@ -1,4 +1,4 @@
-INSERT INTO [dbo].[DishMeals] ([Meal_ID], [Dish_ID]) VALUES (3, 13)
-INSERT INTO [dbo].[DishMeals] ([Meal_ID], [Dish_ID]) VALUES (5, 13)
-INSERT INTO [dbo].[DishMeals] ([Meal_ID], [Dish_ID]) VALUES (1, 14)
-INSERT INTO [dbo].[DishMeals] ([Meal_ID], [Dish_ID]) VALUES (5, 14)
+INSERT INTO [dbo].[DishMeals] ([Dish_ID], [Meal_ID]) VALUES (14, 1)
+INSERT INTO [dbo].[DishMeals] ([Dish_ID], [Meal_ID]) VALUES (13, 3)
+INSERT INTO [dbo].[DishMeals] ([Dish_ID], [Meal_ID]) VALUES (13, 5)
+INSERT INTO [dbo].[DishMeals] ([Dish_ID], [Meal_ID]) VALUES (14, 5)
