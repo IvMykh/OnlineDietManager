@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 using OnlineDietManager.Domain.UnitsOfWork;
-using OnlineDietManager.WebUI.UnitsOfWork;
 
 namespace OnlineDietManager.WebUI.Infrastructure
 {

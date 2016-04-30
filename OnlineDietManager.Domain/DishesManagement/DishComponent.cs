@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using OnlineDietManager.Domain.Abstract;
 
 namespace OnlineDietManager.Domain.DishesManagement
@@ -18,15 +19,21 @@ namespace OnlineDietManager.Domain.DishesManagement
 
         [Key, Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required(ErrorMessage = "Please, specify corresponding ingredient")]
+        [HiddenInput(DisplayValue = false)]
         public int ID { get; set; }
 
         [ForeignKey("DishRefID")]
         public virtual Dish Dish { get; set; }
 
         [Key, Column(Order = 1)]
+        [HiddenInput(DisplayValue = false)]
+        [Required(ErrorMessage = "Please, specify corresponding dish")]
         public int DishRefID { get; set; }
 
-        [Required, Column(Order = 2)]
+        [Required(ErrorMessage = "Please, specify a weight of component")]
+        [Column(Order = 2)]
+        [Range(0.1, double.MaxValue, ErrorMessage = "Weight must be positive")]
         public float Weight { get; set; }
 
         public float Protein

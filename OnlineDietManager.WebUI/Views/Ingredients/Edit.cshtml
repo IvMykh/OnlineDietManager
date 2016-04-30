@@ -1,10 +1,14 @@
-﻿@model OnlineDietManager.Domain.DishesManagement.Ingredient
+﻿@model OnlineDietManager.WebUI.Models.IngredientViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    if (string.IsNullOrEmpty(Model.Ingredient.Name)) {
+        ViewBag.Title = "Create new Ingredient";
+    } else  {
+        ViewBag.Title = string.Format("Edit {0}", Model.Ingredient.Name);
+    }
 }
 
-<h2>Edit @Model.Name</h2>
+<h3>@ViewBag.Title</h3>
 
 @using (Html.BeginForm("Edit", "Ingredients"))
 {
@@ -12,65 +16,59 @@
     
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Ingredient.ID)
+        @Html.HiddenFor(model => model.Ingredient.OwnerID)
+
+        @Html.HiddenFor(model => model.ReturnUrl)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ingredient.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
+                @Html.EditorFor(model => model.Ingredient.Name)
+                @Html.ValidationMessageFor(model => model.Ingredient.Name)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ingredient.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
+                @Html.EditorFor(model => model.Ingredient.Description)
+                @Html.ValidationMessageFor(model => model.Ingredient.Description)
             </div>
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Protein, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ingredient.Protein, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Protein)
-                @Html.ValidationMessageFor(model => model.Protein)
+                @Html.EditorFor(model => model.Ingredient.Protein)
+                @Html.ValidationMessageFor(model => model.Ingredient.Protein)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Fat, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ingredient.Fat, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Fat)
-                @Html.ValidationMessageFor(model => model.Fat)
+                @Html.EditorFor(model => model.Ingredient.Fat)
+                @Html.ValidationMessageFor(model => model.Ingredient.Fat)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Carbohydrates, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ingredient.Carbohydrates, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Carbohydrates)
-                @Html.ValidationMessageFor(model => model.Carbohydrates)
+                @Html.EditorFor(model => model.Ingredient.Carbohydrates)
+                @Html.ValidationMessageFor(model => model.Ingredient.Carbohydrates)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Caloricity, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ingredient.Caloricity, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Caloricity)
-                @Html.ValidationMessageFor(model => model.Caloricity)
+                @Html.EditorFor(model => model.Ingredient.Caloricity)
+                @Html.ValidationMessageFor(model => model.Ingredient.Caloricity)
             </div>
         </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-            <div>
-                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
-            </div>
-
-        </div>
+        
+         @Html.Partial("_SaveCancelPartial", Model.ReturnUrl) <!--new NavigateToActionModel { Action = "Index" }-->
     </div>
 }

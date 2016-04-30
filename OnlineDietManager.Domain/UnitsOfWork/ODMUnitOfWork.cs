@@ -19,7 +19,6 @@ namespace OnlineDietManager.Domain.UnitsOfWork
         IRepository<Ingredient> _ingredientsRepository;
         IRepository<DishComponent> _dishComponentsRepository;
         IRepository<Dish> _dishesRepository;
-        //IRepository<User> _usersRepository;
         IRepository<Meal> _mealsRepository;
         IRepository<Day> _daysRepository;
         IRepository<Course> _coursesRepository;
@@ -68,19 +67,6 @@ namespace OnlineDietManager.Domain.UnitsOfWork
                 return _dishesRepository;
             }
         }
-
-        //public IRepository<User> UsersRepository
-        //{
-        //    get
-        //    {
-        //        if (_usersRepository == null)
-        //        {
-        //            _usersRepository = new Repository<User>(this._context);
-        //        }
-        //
-        //        return _usersRepository;
-        //    }
-        //}
 
         public IRepository<Meal> MealsRepository
         {

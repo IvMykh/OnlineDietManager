@@ -26,9 +26,17 @@ namespace OnlineDietManager.Domain
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<DishComponent> DishComponents { get; set; }
         public DbSet<Dish> Dishes { get; set; }
-        //public DbSet<User> Users { get; set; }
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Day> Days { get; set; }
         public DbSet<Course> Courses { get; set; }
+
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<DishComponent>()
+        //        .HasRequired(a => a.)
+        //        .WithRequiredDependent(a => a.)
+        //        .WillCascadeOnDelete(true);
+        //}
     }
 }

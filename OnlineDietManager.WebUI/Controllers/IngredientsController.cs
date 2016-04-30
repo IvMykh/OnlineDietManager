@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 
 using OnlineDietManager.Domain.DishesManagement;
 using OnlineDietManager.Domain.UnitsOfWork;
+using OnlineDietManager.WebUI.Models;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
@@ -21,9 +22,13 @@ namespace OnlineDietManager.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(string returnUrl)
         {
-            return View("Edit", new Ingredient());
+            return View("Edit", new IngredientViewModel
+                {
+                    Ingredient = new Ingredient(),
+                    ReturnUrl = returnUrl
+                });
         }
 
         // ...
@@ -32,58 +37,76 @@ namespace OnlineDietManager.WebUI.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            return View(odmUnitOfWork.IngredientsRepository.GetAll()
-                .Where(ing => ing.OwnerID == userId)
-                .ToList<Ingredient>());
+            return View(odmUnitOfWork.IngredientsRepository
+                        .GetAll()
+                        .Where(ing => ing.OwnerID == userId)
+                        .ToList<Ingredient>());
         }
 
         [HttpGet]
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(int Id, string returnUrl)
         {
-            var ingredientToEdit = odmUnitOfWork.IngredientsRepository.GetAll()
-                .FirstOrDefault(ing => ing.ID == Id);
-            
-            return View(ingredientToEdit);
+            string userId = User.Identity.GetUserId();
+
+            var ingredientToEdit = odmUnitOfWork.IngredientsRepository
+                                    .GetAll()
+                                    .Where(ing => ing.OwnerID == userId)
+                                    .FirstOrDefault(ing => ing.ID == Id);
+
+            return View(new IngredientViewModel
+                {
+                    Ingredient = ingredientToEdit,
+                    ReturnUrl = returnUrl
+                });
         }
 
         [HttpPost]
-        public ActionResult Edit(Ingredient ingredient)
+        public ActionResult Edit(IngredientViewModel ingredientVM)
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(ingredient.OwnerID))
+                if (string.IsNullOrEmpty(ingredientVM.Ingredient.OwnerID))
                 {
-                    ingredient.OwnerID = User.Identity.GetUserId();
-                    odmUnitOfWork.IngredientsRepository.Insert(ingredient);
+                    ingredientVM.Ingredient.OwnerID = User.Identity.GetUserId();
+                    odmUnitOfWork.IngredientsRepository.Insert(ingredientVM.Ingredient);
                 }
                 else
                 {
-                    odmUnitOfWork.IngredientsRepository.Update(ingredient);
+                    odmUnitOfWork.IngredientsRepository.Update(ingredientVM.Ingredient);
                 }
 
                 odmUnitOfWork.Save();
+                TempData["message"] = string.Format(
+                    "{0} has been saved", ingredientVM.Ingredient.Name);
 
-                TempData["message"] = string.Format("{0} has been saved", ingredient.Name);
+                if (ingredientVM.ReturnUrl != null)
+                {
+                    return Redirect(ingredientVM.ReturnUrl);
+                }
+                
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(ingredient);
+                return View(ingredientVM);
             }
         }
 
         [HttpPost]
-        public ActionResult Delete(int Id)
+        public ActionResult Delete(int Id, string returnUrl)
         {
-            Ingredient ingredientToDelete = odmUnitOfWork.IngredientsRepository.GetById(Id);
+            Ingredient ingredientToDelete = odmUnitOfWork.IngredientsRepository
+                                                .GetById(Id);
+            
             if (ingredientToDelete != null)
 	        {
                 odmUnitOfWork.IngredientsRepository.Delete(Id);
                 odmUnitOfWork.Save();
-                TempData["message"] = string.Format("{0} has been successfully deleted", ingredientToDelete.Name);
+                TempData["message"] = string.Format(
+                    "{0} has been successfully deleted", ingredientToDelete.Name);
 	        }
 
-            return RedirectToAction("Index");
+            return Redirect(returnUrl);
         }
 	}
 }

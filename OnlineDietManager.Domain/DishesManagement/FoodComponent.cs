@@ -14,10 +14,13 @@ namespace OnlineDietManager.Domain.DishesManagement
     public abstract class FoodComponent
         : IDescribable
     {
-        [Required, Column(Order = 1)]
+        [Required(ErrorMessage = "Please, specify a name")]
+        [Column(Order = 1)]
         public string Name { get; set; }
 
-        [Required, Column(Order = 2)]
+        [Required(ErrorMessage = "Please, specify a description")]
+        [Column(Order = 2)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [StringLength(128)]

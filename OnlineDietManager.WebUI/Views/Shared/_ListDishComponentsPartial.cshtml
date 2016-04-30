@@ -1,0 +1,41 @@
+﻿@model OnlineDietManager.WebUI.Models.ListDishComponentsViewModel
+
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Weight</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.DishComponents)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(
+                   linkText:        item.Ingredient.Name, 
+                   actionName:      "Edit", 
+                   controllerName:  "DishComponents", 
+                   routeValues:     new { Id = item.ID, dishRefId = item.DishRefID, returnUrl = Request.Url }, 
+                   htmlAttributes:  null
+                   )
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Weight)
+            </td>
+            <td>
+                @using (Html.BeginForm("Delete", "DishComponents"))
+                {
+                    
+                    @Html.Hidden("ingId", item.ID)
+                    @Html.Hidden("dishRefId", Model.DishRefId)
+                    @Html.Hidden("returnUrl", Request.Url)
+                    
+                    <input type="submit" class="btn btn-default btn-xs" value="Delete" />
+                }
+            </td>
+        </tr>
+    }
+
+    @Html.Action("Create", "DishComponents", new { returnUrl = Request.Url, dishRefId = Model.DishRefId })
+
+</table>
