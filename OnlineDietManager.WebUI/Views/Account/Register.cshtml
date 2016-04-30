@@ -7,10 +7,14 @@
 
 @Html.ValidationSummary(false)
 
-@using (Html.BeginForm())
-{
-    @Html.EditorForModel()
-    <p>
-        <button type="submit">Register</button>
-    </p>
-}
+<div class="panel">
+    @using (Html.BeginForm())
+    {
+        <div class="panel-group">
+            @Html.EditorForModel()
+        </div>
+        <div class="panel-group">
+            @Html.ActionLink("Register", "Register", "Account", new { @class = "btn btn-success" })
+        </div>
+    }
+</div>

@@ -40,6 +40,7 @@ namespace OnlineDietManager.WebUI.Controllers
             return View(odmUnitOfWork.IngredientsRepository
                         .GetAll()
                         .Where(ing => ing.OwnerID == userId)
+                        .OrderBy(ing => ing.Name)
                         .ToList<Ingredient>());
         }
 
@@ -47,7 +48,6 @@ namespace OnlineDietManager.WebUI.Controllers
         public ActionResult Edit(int Id, string returnUrl)
         {
             string userId = User.Identity.GetUserId();
-
             var ingredientToEdit = odmUnitOfWork.IngredientsRepository
                                     .GetAll()
                                     .Where(ing => ing.OwnerID == userId)

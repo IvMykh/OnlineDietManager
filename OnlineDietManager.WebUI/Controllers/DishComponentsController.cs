@@ -22,11 +22,13 @@ namespace OnlineDietManager.WebUI.Controllers
             odmUnitOfWork = uowParam;
         }
 
+        [ChildActionOnly]
         public ActionResult Index(int dishRefId, string returnUrl)
         {
             IEnumerable<DishComponent> components = odmUnitOfWork.DishComponentsRepository
                                                     .GetAll()
                                                     .Where(dc => dc.DishRefID == dishRefId)
+                                                    .OrderBy(dc => dc.Ingredient.Name)
                                                     .ToList();
 
             return PartialView("_ListDishComponentsPartial", new ListDishComponentsViewModel 
@@ -38,14 +40,16 @@ namespace OnlineDietManager.WebUI.Controllers
         }
 
         [HttpGet]
+        [ChildActionOnly]
         public ActionResult Create(string returnUrl, int dishRefId)
         {
             string userId = User.Identity.GetUserId();
 
-            IEnumerable<Ingredient> sortedIngredients = odmUnitOfWork.IngredientsRepository
-                                                            .GetAll()
-                                                            .Where(ing => ing.OwnerID == userId)
-                                                            .OrderBy(ing => ing.Name);
+            IEnumerable<Ingredient> sortedIngredients = 
+                odmUnitOfWork.IngredientsRepository
+                    .GetAll()
+                    .Where(ing => ing.OwnerID == userId)
+                    .OrderBy(ing => ing.Name);
 
             ViewBag.ID = new SelectList(
                 items:          sortedIngredients, 
@@ -53,11 +57,12 @@ namespace OnlineDietManager.WebUI.Controllers
                 dataTextField:  "Name"
                 );
             
-            return PartialView("_CreateDishComponentPartial", new CreateDishComponentViewModel 
-                {
-                    DishRefId = dishRefId,
-                    ReturnUrl = returnUrl
-                });
+            return PartialView("_CreateDishComponentPartial", 
+                new CreateDishComponentViewModel 
+                    {
+                        DishRefId = dishRefId,
+                        ReturnUrl = returnUrl
+                    });
         }
 
         [HttpPost]
@@ -70,7 +75,8 @@ namespace OnlineDietManager.WebUI.Controllers
                         ID = dishComponentVM.Id,
                         DishRefID = dishComponentVM.DishRefId,
                         Weight = dishComponentVM.Weight,
-                        Ingredient = odmUnitOfWork.IngredientsRepository.GetById(dishComponentVM.Id)
+                        Ingredient = odmUnitOfWork.IngredientsRepository
+                                        .GetById(dishComponentVM.Id)
                     };
 
                 var componentEntry = odmUnitOfWork.DishComponentsRepository
@@ -88,6 +94,21 @@ namespace OnlineDietManager.WebUI.Controllers
 
                 TempData["message"] = string.Format(
                     "{0} component has been saved", newDishComponent.Ingredient.Name);
+            }
+            else
+            {
+                var errorMessages = new List<string>();
+
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        errorMessages.Add(error.ErrorMessage);
+                    }
+                }
+
+                TempData["errorMessage"] =
+                    errorMessages.Count != 0 ? errorMessages : null; // "Specified component cannot be added as it is invalid";
             }
             
             return Redirect(dishComponentVM.ReturnUrl);

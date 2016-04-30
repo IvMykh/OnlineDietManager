@@ -9,27 +9,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OnlineDietManager.Domain.UsersManagement
 {
-    //[Table("Users")]
-    //public class User
-    //{
-    //    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    //    public int ID { get; set; }
-    //
-    //    [Required]
-    //    public string Name { get; set; }
-    //
-    //    [Required]
-    //    //[Index(IsUnique=true)]
-    //    [StringLength(50)]
-    //    public string Login { get; set; }
-    //
-    //    [Required]
-    //    public string Password { get; set; }
-    //
-    //    [Required]
-    //    public bool IsAdmin { get; set; }
-    //}
-
     public class AppUser
         : IdentityUser
     {

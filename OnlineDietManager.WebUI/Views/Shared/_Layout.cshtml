@@ -10,6 +10,9 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    
     <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
@@ -36,6 +39,15 @@
     <div class="container body-content">
         @if (TempData["message"] != null) {
             <div class="alert alert-success">@TempData["message"]</div>
+        }
+        
+        @if (TempData["errorMessage"] != null){
+            var errors = TempData["errorMessage"] as List<string>;
+
+            foreach (var error in errors)
+            {
+                <div class="alert alert-danger">@(error)</div>
+            }
         }
         
         @RenderBody()
