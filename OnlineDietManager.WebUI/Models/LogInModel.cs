@@ -10,6 +10,7 @@ namespace OnlineDietManager.WebUI.Models
     public class LogInModel
     {
         [Required]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
 
         [Required]

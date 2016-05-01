@@ -17,7 +17,7 @@ namespace OnlineDietManager.WebUI.Models
         public string ReturnUrl { get; set; }
 
         [Required(ErrorMessage = "Please, specify corresponding weight of component")]
-        [Range(0.1, double.MaxValue, ErrorMessage = "Weight must be positive")]
+        [Range(0.00, double.MaxValue, ErrorMessage = "Weight must be positive")]
         public float Weight { get; set; }
     }
 }

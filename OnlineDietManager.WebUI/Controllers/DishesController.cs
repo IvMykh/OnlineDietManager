@@ -26,7 +26,8 @@ namespace OnlineDietManager.WebUI.Controllers
             string userId = User.Identity.GetUserId();
 
             return View(odmUnitOfWork.DishesRepository.GetAll()
-                        .Where(ing => ing.OwnerID == userId)
+                        .Where(dish => dish.OwnerID == userId) //|| // private dishes
+                                       //dish.OwnerID == null)     // global dishes
                         .OrderBy(dish => dish.Name)
                         .ToList<Dish>());
         }

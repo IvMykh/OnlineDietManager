@@ -1,0 +1,18 @@
+﻿@model OnlineDietManager.WebUI.Models.SelectIngredientViewModel
+
+    @using (Html.BeginForm("Create", "DishComponents"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    
+        @Html.Hidden("Id", Model.Ingredient.ID)
+        @Html.Hidden("Weight",
+            OnlineDietManager.Domain.DishesManagement.SpecialData.DEFAULT_COMPONENT_WEIGHT)
+        
+        @Html.Hidden("DishRefId", Model.DishRefId)
+        @Html.Hidden("ReturnUrl", Model.ReturnUrl)
+
+        <button type="submit" class="btn btn-link btn-group-justified">
+            @Model.Ingredient.Name
+        </button>
+    }

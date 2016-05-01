@@ -1,17 +1,31 @@
-﻿@model OnlineDietManager.WebUI.Models.CreateDishComponentViewModel
+﻿<!--model OnlineDietManager.WebUI.Models.CreateDishComponentViewModel
 
 
-@using (Html.BeginForm("Create", "DishComponents"))
+using (Html.BeginForm("Create", "DishComponents"))
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    
-    @Html.HiddenFor(model => model.DishRefId, Model.DishRefId)
-    @Html.HiddenFor(model => model.ReturnUrl)
+   Html.AntiForgeryToken()
+   Html.ValidationSummary(true)
+   
+   Html.HiddenFor(model => model.DishRefId, Model.DishRefId)
+   Html.HiddenFor(model => model.ReturnUrl)
     
     <tr>
-        <td>@Html.DropDownList("Id", String.Empty)</td>
-        <td>@Html.EditorFor(model => model.Weight)</td>
+        <td>Html.DropDownList("Id", String.Empty)</td>
+        <td>Html.EditorFor(model => model.Weight)</td>
         <td><input type="submit" value="Add" class="btn btn-primary btn-xs" /></td>
     </tr>
-}
+}-->
+
+@model IEnumerable<OnlineDietManager.WebUI.Models.SelectIngredientViewModel>
+
+<div class="panel panel-default">
+    <div class="panel-heading text-centrified">
+        <h4>Ingredients box</h4>
+    </div>
+    <div id="ingredients-list-box" class="panel-body">
+        @foreach (var selectIngredientVM in Model)
+        {
+            @Html.Partial("_SelectIngredientPartial", selectIngredientVM)
+        }
+    </div>
+</div>

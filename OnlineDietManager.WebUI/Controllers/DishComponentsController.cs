@@ -39,30 +39,53 @@ namespace OnlineDietManager.WebUI.Controllers
                 });
         }
 
+        //[HttpGet]
+        //[ChildActionOnly]
+        //public ActionResult Create(string returnUrl, int dishRefId)
+        //{
+        //    string userId = User.Identity.GetUserId();
+        //
+        //    IEnumerable<Ingredient> sortedIngredients = 
+        //        odmUnitOfWork.IngredientsRepository
+        //            .GetAll()
+        //            .Where(ing => ing.OwnerID == userId)
+        //            .OrderBy(ing => ing.Name);
+        //
+        //    ViewBag.ID = new SelectList(
+        //        items:          sortedIngredients, 
+        //        dataValueField: "Id", 
+        //        dataTextField:  "Name"
+        //        );
+        //    
+        //    return PartialView("_CreateDishComponentPartial", 
+        //        new CreateDishComponentViewModel 
+        //            {
+        //                DishRefId = dishRefId,
+        //                ReturnUrl = returnUrl
+        //            });
+        //}
+
         [HttpGet]
         [ChildActionOnly]
         public ActionResult Create(string returnUrl, int dishRefId)
         {
             string userId = User.Identity.GetUserId();
 
-            IEnumerable<Ingredient> sortedIngredients = 
+            IEnumerable<SelectIngredientViewModel> sortedIngredients =
                 odmUnitOfWork.IngredientsRepository
                     .GetAll()
-                    .Where(ing => ing.OwnerID == userId)
-                    .OrderBy(ing => ing.Name);
+                    .Where(ing => ing.OwnerID == userId) //|| local ingredients 
+                                  // ing.OwnerID == null)
+                    .OrderBy(ing => ing.Name)
+                    .Select(ing => new SelectIngredientViewModel
+                        {
+                            Ingredient = ing,
+                            DishRefId = dishRefId,
+                            Weight = SpecialData.DEFAULT_COMPONENT_WEIGHT,
+                            ReturnUrl = returnUrl
+                        });
 
-            ViewBag.ID = new SelectList(
-                items:          sortedIngredients, 
-                dataValueField: "Id", 
-                dataTextField:  "Name"
-                );
-            
-            return PartialView("_CreateDishComponentPartial", 
-                new CreateDishComponentViewModel 
-                    {
-                        DishRefId = dishRefId,
-                        ReturnUrl = returnUrl
-                    });
+            return PartialView("_CreateDishComponentPartial", sortedIngredients);
         }
 
         [HttpPost]

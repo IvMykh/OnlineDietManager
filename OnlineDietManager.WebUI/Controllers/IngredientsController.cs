@@ -39,7 +39,8 @@ namespace OnlineDietManager.WebUI.Controllers
 
             return View(odmUnitOfWork.IngredientsRepository
                         .GetAll()
-                        .Where(ing => ing.OwnerID == userId)
+                        .Where(ing => ing.OwnerID == userId) //|| // private ingredients
+                                      //ing.OwnerID == null)     // global ingredients
                         .OrderBy(ing => ing.Name)
                         .ToList<Ingredient>());
         }

@@ -187,6 +187,7 @@
     <Compile Include="Models\ListDishComponentsViewModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\SelectIngredientViewModel.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -212,6 +213,7 @@
     <Content Include="Views\Shared\_SaveCancelPartial.cshtml" />
     <Content Include="Views\Shared\_CreateDishComponentPartial.cshtml" />
     <Content Include="Views\Dishes\Create.cshtml" />
+    <Content Include="Views\Shared\_SelectIngredientPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
