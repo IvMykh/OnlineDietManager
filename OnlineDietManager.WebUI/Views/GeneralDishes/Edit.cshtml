@@ -1,9 +1,12 @@
 ﻿@model OnlineDietManager.WebUI.Models.DishViewModel
 
 @{
-    if (string.IsNullOrEmpty(Model.Dish.Name)) {
+    if (string.IsNullOrEmpty(Model.Dish.Name))
+    {
         ViewBag.Title = "Create new Dish";
-    } else {
+    }
+    else
+    {
         ViewBag.Title = string.Format("Edit {0}", Model.Dish.Name);
     }
 }

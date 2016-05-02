@@ -1,0 +1,82 @@
+﻿@model IEnumerable<OnlineDietManager.Domain.DishesManagement.Ingredient>
+@using OnlineDietManager.Domain.UsersManagement;
+
+@{
+    ViewBag.Title = "All general ingredients";
+}
+
+<div class="panel-heading">
+    <h3>@ViewBag.Title</h3>
+</div>
+
+@if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+{
+    <p>
+        @Html.ActionLink(
+            linkText: "Create New",
+            actionName: "Create",
+            routeValues: new { returnUrl = Request.Url },
+            htmlAttributes: new { @class = "btn btn-primary" })
+    </p>
+}
+
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Description)</th>
+        <th>@Html.DisplayNameFor(model => model.Protein)</th>
+        <th>@Html.DisplayNameFor(model => model.Fat)</th>
+        <th>@Html.DisplayNameFor(model => model.Carbohydrates)</th>
+        <th>@Html.DisplayNameFor(model => model.Caloricity)</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+            {
+                <td>@Html.ActionLink(item.Name, "Edit", new { item.ID, returnUrl = Request.Url })</td>
+            }
+            else
+            {
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            }
+
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.Protein)</td>
+            <td>@Html.DisplayFor(modelItem => item.Fat)</td>
+            <td>@Html.DisplayFor(modelItem => item.Carbohydrates)</td>
+            <td>@Html.DisplayFor(modelItem => item.Caloricity)</td>
+            <td class="row panel">        
+                @using (@Html.BeginForm("AddToPersonal", "GeneralIngredients",
+                    FormMethod.Post,
+                    new { @class = "col-xs-2" }))
+                {
+                    @Html.Hidden("ID", item.ID)
+                    @Html.Hidden("returnUrl", Request.Url)
+
+                    <button type="submit" class="btn btn-info btn-sm">
+                        <div class=" glyphicon glyphicon-star"></div>
+                    </button>
+                }
+
+                @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+                {
+                    using (@Html.BeginForm("Delete", "GeneralIngredients",
+                        FormMethod.Post,
+                        new { @class = "col-xs-2" }))
+                    {
+                        @Html.Hidden("ID", item.ID)
+                        @Html.Hidden("returnUrl", Request.Url)
+
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <div class="glyphicon glyphicon-remove"></div>
+                        </button>
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

@@ -12,125 +12,81 @@ using OnlineDietManager.WebUI.Models;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
-    public class DishesController : Controller
+    public class DishesController 
+        : AbstrDishesController
     {
-        private IUnitOfWork odmUnitOfWork;
-
         public DishesController(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            odmUnitOfWork = unitOfWork;
         }
 
-        public ActionResult Index()
+        protected override ViewResult GetViewResultFor(string viewName = null, object model = null)
+        {
+            if (viewName == null && model == null)
+                return View();
+
+            if (viewName == null)
+                return View(model);
+
+            if (model == null)
+                return View(viewName);
+
+            return View(viewName, model);
+        }
+        protected override RedirectToRouteResult GetRedirectToActionFor(string actionName, object routeParams = null)
+        {
+            if (routeParams == null)
+            {
+                return RedirectToAction(actionName);
+            }
+
+            return RedirectToAction(actionName, routeParams);
+        }
+
+        protected override object GetIndexModel()
         {
             string userId = User.Identity.GetUserId();
 
-            return View(odmUnitOfWork.DishesRepository.GetAll()
-                        .Where(dish => dish.OwnerID == userId) //|| // private dishes
-                                       //dish.OwnerID == null)     // global dishes
-                        .OrderBy(dish => dish.Name)
-                        .ToList<Dish>());
-        }
-
-        [HttpGet]
-        public ActionResult Create(string returnUrl)
-        {
-            return View(new DishViewModel
-                {
-                    Dish = new Dish(),
-                    ReturnUrl = returnUrl
-                });
-        }
-
-        [HttpPost]
-        public ActionResult Create(DishViewModel newDishVM)
-        {
-            if (ModelState.IsValid)
-            {
-                string userId = User.Identity.GetUserId();
-                newDishVM.Dish.OwnerID = userId;
-
-                odmUnitOfWork.DishesRepository.Insert(newDishVM.Dish);
-                odmUnitOfWork.Save();
-
-                TempData["message"] = string.Format(
-                    "{0} has been saved", newDishVM.Dish.Name);
-
-                return RedirectToAction("Edit", new
-                    {
-                        Id = newDishVM.Dish.ID,
-                        returnUrl = newDishVM.ReturnUrl
-                    });
-            }
-            else
-            {
-                return View(newDishVM);
-            }
-        }
-
-        [HttpGet]
-        public ActionResult Edit(int Id, string returnUrl)
-        {
-            string userId = User.Identity.GetUserId();
-            var dishToEdit = odmUnitOfWork.DishesRepository
-                            .GetAll()
+            var model = OdmUnitOfWork.DishesRepository.GetAll()
                             .Where(dish => dish.OwnerID == userId)
-                            .FirstOrDefault(dish => dish.ID == Id);
+                            .OrderBy(dish => dish.Name)
+                            .ToList<Dish>();   
 
-            return View(new DishViewModel 
-                { 
-                    Dish = dishToEdit, 
-                    ReturnUrl = returnUrl 
-                });
+            return model;
+        }
+        protected override string GetOwnerName()
+        {
+            return User.Identity.GetUserId();
+        }
+
+        [HttpGet]
+        public new ActionResult Create(string returnUrl)
+        {
+            return base.Create(returnUrl);
         }
 
         [HttpPost]
-        public ActionResult Edit(DishViewModel dishVM)
+        public new ActionResult Create(DishViewModel newDishVM)
         {
-            if (ModelState.IsValid)
-            {
-                if (string.IsNullOrEmpty(dishVM.Dish.OwnerID))
-                {
-                    dishVM.Dish.OwnerID = User.Identity.GetUserId();
-                    odmUnitOfWork.DishesRepository.Insert(dishVM.Dish);
-                }
-                else
-                {
-                    odmUnitOfWork.DishesRepository.Update(dishVM.Dish);
-                }
-                odmUnitOfWork.Save();
+            return base.Create(newDishVM);
+        }
 
-                TempData["message"] = string.Format(
-                    "{0} has been saved", dishVM.Dish.Name);
-
-                if (dishVM.ReturnUrl != null)
-                {
-                    return Redirect(dishVM.ReturnUrl);
-                }
-
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(dishVM);
-            }
+        [HttpGet]
+        public new ActionResult Edit(int Id, string returnUrl)
+        {
+            return base.Edit(Id, returnUrl);
         }
 
         [HttpPost]
-        public ActionResult Delete(int Id, string returnUrl)
+        public new ActionResult Edit(DishViewModel dishVM)
         {
-            Dish dishToDelete = odmUnitOfWork.DishesRepository
-                                                .GetById(Id);
+            return base.Edit(dishVM);
+        }
 
-            if (dishToDelete != null)
-            {
-                odmUnitOfWork.DishesRepository.Delete(Id);
-                odmUnitOfWork.Save();
-                TempData["message"] = string.Format(
-                    "{0} has been successfully deleted", dishToDelete.Name);
-            }
-
-            return Redirect(returnUrl);
+        [HttpPost]
+        public new ActionResult Delete(int Id, string returnUrl)
+        {
+            return base.Delete(Id, returnUrl);
         }
 	}
 }

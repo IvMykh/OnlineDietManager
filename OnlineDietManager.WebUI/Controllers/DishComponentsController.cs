@@ -74,8 +74,7 @@ namespace OnlineDietManager.WebUI.Controllers
             IEnumerable<SelectIngredientViewModel> sortedIngredients =
                 odmUnitOfWork.IngredientsRepository
                     .GetAll()
-                    .Where(ing => ing.OwnerID == userId) //|| local ingredients 
-                                  // ing.OwnerID == null)
+                    .Where(ing => ing.OwnerID == userId)
                     .OrderBy(ing => ing.Name)
                     .Select(ing => new SelectIngredientViewModel
                         {

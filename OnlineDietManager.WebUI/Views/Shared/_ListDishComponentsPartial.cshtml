@@ -13,7 +13,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Weight</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
 
                     @foreach (var item in Model.DishComponents)
@@ -21,12 +21,12 @@
                         <tr>
                             <td>
                                 @Html.ActionLink(
-                           linkText: item.Ingredient.Name,
-                           actionName: "Edit",
-                           controllerName: "DishComponents",
-                           routeValues: new { Id = item.ID, dishRefId = item.DishRefID, returnUrl = Request.Url },
-                           htmlAttributes: null
-                           )
+                                    linkText: item.Ingredient.Name,
+                                    actionName: "Edit",
+                                    controllerName: "DishComponents",
+                                    routeValues: new { Id = item.ID, dishRefId = item.DishRefID, returnUrl = Request.Url },
+                                    htmlAttributes: null
+                                )
                             </td>
                             <td>
                                 @Html.DisplayFor(m => item.Weight)
@@ -39,7 +39,10 @@
                                     @Html.Hidden("dishRefId", Model.DishRefId)
                                     @Html.Hidden("returnUrl", Request.Url)
 
-                                    <input type="submit" class="btn btn-default btn-xs" value="Delete" />
+                                    @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <div class="glyphicon glyphicon-remove"></div>
+                                    </button>
                                 }
                             </td>
                         </tr>

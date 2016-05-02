@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<OnlineDietManager.Domain.DishesManagement.Ingredient>
 
 @{
-    ViewBag.Title = "All ingredients";
+    ViewBag.Title = "All my ingredients";
 }
 
 <div class="panel-heading">
@@ -24,7 +24,7 @@
         <th>@Html.DisplayNameFor(model => model.Fat)</th>
         <th>@Html.DisplayNameFor(model => model.Carbohydrates)</th>
         <th>@Html.DisplayNameFor(model => model.Caloricity)</th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
     @foreach (var item in Model)
@@ -42,7 +42,10 @@
                     @Html.Hidden("ID", item.ID)
                     @Html.Hidden("returnUrl", Request.Url)
                     
-                    <input type="submit" class="btn btn-default btn-xs" value="Delete" />
+                    @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <div class="glyphicon glyphicon-remove"></div>
+                    </button>
                 }
             </td>
         </tr>
