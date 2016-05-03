@@ -132,6 +132,9 @@ namespace OnlineDietManager.WebUI.Controllers
 
                 OdmUnitOfWork.DishesRepository.Insert(dishPersonalCopy);
                 OdmUnitOfWork.Save();
+
+                TempData["message"] = string.Format(
+                    "{0} has been successfully added to personal dishes", dishToAdd.Name);
             }
 
             return Redirect(returnUrl);

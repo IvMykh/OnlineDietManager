@@ -48,7 +48,7 @@
             <td>@Html.DisplayFor(modelItem => item.Fat)</td>
             <td>@Html.DisplayFor(modelItem => item.Carbohydrates)</td>
             <td>@Html.DisplayFor(modelItem => item.Caloricity)</td>
-            <td class="row panel">        
+            <td class="row">        
                 @using (@Html.BeginForm("AddToPersonal", "GeneralIngredients",
                     FormMethod.Post,
                     new { @class = "col-xs-2" }))
