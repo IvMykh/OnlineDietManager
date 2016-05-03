@@ -2,7 +2,12 @@
 
 <div class="row panel">
     <div class="col-xs-2">
-        @Html.Action("Create", "DishComponents", new { returnUrl = Request.Url, dishRefId = Model.DishRefId })
+        @Html.Action("Create", "DishComponents", 
+            new { 
+                returnUrl = Request.Url, 
+                dishRefId = Model.DishRefId,
+                ownerPolicy = Model.OwnerPolicy 
+            })
     </div>
 
     <div class="col-xs-9">

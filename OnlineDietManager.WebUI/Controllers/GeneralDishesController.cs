@@ -96,8 +96,45 @@ namespace OnlineDietManager.WebUI.Controllers
         [HttpPost]
         public ActionResult AddToPersonal(int Id, string returnUrl)
         {
-            // TODO: implement;
-            return null;
+            Dish dishToAdd = OdmUnitOfWork.DishesRepository.GetById(Id);
+
+            if (dishToAdd != null)
+            {
+                Dish dishPersonalCopy   = new Dish 
+                    {
+                        Name = dishToAdd.Name, 
+                        Description = dishToAdd.Description,
+                        OwnerID = User.Identity.GetUserId(),
+                    };
+
+
+                foreach (DishComponent comp in dishToAdd.Components)
+                {
+                    Ingredient ingredientPersonalCopy = new Ingredient
+                        {
+                            Name            = comp.Ingredient.Name,
+                            Description     = comp.Ingredient.Description,
+                            Protein         = comp.Ingredient.Protein,
+                            Fat             = comp.Ingredient.Fat,
+                            Carbohydrates   = comp.Ingredient.Carbohydrates,
+                            Caloricity      = comp.Ingredient.Caloricity,
+                            OwnerID         = User.Identity.GetUserId()
+                        };
+
+
+                    dishPersonalCopy.Components.Add(new DishComponent
+                        {
+                            Dish = dishPersonalCopy,
+                            Ingredient = ingredientPersonalCopy,
+                            Weight = comp.Weight
+                        });
+                }
+
+                OdmUnitOfWork.DishesRepository.Insert(dishPersonalCopy);
+                OdmUnitOfWork.Save();
+            }
+
+            return Redirect(returnUrl);
         }
 	}
 }
