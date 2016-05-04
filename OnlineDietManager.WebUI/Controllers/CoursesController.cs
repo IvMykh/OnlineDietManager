@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using OnlineDietManager.Domain.CoursesManagement;
 using OnlineDietManager.Domain.UnitsOfWork;
+using OnlineDietManager.Domain.UsersManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace OnlineDietManager.WebUI.Controllers
 
             res.AddRange(model);
 
+            ViewBag.isAdmin = User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin));
             ViewBag.UserId = user;
 
             return View("Index", res);
