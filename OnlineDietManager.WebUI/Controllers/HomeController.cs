@@ -12,6 +12,13 @@ namespace OnlineDietManager.WebUI.Controllers
 {
     public class HomeController : AppController
     {
+        private IUnitOfWork OdmUnitOfWork { get; set; }
+
+        public HomeController(IUnitOfWork unitOfWork)
+        {
+            OdmUnitOfWork = unitOfWork;
+        }
+
         //
         // GET: /Home/
         public ActionResult Index()
