@@ -38,6 +38,9 @@
                         <li>@Html.ActionLink("General Dishes", "Index", "GeneralDishes")</li>
                     </ul>
                 </li>
+                <li>
+                   @Html.ActionLink("Courses", "Index", "Courses") 
+                </li>
                 @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
                 {
                     <li>@Html.ActionLink("Manage users", "Index", "UserManagement")</li>                
