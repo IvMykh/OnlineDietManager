@@ -1,12 +1,35 @@
 ﻿@model OnlineDietManager.WebUI.Models.DayViewModel
 
-<div class="panel panel-default" >
-    <div class="panel-heading text-centrified">@Model.CalendarDate.Date.ToLongDateString() - @Model.Day.Description</div>
+<div class="panel @(Model.CalendarDate.Date.Equals(DateTime.Today) ? "panel-primary" : "panel-info")" >
+    <div class="panel-heading text-center">
+        <h4>
+            <span class="glyphicon glyphicon-calendar"></span> @Model.CalendarDate.ToShortDateString()
+        </h4>
+        <h5>@Model.Day.Description (@Model.Day.Meals.Sum(meal => meal.Dishes.Sum(d => d.Caloricity)) kcal)</h5>
+    </div>
     <div class="panel-body">
         <div class="row">
             @foreach (var meal in Model.Day.Meals)
             {
-                <p><span class="glyphicon glyphicon-arrow-right"></span>@meal.Time.ToString() (@meal.Description)</p>
+                <div class="panel panel-default">
+                    <div class="row">
+                        <div class="text-center col-lg-5">
+                            <h5><span class="glyphicon glyphicon-time" /> @meal.Time.ToString() (@meal.Description)</h5>
+                        </div>
+                        <div class="panel-body col-lg-5">
+                            @foreach (var dish in meal.Dishes)
+                            {
+                                <p>@Html.ActionLink(
+                                    linkText: dish.Name,
+                                    actionName: "Edit",
+                                    controllerName: "Dishes",
+                                    routeValues: new { id = dish.ID, returnUrl = Request.Url },
+                                    htmlAttributes: null
+                                ) (@dish.Caloricity kcal)</p>
+                            }
+                        </div>
+                    </div>
+                </div>
             }
         </div>
     </div>

@@ -4,24 +4,8 @@
     ViewBag.Title = "Home";
 }
 
-    <div class="panel panel-default">
-    @if (Model == null)
-    {
-    	 <div class="panel-heading text-centrified"><h4>No course is active right now</h4></div>
-    }
-    else
-    {
-        <div class="panel-heading text-centrified"><h4>Active course: @Model.Description</h4></div>
-        <div class="panel-body">
-            @for (int i = 0; i < Model.Days.Count; ++i)
-            {
-                var day = Model.Days[i];
-                @Html.Partial("_DayPartial", new OnlineDietManager.WebUI.Models.DayViewModel
-                    {
-                        Day = day,
-                        CalendarDate = Model.StartDate.Add(new TimeSpan(i))
-                    })
-            }
-        </div>
-    }
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-2">
+        @Html.Partial("_ActiveCoursePartial", Model)
     </div>
+</div>
