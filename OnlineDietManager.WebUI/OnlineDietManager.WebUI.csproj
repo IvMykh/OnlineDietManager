@@ -188,6 +188,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AppUserPrincipal.cs" />
     <Compile Include="Models\CreateDishComponentViewModel.cs" />
+    <Compile Include="Models\DayViewModel.cs" />
     <Compile Include="Models\DishComponentViewModel.cs" />
     <Compile Include="Models\DishViewModel.cs" />
     <Compile Include="Models\IngredientViewModel.cs" />
@@ -231,7 +232,11 @@
     <Content Include="Views\GeneralDishes\Create.cshtml" />
     <Content Include="Views\Shared\_DishNutritionalSummary.cshtml" />
     <Content Include="Views\UserManagement\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Courses\Index.cshtml" />
+=======
+    <Content Include="Views\Shared\_DayPartial.cshtml" />
+>>>>>>> refs/remotes/origin/development
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

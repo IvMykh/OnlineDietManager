@@ -22,6 +22,7 @@ namespace OnlineDietManager.Domain.UnitsOfWork
         IRepository<Meal> _mealsRepository;
         IRepository<Day> _daysRepository;
         IRepository<Course> _coursesRepository;
+        IRepository<ActiveCourse> _activeCoursesRepository;
 
         public ODMUnitOfWork()
         {
@@ -104,6 +105,19 @@ namespace OnlineDietManager.Domain.UnitsOfWork
                 }
 
                 return _coursesRepository;
+            }
+        }
+
+        public IRepository<ActiveCourse> ActiveCoursesRepository
+        {
+            get
+            {
+                if (_activeCoursesRepository == null)
+                {
+                    _activeCoursesRepository = new GenericRepository<ActiveCourse>(this._context);
+                }
+
+                return _activeCoursesRepository;
             }
         }
 

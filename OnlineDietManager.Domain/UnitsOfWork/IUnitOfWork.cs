@@ -19,6 +19,7 @@ namespace OnlineDietManager.Domain.UnitsOfWork
         IRepository<Meal> MealsRepository { get; }
         IRepository<Day> DaysRepository { get; }
         IRepository<Course> CoursesRepository { get; }
+        IRepository<ActiveCourse> ActiveCoursesRepository { get; }
 
         void Save();
     }
