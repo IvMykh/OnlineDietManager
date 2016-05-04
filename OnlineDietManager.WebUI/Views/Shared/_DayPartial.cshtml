@@ -1,0 +1,13 @@
+﻿@model OnlineDietManager.WebUI.Models.DayViewModel
+
+<div class="panel panel-default" >
+    <div class="panel-heading text-centrified">@Model.CalendarDate.Date.ToLongDateString() - @Model.Day.Description</div>
+    <div class="panel-body">
+        <div class="row">
+            @foreach (var meal in Model.Day.Meals)
+            {
+                <p><span class="glyphicon glyphicon-arrow-right"></span>@meal.Time.ToString() (@meal.Description)</p>
+            }
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using OnlineDietManager.Domain.CoursesManagement;
 using OnlineDietManager.Domain.DishesManagement;
 using OnlineDietManager.Domain.UnitsOfWork;
 
@@ -23,7 +24,14 @@ namespace OnlineDietManager.WebUI.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+
+            ActiveCourse activeCourse = OdmUnitOfWork.ActiveCoursesRepository
+                .GetAll()
+                .Where(ac => ac.OwnerID == userId)
+                .FirstOrDefault();
+
+            return View(activeCourse);
         }
 
         public ActionResult About()
