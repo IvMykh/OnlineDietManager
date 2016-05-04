@@ -15,49 +15,104 @@ namespace OnlineDietManager.WebUI.Controllers
 {
     public class DishComponentsController : Controller
     {
-        private IUnitOfWork odmUnitOfWork;
+        private IUnitOfWork OdmUnitOfWork { get; set; }
 
-        public DishComponentsController(IUnitOfWork uowParam)
+        public DishComponentsController(IUnitOfWork unitOfWork)
         {
-            odmUnitOfWork = uowParam;
+            OdmUnitOfWork = unitOfWork;
         }
 
+        [ChildActionOnly]
         public ActionResult Index(int dishRefId, string returnUrl)
         {
-            IEnumerable<DishComponent> components = odmUnitOfWork.DishComponentsRepository
-                                                    .GetAll()
-                                                    .Where(dc => dc.DishRefID == dishRefId)
-                                                    .ToList();
+            IEnumerable<DishComponent> components = 
+                OdmUnitOfWork.DishComponentsRepository
+                    .GetAll()
+                    .Where(dc => dc.DishRefID == dishRefId)
+                    .OrderBy(dc => dc.Ingredient.Name)
+                    .ToList();
+
+            Dish referedDish = OdmUnitOfWork.DishesRepository.GetById(dishRefId);
+            OwnerPolicy ownerPolicy = referedDish.OwnerID == null ?
+                                        OwnerPolicy.GlobalOnly :
+                                        OwnerPolicy.UserOnly;
 
             return PartialView("_ListDishComponentsPartial", new ListDishComponentsViewModel 
                 {
                     DishComponents = components,
                     DishRefId = dishRefId,
-                    ReturnUrl = returnUrl
+                    ReturnUrl = returnUrl,
+                    OwnerPolicy = ownerPolicy
                 });
         }
 
+        //[HttpGet]
+        //[ChildActionOnly]
+        //public ActionResult Create(string returnUrl, int dishRefId)
+        //{
+        //    string userId = User.Identity.GetUserId();
+        //
+        //    IEnumerable<Ingredient> sortedIngredients = 
+        //        odmUnitOfWork.IngredientsRepository
+        //            .GetAll()
+        //            .Where(ing => ing.OwnerID == userId)
+        //            .OrderBy(ing => ing.Name);
+        //
+        //    ViewBag.ID = new SelectList(
+        //        items:          sortedIngredients, 
+        //        dataValueField: "Id", 
+        //        dataTextField:  "Name"
+        //        );
+        //    
+        //    return PartialView("_CreateDishComponentPartial", 
+        //        new CreateDishComponentViewModel 
+        //            {
+        //                DishRefId = dishRefId,
+        //                ReturnUrl = returnUrl
+        //            });
+        //}
+
         [HttpGet]
-        public ActionResult Create(string returnUrl, int dishRefId)
+        [ChildActionOnly]
+        public ActionResult Create(string returnUrl, int dishRefId, OwnerPolicy ownerPolicy)
         {
             string userId = User.Identity.GetUserId();
+            IEnumerable<Ingredient> model = null;
 
-            IEnumerable<Ingredient> sortedIngredients = odmUnitOfWork.IngredientsRepository
-                                                            .GetAll()
-                                                            .Where(ing => ing.OwnerID == userId)
-                                                            .OrderBy(ing => ing.Name);
+            switch (ownerPolicy)
+            {
+                case OwnerPolicy.UserOnly:
+                    {
+                        model = OdmUnitOfWork.IngredientsRepository
+                                .GetAll()
+                                .Where(ing => ing.OwnerID == userId);
+                    } break;
+                case OwnerPolicy.GlobalOnly:
+                    {
+                        model = OdmUnitOfWork.IngredientsRepository
+                                .GetAll()
+                                .Where(ing => ing.OwnerID == null);
+                    } break;
+                case OwnerPolicy.Both:
+                    {
+                        model = OdmUnitOfWork.IngredientsRepository
+                                .GetAll()
+                                .Where(ing => ing.OwnerID == userId || ing.OwnerID == null);
+                    } break;
 
-            ViewBag.ID = new SelectList(
-                items:          sortedIngredients, 
-                dataValueField: "Id", 
-                dataTextField:  "Name"
-                );
-            
-            return PartialView("_CreateDishComponentPartial", new CreateDishComponentViewModel 
-                {
-                    DishRefId = dishRefId,
-                    ReturnUrl = returnUrl
-                });
+                default: throw new ArgumentException(
+                    string.Format("'{0}': unexpected owner policy type"));
+            }
+
+            return PartialView("_CreateDishComponentPartial",
+                model.OrderBy(ing => ing.Name)
+                     .Select(ing => new SelectIngredientViewModel
+                        {
+                            Ingredient = ing,
+                            DishRefId = dishRefId,
+                            Weight = SpecialData.DEFAULT_COMPONENT_WEIGHT,
+                            ReturnUrl = returnUrl
+                        }));
         }
 
         [HttpPost]
@@ -70,10 +125,11 @@ namespace OnlineDietManager.WebUI.Controllers
                         ID = dishComponentVM.Id,
                         DishRefID = dishComponentVM.DishRefId,
                         Weight = dishComponentVM.Weight,
-                        Ingredient = odmUnitOfWork.IngredientsRepository.GetById(dishComponentVM.Id)
+                        Ingredient = OdmUnitOfWork.IngredientsRepository
+                                        .GetById(dishComponentVM.Id)
                     };
 
-                var componentEntry = odmUnitOfWork.DishComponentsRepository
+                var componentEntry = OdmUnitOfWork.DishComponentsRepository
                                         .GetById(dishComponentVM.Id, dishComponentVM.DishRefId);
                 
                 if (componentEntry != null)
@@ -82,12 +138,27 @@ namespace OnlineDietManager.WebUI.Controllers
                 }
                 else
                 {
-                    odmUnitOfWork.DishComponentsRepository.Insert(newDishComponent);
+                    OdmUnitOfWork.DishComponentsRepository.Insert(newDishComponent);
                 }
-                odmUnitOfWork.Save();
+                OdmUnitOfWork.Save();
 
                 TempData["message"] = string.Format(
                     "{0} component has been saved", newDishComponent.Ingredient.Name);
+            }
+            else
+            {
+                var errorMessages = new List<string>();
+
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        errorMessages.Add(error.ErrorMessage);
+                    }
+                }
+
+                TempData["errorMessage"] =
+                    errorMessages.Count != 0 ? errorMessages : null; // "Specified component cannot be added as it is invalid";
             }
             
             return Redirect(dishComponentVM.ReturnUrl);
@@ -96,7 +167,7 @@ namespace OnlineDietManager.WebUI.Controllers
         [HttpGet]
         public ActionResult Edit(int ID, int dishRefId, string returnUrl)
         {
-            DishComponent component = odmUnitOfWork.DishComponentsRepository
+            DishComponent component = OdmUnitOfWork.DishComponentsRepository
                                         .GetById(ID, dishRefId);
             return View(new DishComponentViewModel
                 {
@@ -110,8 +181,8 @@ namespace OnlineDietManager.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                odmUnitOfWork.DishComponentsRepository.Update(componentVM.DishComponent);
-                odmUnitOfWork.Save();
+                OdmUnitOfWork.DishComponentsRepository.Update(componentVM.DishComponent);
+                OdmUnitOfWork.Save();
 
                 TempData["message"] = string.Format(
                     "{0} component has been saved", componentVM.DishComponent.Ingredient.Name);
@@ -128,17 +199,17 @@ namespace OnlineDietManager.WebUI.Controllers
         [HttpPost]
         public ActionResult Delete(int ingId, int dishRefId, string returnUrl)
         {
-            DishComponent componentToDelete = odmUnitOfWork.DishComponentsRepository
+            DishComponent componentToDelete = OdmUnitOfWork.DishComponentsRepository
                                                 .GetById(ingId, dishRefId);
 
-            string ingredientName = odmUnitOfWork.IngredientsRepository
+            string ingredientName = OdmUnitOfWork.IngredientsRepository
                                     .GetById(ingId)
                                     .Name;
 
             if (componentToDelete != null)
             {
-                odmUnitOfWork.DishComponentsRepository.Delete(ingId, dishRefId);
-                odmUnitOfWork.Save();
+                OdmUnitOfWork.DishComponentsRepository.Delete(ingId, dishRefId);
+                OdmUnitOfWork.Save();
                 TempData["message"] = string.Format(
                     "{0} has been successfully deleted", ingredientName);
             }

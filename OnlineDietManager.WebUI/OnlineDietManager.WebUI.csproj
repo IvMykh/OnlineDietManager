@@ -139,6 +139,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -165,12 +166,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AbstrDishesController.cs" />
+    <Compile Include="Controllers\AbstrIngredientsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\DishComponentsController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
+    <Compile Include="Controllers\GeneralDishesController.cs" />
+    <Compile Include="Controllers\GeneralIngredientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsController.cs" />
+    <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +192,8 @@
     <Compile Include="Models\ListDishComponentsViewModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\SelectIngredientViewModel.cs" />
+    <Compile Include="Models\AppUserViewModel.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -210,6 +218,18 @@
     <Content Include="Views\DishComponents\Edit.cshtml" />
     <Content Include="Views\Shared\_SaveCancelPartial.cshtml" />
     <Content Include="Views\Shared\_CreateDishComponentPartial.cshtml" />
+    <Content Include="Views\Dishes\Create.cshtml" />
+    <Content Include="Views\Shared\_SelectIngredientPartial.cshtml" />
+    <Content Include="Views\GeneralIngredients\Index.cshtml" />
+    <Content Include="Views\GeneralIngredients\Edit.cshtml" />
+    <Content Include="Views\Shared\_EditIngredientPartial.cshtml" />
+    <Content Include="Views\GeneralDishes\Index.cshtml" />
+    <Content Include="Views\Shared\_EditDishPartial.cshtml" />
+    <Content Include="Views\GeneralDishes\Edit.cshtml" />
+    <Content Include="Views\Shared\_CreateDishPartial.cshtml" />
+    <Content Include="Views\GeneralDishes\Create.cshtml" />
+    <Content Include="Views\Shared\_DishNutritionalSummary.cshtml" />
+    <Content Include="Views\UserManagement\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -219,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AbstrDishes\" />
     <Folder Include="Views\App\" />
   </ItemGroup>
   <ItemGroup>

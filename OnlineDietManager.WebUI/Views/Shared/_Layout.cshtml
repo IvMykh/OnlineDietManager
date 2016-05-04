@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using OnlineDietManager.Domain.UsersManagement;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,32 +12,52 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    
     <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Online Diet Manager", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("My Ingredients", "Index", "Ingredients")</li>
-                    <li>@Html.ActionLink("My Dishes", "Index", "Dishes")</li>
-                </ul>
-
-                @Html.Partial("_LoginPartial")
-            </div>
+    <div class="navbar navbar-fixed-top">
+        <div class="container navbar-default">
+            <ul class="nav nav-tabs">
+                <li>
+                    @Html.ActionLink("Online Diet Manager", "Index", "Home")
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ingredients<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("My Ingredients", "Index", "Ingredients")</li>
+                        <li>@Html.ActionLink("General Ingredients", "Index", "GeneralIngredients")</li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dishes<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("My Dishes", "Index", "Dishes")</li>
+                        <li>@Html.ActionLink("General Dishes", "Index", "GeneralDishes")</li>
+                    </ul>
+                </li>
+                @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+                {
+                    <li>@Html.ActionLink("Manage users", "Index", "UserManagement")</li>                
+                }
+                <li>@Html.Partial("_LoginPartial")</li>
+            </ul>
         </div>
     </div>
     <div class="container body-content">
         @if (TempData["message"] != null) {
             <div class="alert alert-success">@TempData["message"]</div>
+        }
+        
+        @if (TempData["errorMessage"] != null){
+            var errors = TempData["errorMessage"] as List<string>;
+
+            foreach (var error in errors)
+            {
+                <div class="alert alert-danger">@(error)</div>
+            }
         }
         
         @RenderBody()

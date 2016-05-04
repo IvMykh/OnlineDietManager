@@ -101,7 +101,7 @@ namespace OnlineDietManager.WebUI.Controllers
 
             if (result.Succeeded)
             {
-                UserManager.AddToRole(user.Id, "User");
+                UserManager.AddToRole(user.Id, AppRole.RoleTypeToString(AppRole.RoleType.User));
                 await SignIn(user);
                 return RedirectToAction("Index", "Home");
             }

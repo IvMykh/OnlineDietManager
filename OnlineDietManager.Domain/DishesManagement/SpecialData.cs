@@ -8,6 +8,7 @@ namespace OnlineDietManager.Domain.DishesManagement
 {
     public static class SpecialData
     {
-        public const float STANDARD_PORTION = 100.0f;
+        public const float STANDARD_PORTION         = 100.0f;
+        public const float DEFAULT_COMPONENT_WEIGHT = 100.0f;
     }
 }

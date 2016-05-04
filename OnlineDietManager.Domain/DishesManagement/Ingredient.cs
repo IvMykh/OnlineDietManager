@@ -19,19 +19,19 @@ namespace OnlineDietManager.Domain.DishesManagement
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Please, specify the protein quantity")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive protein quantity")]
+        [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a non-negative protein quantity")]
         public float Protein { get; set; }
 
         [Required(ErrorMessage = "Please, specify the fat quantity")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive fat quantity")]
+        [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a non-negative fat quantity")]
         public float Fat { get; set; }
 
         [Required(ErrorMessage = "Please, specify the carbohydrates quantity")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive carbohydrates quantity")]
+        [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a non-negative carbohydrates quantity")]
         public float Carbohydrates { get; set; }
 
         [Required(ErrorMessage = "Please, specify the caloricity")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive caloricity")]
+        [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a non-negative caloricity")]
         public float Caloricity { get; set; }
     }
 }

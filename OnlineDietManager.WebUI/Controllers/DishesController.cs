@@ -12,71 +12,81 @@ using OnlineDietManager.WebUI.Models;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
-    public class DishesController : Controller
+    public class DishesController 
+        : AbstrDishesController
     {
-        private IUnitOfWork odmUnitOfWork;
-
         public DishesController(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            odmUnitOfWork = unitOfWork;
         }
 
-        public ActionResult Index()
+        protected override ViewResult GetViewResultFor(string viewName = null, object model = null)
+        {
+            if (viewName == null && model == null)
+                return View();
+
+            if (viewName == null)
+                return View(model);
+
+            if (model == null)
+                return View(viewName);
+
+            return View(viewName, model);
+        }
+        protected override RedirectToRouteResult GetRedirectToActionFor(string actionName, object routeParams = null)
+        {
+            if (routeParams == null)
+            {
+                return RedirectToAction(actionName);
+            }
+
+            return RedirectToAction(actionName, routeParams);
+        }
+
+        protected override object GetIndexModel()
         {
             string userId = User.Identity.GetUserId();
 
-            return View(odmUnitOfWork.DishesRepository.GetAll()
-                        .Where(ing => ing.OwnerID == userId)
-                        .ToList<Dish>());
+            var model = OdmUnitOfWork.DishesRepository.GetAll()
+                            .Where(dish => dish.OwnerID == userId)
+                            .OrderBy(dish => dish.Name)
+                            .ToList<Dish>();   
+
+            return model;
+        }
+        protected override string GetOwnerName()
+        {
+            return User.Identity.GetUserId();
         }
 
         [HttpGet]
-        public ActionResult Edit(int Id, string returnUrl)
+        public new ActionResult Create(string returnUrl)
         {
-            string userId = User.Identity.GetUserId();
-
-            var dishToEdit = odmUnitOfWork.DishesRepository
-                            .GetAll()
-                            .Where(dish => dish.OwnerID == userId)
-                            .FirstOrDefault(dish => dish.ID == Id);
-
-            return View(new DishViewModel 
-                { 
-                    Dish = dishToEdit, 
-                    ReturnUrl = returnUrl 
-                });
+            return base.Create(returnUrl);
         }
 
         [HttpPost]
-        public ActionResult Edit(DishViewModel dishVM)
+        public new ActionResult Create(DishViewModel newDishVM)
         {
-            if (ModelState.IsValid)
-            {
-                if (string.IsNullOrEmpty(dishVM.Dish.OwnerID))
-                {
-                    dishVM.Dish.OwnerID = User.Identity.GetUserId();
-                    odmUnitOfWork.DishesRepository.Insert(dishVM.Dish);
-                }
-                else
-                {
-                    odmUnitOfWork.DishesRepository.Update(dishVM.Dish);
-                }
-                odmUnitOfWork.Save();
+            return base.Create(newDishVM);
+        }
 
-                TempData["message"] = string.Format(
-                    "{0} has been saved", dishVM.Dish.Name);
+        [HttpGet]
+        public new ActionResult Edit(int Id, string returnUrl)
+        {
+            return base.Edit(Id, returnUrl);
+        }
 
-                if (dishVM.ReturnUrl != null)
-                {
-                    return Redirect(dishVM.ReturnUrl);
-                }
+        [HttpPost]
+        public new ActionResult Edit(DishViewModel dishVM)
+        {
+            return base.Edit(dishVM);
+        }
 
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(dishVM);
-            }
+        [HttpPost]
+        public new ActionResult Delete(int Id, string returnUrl)
+        {
+            return base.Delete(Id, returnUrl);
         }
 	}
 }

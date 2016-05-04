@@ -6,19 +6,11 @@ using OnlineDietManager.Domain.DishesManagement;
 
 namespace OnlineDietManager.WebUI.Models
 {
-    public enum OwnerPolicy
+    public class SelectIngredientViewModel
     {
-        UserOnly,
-        GlobalOnly,
-        Both
-    }
-
-    public class ListDishComponentsViewModel
-    {
-        public IEnumerable<DishComponent> DishComponents { get; set; }
+        public Ingredient Ingredient { get; set; }
+        public float Weight { get; set; }
         public int DishRefId { get; set; }
         public string ReturnUrl { get; set; }
-
-        public OwnerPolicy OwnerPolicy { get; set; }
     }
 }
