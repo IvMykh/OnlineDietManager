@@ -139,5 +139,45 @@ namespace OnlineDietManager.WebUI.Controllers
 
             return Redirect(returnUrl);
         }
+
+        //UserId - owner of copy of dish
+        public static Dish CopyDish(Dish dishToAdd, string UserId)
+        {
+            if (dishToAdd != null)
+            {
+                Dish dishPersonalCopy = new Dish
+                {
+                    Name = dishToAdd.Name,
+                    Description = dishToAdd.Description,
+                    OwnerID = UserId
+                };
+
+
+                foreach (DishComponent comp in dishToAdd.Components)
+                {
+                    Ingredient ingredientPersonalCopy = new Ingredient
+                    {
+                        Name = comp.Ingredient.Name,
+                        Description = comp.Ingredient.Description,
+                        Protein = comp.Ingredient.Protein,
+                        Fat = comp.Ingredient.Fat,
+                        Carbohydrates = comp.Ingredient.Carbohydrates,
+                        Caloricity = comp.Ingredient.Caloricity,
+                        OwnerID = UserId
+                    };
+
+
+                    dishPersonalCopy.Components.Add(new DishComponent
+                    {
+                        Dish = dishPersonalCopy,
+                        Ingredient = ingredientPersonalCopy,
+                        Weight = comp.Weight
+                    });
+                }
+
+                return dishPersonalCopy;
+            }
+            return null;
+        }    
 	}
 }

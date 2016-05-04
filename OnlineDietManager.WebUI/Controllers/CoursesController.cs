@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using OnlineDietManager.Domain.CoursesManagement;
+using OnlineDietManager.Domain.DishesManagement;
 using OnlineDietManager.Domain.UnitsOfWork;
 using OnlineDietManager.Domain.UsersManagement;
 using System;
@@ -38,6 +39,59 @@ namespace OnlineDietManager.WebUI.Controllers
             ViewBag.UserId = user;
 
             return View("Index", res);
+        }
+
+        [HttpPost]
+        public ActionResult AddToPersonal(int Id, string returnUrl)
+        {
+            Course courseToAdd = UnitOfWork.CoursesRepository.GetById(Id);
+
+            if (courseToAdd != null)
+            {
+                Course coursePersonalCopy = new Course
+                {
+                    Days = new List<Day>(),
+                    Description = courseToAdd.Description,
+                    OwnerID = User.Identity.GetUserId()
+                };
+
+
+                foreach (var day in courseToAdd.Days)
+                {
+                    var dayCopy = new Day
+                    {
+                        Description = day.Description,
+                        Meals = new List<Meal>()
+                    };
+
+                    foreach(var meal in day.Meals)
+                    {
+                        var mealCopy = new Meal
+                        {
+                            Description = meal.Description,
+                            Time = meal.Time,
+                            Dishes = new List<Dish>()
+                        };
+
+                        foreach(var dish in meal.Dishes)
+                        {
+                            mealCopy.Dishes.Add(dish);
+                        }
+
+                        dayCopy.Meals.Add(mealCopy);
+                    }
+
+                    coursePersonalCopy.Days.Add(dayCopy);
+                }
+
+                UnitOfWork.CoursesRepository.Insert(coursePersonalCopy);
+                UnitOfWork.Save();
+
+                TempData["message"] = string.Format(
+                    "{0} has been successfully added to personal courses", courseToAdd.ID);
+            }
+
+            return Redirect(returnUrl);
         }
     }
 }

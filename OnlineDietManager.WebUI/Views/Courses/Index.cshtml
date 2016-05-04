@@ -51,6 +51,19 @@
                         </button>
                     }
 
+                    @using (@Html.BeginForm("Launch", "ActiveCourses",
+                    FormMethod.Post,
+                    new { @class = "col-xs-2" }))
+                    {
+                        @Html.Hidden("ID", item.ID)
+                        @Html.Hidden("returnUrl", Request.Url)
+
+                        @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                        <button type="submit" class="btn btn-info btn-sm">
+                            <div class="glyphicon glyphicon-bell"></div>
+                        </button>
+                    }
+
                     @if (ViewBag.isAdmin)
                     {
                         using (@Html.BeginForm("DeleteGlobal", "Courses",
@@ -93,14 +106,29 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @using (@Html.BeginForm("Delete", "Courses"))
+                    @using (@Html.BeginForm("Delete", "Courses",
+                            FormMethod.Post,
+                            new { @class = "col-xs-2" }))
                     {
                         @Html.Hidden("ID", item.ID)
                         @Html.Hidden("returnUrl", Request.Url)
 
                         @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
-                        <button type="submit" class="btn btn-danger btn-sm">
+                        <button type = "submit" class="btn btn-danger btn-sm">
                             <div class="glyphicon glyphicon-remove"></div>
+                        </button>
+                    }
+
+                    @using (@Html.BeginForm("Launch", "ActiveCourses",
+                    FormMethod.Post,
+                    new { @class = "col-xs-2" }))
+                    {
+                        @Html.Hidden("ID", item.ID)
+                        @Html.Hidden("returnUrl", Request.Url)
+
+                        @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                        <button type="submit" class="btn btn-info btn-sm">
+                            <div class="glyphicon glyphicon-bell"></div>
                         </button>
                     }
                 </td>
