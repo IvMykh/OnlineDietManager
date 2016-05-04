@@ -125,6 +125,10 @@
     <Compile Include="Migrations\201605041429271_Mig_7.Designer.cs">
       <DependentUpon>201605041429271_Mig_7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605042158089_Mig_8.cs" />
+    <Compile Include="Migrations\201605042158089_Mig_8.Designer.cs">
+      <DependentUpon>201605042158089_Mig_8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyApp.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
@@ -164,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605041429271_Mig_7.resx">
       <DependentUpon>201605041429271_Mig_7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605042158089_Mig_8.resx">
+      <DependentUpon>201605042158089_Mig_8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
