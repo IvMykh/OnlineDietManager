@@ -1,0 +1,30 @@
+﻿@model OnlineDietManager.Domain.CoursesManagement.ActiveCourse
+
+@if (Model == null)
+{
+    <div class="panel panel-warning">
+        <div class="panel-heading text-centrified"><h2>No course is active right now</h2></div>
+    </div>
+}
+else
+{
+    <div class="panel panel-success">
+        <div class="panel-heading text-centrified">
+            <h2>@Model.Description</h2>
+        </div>
+        <div class="panel-body">
+            @for (int i = 0; i < Model.Days.Count; ++i)
+            {
+                var day = Model.Days[i];
+                @Html.Partial("_DayPartial", new OnlineDietManager.WebUI.Models.DayViewModel
+                       {
+                           Day = day,
+                           CalendarDate = Model.StartDate.Add(new TimeSpan(i, 0, 0, 0))
+                       })
+            }
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("_StopEditCoursePartial")
+        </div>
+    </div>
+}
