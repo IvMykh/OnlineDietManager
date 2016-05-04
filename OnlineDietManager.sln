@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineDietManager.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineDietManager.Domain", "OnlineDietManager.Domain\OnlineDietManager.Domain.csproj", "{B8EDF30D-E1C5-4F56-BA62-39365E0E9A8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineDietManager.DataManip", "OnlineDietManager.DataManip\OnlineDietManager.DataManip.csproj", "{CD054170-D9B1-4F3E-AAD8-6F4282D31DCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B8EDF30D-E1C5-4F56-BA62-39365E0E9A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8EDF30D-E1C5-4F56-BA62-39365E0E9A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8EDF30D-E1C5-4F56-BA62-39365E0E9A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD054170-D9B1-4F3E-AAD8-6F4282D31DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD054170-D9B1-4F3E-AAD8-6F4282D31DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD054170-D9B1-4F3E-AAD8-6F4282D31DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD054170-D9B1-4F3E-AAD8-6F4282D31DCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

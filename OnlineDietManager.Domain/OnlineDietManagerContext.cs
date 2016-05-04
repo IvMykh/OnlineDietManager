@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using OnlineDietManager.Domain.UsersManagement;
 namespace OnlineDietManager.Domain
 {
     public class OnlineDietManagerContext
-        : IdentityDbContext<AppUser>
+        : IdentityDbContext<AppUser>, IDisposable
     {
         public static OnlineDietManagerContext Create()
         {
@@ -30,13 +31,21 @@ namespace OnlineDietManager.Domain
         public DbSet<Day> Days { get; set; }
         public DbSet<Course> Courses { get; set; }
 
+        public void Dispose()
+        {
+            base.Dispose();
+        }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<DishComponent>()
-        //        .HasRequired(a => a.)
-        //        .WithRequiredDependent(a => a.)
-        //        .WillCascadeOnDelete(true);
-        //}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>()
+                        .HasKey(c => c.ID);
+
+            modelBuilder.Entity<Course>()
+                        .Property(c => c.ID)
+                        .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
