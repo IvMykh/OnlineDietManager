@@ -93,43 +93,7 @@
     <Compile Include="DishesManagement\FoodComponent.cs" />
     <Compile Include="DishesManagement\Ingredient.cs" />
     <Compile Include="DishesManagement\SpecialData.cs" />
-    <Compile Include="Migrations\201604251829066_init.cs" />
-    <Compile Include="Migrations\201604251829066_init.Designer.cs">
-      <DependentUpon>201604251829066_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604262114181_Mig_1.cs" />
-    <Compile Include="Migrations\201604262114181_Mig_1.Designer.cs">
-      <DependentUpon>201604262114181_Mig_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604262158183_Mig_2.cs" />
-    <Compile Include="Migrations\201604262158183_Mig_2.Designer.cs">
-      <DependentUpon>201604262158183_Mig_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604262159459_Mig_3.cs" />
-    <Compile Include="Migrations\201604262159459_Mig_3.Designer.cs">
-      <DependentUpon>201604262159459_Mig_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604271107139_Mig_4.cs" />
-    <Compile Include="Migrations\201604271107139_Mig_4.Designer.cs">
-      <DependentUpon>201604271107139_Mig_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604271430130_Mig_5.cs" />
-    <Compile Include="Migrations\201604271430130_Mig_5.Designer.cs">
-      <DependentUpon>201604271430130_Mig_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605041320558_Mig_6.cs" />
-    <Compile Include="Migrations\201605041320558_Mig_6.Designer.cs">
-      <DependentUpon>201605041320558_Mig_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605041429271_Mig_7.cs" />
-    <Compile Include="Migrations\201605041429271_Mig_7.Designer.cs">
-      <DependentUpon>201605041429271_Mig_7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605042158089_Mig_8.cs" />
-    <Compile Include="Migrations\201605042158089_Mig_8.Designer.cs">
-      <DependentUpon>201605042158089_Mig_8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+
     <Compile Include="MyApp.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,35 +108,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604251829066_init.resx">
-      <DependentUpon>201604251829066_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604262114181_Mig_1.resx">
-      <DependentUpon>201604262114181_Mig_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604262158183_Mig_2.resx">
-      <DependentUpon>201604262158183_Mig_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604262159459_Mig_3.resx">
-      <DependentUpon>201604262159459_Mig_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604271107139_Mig_4.resx">
-      <DependentUpon>201604271107139_Mig_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604271430130_Mig_5.resx">
-      <DependentUpon>201604271430130_Mig_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605041320558_Mig_6.resx">
-      <DependentUpon>201605041320558_Mig_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605041429271_Mig_7.resx">
-      <DependentUpon>201605041429271_Mig_7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605042158089_Mig_8.resx">
-      <DependentUpon>201605042158089_Mig_8.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,140 @@
+﻿@model IEnumerable<OnlineDietManager.Domain.CoursesManagement.Course>
+@{
+    ViewBag.Title = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-heading">
+    <h3>@ViewBag.Title</h3>
+</div>
+
+<p>Global courses</p>
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.ID)</th>
+        <th>@Html.DisplayNameFor(model => model.Description)</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.OwnerID == null)
+        {
+            <tr>
+                @if (ViewBag.isAdmin)
+                {
+                    <td>
+                        @Html.ActionLink(item.ID.ToString(), "Edit", new { item.ID, returnUrl = Request.Url })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink(item.ID.ToString(), "ViewDetails", new { item.ID, returnUrl = Request.Url })
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td class="row">
+                    @using (@Html.BeginForm("AddToPersonal", "Courses",
+                    FormMethod.Post,
+                    new { @class = "col-xs-2" }))
+                    {
+                        @Html.Hidden("ID", item.ID)
+                        @Html.Hidden("returnUrl", Request.Url)
+
+                        @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                        <button type="submit" class="btn btn-info btn-sm">
+                            <div class="glyphicon glyphicon-star"></div>
+                        </button>
+                    }
+
+                    @using (@Html.BeginForm("Launch", "ActiveCourses",
+                    FormMethod.Post,
+                    new { @class = "col-xs-2" }))
+                    {
+                        @Html.Hidden("idToLaunch", item.ID)
+                        @Html.Hidden("returnUrl", Request.Url)
+
+                        @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                        <button type="submit" class="btn btn-info btn-sm">
+                            <div class="glyphicon glyphicon-bell"></div>
+                        </button>
+                    }
+
+                    @if (ViewBag.isAdmin)
+                    {
+                        using (@Html.BeginForm("DeleteGlobal", "Courses",
+                            FormMethod.Post,
+                            new { @class = "col-xs-2" }))
+                        {
+                            @Html.Hidden("ID", item.ID)
+                            @Html.Hidden("returnUrl", Request.Url)
+
+                            @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <div class="glyphicon glyphicon-remove"></div>
+                            </button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<p>Local courses</p>
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.ID)</th>
+        <th>@Html.DisplayNameFor(model => model.Description)</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.OwnerID == ViewBag.UserId)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.ID.ToString(), "Edit", new { item.ID, returnUrl = Request.Url })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @using (@Html.BeginForm("Delete", "Courses",
+                            FormMethod.Post,
+                            new { @class = "col-xs-2" }))
+                    {
+                        @Html.Hidden("ID", item.ID)
+                        @Html.Hidden("returnUrl", Request.Url)
+
+                        @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                        <button type = "submit" class="btn btn-danger btn-sm">
+                            <div class="glyphicon glyphicon-remove"></div>
+                        </button>
+                    }
+
+                    @using (@Html.BeginForm("Launch", "ActiveCourses",
+                    FormMethod.Post,
+                    new { @class = "col-xs-2" }))
+                    {
+                        @Html.Hidden("idToLaunch", item.ID)
+                        @Html.Hidden("returnUrl", Request.Url)
+
+                        @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
+                        <button type="submit" class="btn btn-info btn-sm">
+                            <div class="glyphicon glyphicon-bell"></div>
+                        </button>
+                    }
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+

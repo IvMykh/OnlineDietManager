@@ -18,7 +18,8 @@ namespace OnlineDietManager.Domain
         public static OnlineDietManagerContext Create()
         {
             return new OnlineDietManagerContext();
-        }
+        }
+
         public OnlineDietManagerContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
