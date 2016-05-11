@@ -18,7 +18,7 @@ namespace OnlineDietManager.Domain.DishesManagement
         [Column(Order = 1)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please, specify a description")]
+        //[Required(ErrorMessage = "Please, specify a description")]
         [Column(Order = 2)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }

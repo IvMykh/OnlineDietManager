@@ -9,7 +9,7 @@ namespace OnlineDietManager.Domain.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(OnlineDietManager.Domain.OnlineDietManagerContext context)
