@@ -93,6 +93,13 @@
     <Compile Include="DishesManagement\FoodComponent.cs" />
     <Compile Include="DishesManagement\Ingredient.cs" />
     <Compile Include="DishesManagement\SpecialData.cs" />
+    
+    <Compile Include="Migrations\201605042158089_Mig_8.cs" />
+    <Compile Include="Migrations\201605042158089_Mig_8.Designer.cs">
+      <DependentUpon>201605042158089_Mig_8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    
 
     <Compile Include="MyApp.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
@@ -108,7 +115,13 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    
+    <EmbeddedResource Include="Migrations\201605042158089_Mig_8.resx">
+      <DependentUpon>201605042158089_Mig_8.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
 
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
