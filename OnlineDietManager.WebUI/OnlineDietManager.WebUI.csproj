@@ -173,12 +173,14 @@
     <Compile Include="Controllers\ActiveCoursesController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\DaysController.cs" />
     <Compile Include="Controllers\DishComponentsController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\GeneralDishesController.cs" />
     <Compile Include="Controllers\GeneralIngredientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,11 +190,13 @@
     <Compile Include="Infrastructure\AppViewPage.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AppUserPrincipal.cs" />
+    <Compile Include="Models\CourseViewModel.cs" />
     <Compile Include="Models\CreateDishComponentViewModel.cs" />
     <Compile Include="Models\DayViewModel.cs" />
     <Compile Include="Models\DishComponentViewModel.cs" />
     <Compile Include="Models\DishViewModel.cs" />
     <Compile Include="Models\IngredientViewModel.cs" />
+    <Compile Include="Models\ListDayViewModel.cs" />
     <Compile Include="Models\ListDishComponentsViewModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
@@ -235,6 +239,10 @@
     <Content Include="Views\UserManagement\Index.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Shared\_DayPartial.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Shared\_CourseSummary.cshtml" />
+    <Content Include="Views\Shared\_ListDayPartial.cshtml" />
+    <Content Include="Views\Shared\_AbstractDayPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -248,6 +256,8 @@
     <Folder Include="Views\ActiveCourses\" />
     <Folder Include="Views\ActiveCourse\" />
     <Folder Include="Views\App\" />
+    <Folder Include="Views\Days\" />
+    <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineDietManager.Domain\OnlineDietManager.Domain.csproj">
