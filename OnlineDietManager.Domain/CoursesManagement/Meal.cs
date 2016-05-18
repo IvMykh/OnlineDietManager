@@ -25,5 +25,11 @@ namespace OnlineDietManager.Domain.CoursesManagement
 
         [Required]
         public virtual IList<Dish> Dishes { get; set; }
+
+        public int Day_ID { get; set; }
+
+        [ForeignKey("Day_ID")]
+        public virtual Day Day { get; set; }
+
     }
 }
