@@ -15,7 +15,6 @@ namespace OnlineDietManager.Domain.UnitsOfWork
         IRepository<Ingredient> IngredientsRepository { get; }
         IRepository<DishComponent> DishComponentsRepository { get; }
         IRepository<Dish> DishesRepository { get; }
-        //IRepository<User> UsersRepository { get; }
         IRepository<Meal> MealsRepository { get; }
         IRepository<Day> DaysRepository { get; }
         IRepository<Course> CoursesRepository { get; }

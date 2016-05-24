@@ -19,6 +19,7 @@ namespace OnlineDietManager.WebUI.Controllers
         {
             UnitOfWork = uow;
         }
+
         // GET: Courses
         public ActionResult Index()
         {
@@ -89,6 +90,24 @@ namespace OnlineDietManager.WebUI.Controllers
 
                 TempData["message"] = string.Format(
                     "{0} has been successfully added to personal courses", courseToAdd.ID);
+            }
+
+            return Redirect(returnUrl);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int Id, string returnUrl)
+        {
+            Course courseToDelete = UnitOfWork.CoursesRepository
+                                    .GetById(Id);
+
+            if (courseToDelete != null)
+            {
+                UnitOfWork.CoursesRepository.Delete(Id);
+                UnitOfWork.Save();
+
+                TempData["message"] = string.Format(
+                    "{0} has been successfully deleted", courseToDelete.Description);
             }
 
             return Redirect(returnUrl);

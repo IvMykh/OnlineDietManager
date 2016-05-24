@@ -235,6 +235,8 @@
     <Content Include="Views\UserManagement\Index.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Shared\_DayPartial.cshtml" />
+    <Content Include="Views\Shared\_ActiveCoursePartial.cshtml" />
+    <Content Include="Views\Shared\_StopEditCoursePartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
