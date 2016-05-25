@@ -9,7 +9,7 @@ namespace OnlineDietManager.WebUI.Models
     public class MealViewModel
     {
         public Meal Meal { get; set; }
-        public string returnUrl { get; set; }
-        public int Day_ID { get; set; }
+        public string ReturnUrl { get; set; }
+        public int DayId { get; set; }
     }
 }

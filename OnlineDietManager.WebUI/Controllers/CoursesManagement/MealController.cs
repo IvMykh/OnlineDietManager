@@ -5,20 +5,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OnlineDietManager.Domain.CoursesManagement;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
     public class MealController : Controller
     {
         private IUnitOfWork uow;
+        
         public MealController(IUnitOfWork uow_)
         {
             uow = uow_;
         }
-        // GET: Meal
-        public ActionResult Index()
+        
+        // GET:
+        public ActionResult Index(int dayRefId, string returnUrl)
         {
-            return View();
+            var meals = uow.MealsRepository.GetAll()
+                            .Where(m => m.Day_ID == dayRefId)
+                            .ToList<Meal>();
+
+            return PartialView("_ListMealsForDayPartial",
+                new ListMealsForDayViewModel {
+                    DayId = dayRefId,
+                    Meals = meals,
+                    ReturnUrl = returnUrl
+                });
         }
 
         [HttpGet]
@@ -27,24 +39,24 @@ namespace OnlineDietManager.WebUI.Controllers
             var model = new MealViewModel
             {
                 Meal = new Domain.CoursesManagement.Meal(),
-                returnUrl = returnUrl_
+                ReturnUrl = returnUrl_
             };
 
             return View("Edit", model);
         }
 
         [HttpGet]
-        public ActionResult Edit(int Id, string returnUrl_, int Day_ID_)
+        public ActionResult Edit(int id, string returnUrl, int dayId)
         {
             var mealToEdit = uow.MealsRepository.
                 GetAll().
-                FirstOrDefault(meal => meal.ID == Id);
+                FirstOrDefault(meal => meal.ID == id);
 
             return View(new MealViewModel
             {
                 Meal = mealToEdit,
-                returnUrl = returnUrl_,
-                Day_ID = Day_ID_
+                ReturnUrl = returnUrl,
+                DayId = dayId
             });
         }
 
@@ -55,7 +67,7 @@ namespace OnlineDietManager.WebUI.Controllers
             {
                 if (model.Meal.ID == 0)
                 {
-                    model.Meal.Day_ID = model.Day_ID;
+                    model.Meal.Day_ID = model.DayId;
                     uow.MealsRepository.Insert(model.Meal);
                 }
                 else
@@ -66,9 +78,9 @@ namespace OnlineDietManager.WebUI.Controllers
                 uow.Save();
                 TempData["message"] = "meal was saved";
 
-                if (model.returnUrl!= null)
+                if (model.ReturnUrl!= null)
                 {
-                    return Redirect(model.returnUrl);
+                    return Redirect(model.ReturnUrl);
                 }
 
                 return RedirectToAction("Index");
@@ -77,6 +89,13 @@ namespace OnlineDietManager.WebUI.Controllers
             {
                 return View(model);
             }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(MealViewModel model)
+        {
+            // TODO: implement.
+            throw new NotImplementedException();
         }
     }
 }

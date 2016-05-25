@@ -1,19 +1,20 @@
 ﻿@model OnlineDietManager.WebUI.Models.ListDaysViewModel
 
 <div class="col-xs-2">
-    <div class="panel panel-default">
-        <div class="panel-heading text-centrified">
-            <h4>Days</h4>
-        </div>
+    <div class="panel panel-info">
+        <div class="panel-heading text-centrified"><p>Days</p></div>
         <div class="panel-body">
                 @{
                     int i = 1;
                     foreach (var day in Model.Days)
-                    {
-                        @Html.ActionLink(string.Format("Day #{0}", i),
-                                "ChooseDay",
-                                new { CVM = Model, index = i - 1 },
-                                new { @class = "btn btn-link btn-group-justified" })
+                    {                        
+                        @Html.ActionLink(
+                            linkText: string.Format("Day #{0}", i),
+                            actionName: "ChooseDay",
+                            controllerName: "Days",
+                            routeValues: new { dayId = day.ID, returnUrl = Request.Url },
+                            htmlAttributes: new { @class = "btn btn-info btn-group-justified" }
+                        )
                         ++i;
                     }
                 }
@@ -25,9 +26,13 @@
                 @Html.Hidden("CourseId", Model.CourseRefId)
                 @Html.Hidden("ReturnUrl", Request.Url)
                 
-                <button type="submit" class="btn btn-group-justified">
-                    Add day
+                <button type="submit" class="btn btn-success btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span>
                 </button>
+                
+                @*<button type="submit" class="btn btn-group-justified">
+                    Add day
+                </button>*@
             }
         </div>
     </div>

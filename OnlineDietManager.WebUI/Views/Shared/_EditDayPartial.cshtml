@@ -1,0 +1,30 @@
+﻿@model OnlineDietManager.WebUI.Models.EditDayViewModel
+
+<div class="col-xs-6">
+    <div>
+        @using (Html.BeginForm("Edit", "Days"))
+        {
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Day.ID)
+                @Html.HiddenFor(model => model.Day.CourseID)
+            
+                @Html.HiddenFor(model => model.ReturnUrl)
+            
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Day.Description, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Day.Description)
+                        @Html.ValidationMessageFor(model => model.Day.Description)
+                    </div>
+                </div>
+            
+                @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+            </div>
+        }
+    </div>
+</div>
+
+<div class="col-xs-6">
+    @Html.Action("Index", "Meal", new { dayRefId = Model.Day.ID, returnUrl = Request.Url })
+</div>

@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
-using OnlineDietManager.Domain.CoursesManagement;
-using OnlineDietManager.Domain.UnitsOfWork;
-using OnlineDietManager.WebUI.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OnlineDietManager.Domain.CoursesManagement;
+using OnlineDietManager.Domain.UnitsOfWork;
+using OnlineDietManager.WebUI.Models;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
@@ -21,6 +20,7 @@ namespace OnlineDietManager.WebUI.Controllers
             OdmUnitOfWork = unitOfWork;
         }
 
+        [HttpGet]
         [ChildActionOnly]
         public ActionResult Index(int courseRefId, string returnUrl)
         {
@@ -41,12 +41,11 @@ namespace OnlineDietManager.WebUI.Controllers
         }
 
         [HttpPost]
-        //[ChildActionOnly]
         public ActionResult Create(AddDayViewModel addDayVM)
         {
             var newDay = new Day { 
-                    CourseID = addDayVM.CourseId 
-                };
+                CourseID = addDayVM.CourseId 
+            };
 
             OdmUnitOfWork.DaysRepository.Insert(newDay);
             OdmUnitOfWork.Save();
@@ -58,6 +57,49 @@ namespace OnlineDietManager.WebUI.Controllers
             uriBuilder.Query = query.ToString();
 
             return Redirect(uriBuilder.ToString());
+        }
+
+        [HttpGet]
+        public ActionResult ChooseDay(int dayId, string returnUrl)
+        {
+            var uriBuilder = new UriBuilder(returnUrl);
+
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["selectedDayId"] = dayId.ToString();
+            uriBuilder.Query = query.ToString();
+
+            return Redirect(uriBuilder.ToString());
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult Edit(int dayId, string returnUrl)
+        {
+            Day day = OdmUnitOfWork.DaysRepository.GetById(dayId);
+
+            return PartialView("_EditDayPartial", new EditDayViewModel {
+                Day = day,
+                ReturnUrl = returnUrl
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditDayViewModel editDayVM)
+        {
+            if (ModelState.IsValid)
+            {
+                OdmUnitOfWork.DaysRepository.Update(editDayVM.Day);
+                OdmUnitOfWork.Save();
+
+                TempData["message"] = string.Format(
+                    "Day '{0}' has been saved", editDayVM.Day.ID);
+
+                return Redirect(editDayVM.ReturnUrl);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

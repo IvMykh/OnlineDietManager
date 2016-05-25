@@ -110,5 +110,23 @@ namespace OnlineDietManager.WebUI.Controllers
                 return GetViewResultFor("Edit", courseVM);
             }
         }
+
+        // POST.
+        public ActionResult Delete(int Id, string returnUrl)
+        {
+            Course courseToDelete = OdmUnitOfWork.CoursesRepository
+                                    .GetById(Id);
+
+            if (courseToDelete != null)
+            {
+                OdmUnitOfWork.CoursesRepository.Delete(Id);
+                OdmUnitOfWork.Save();
+
+                TempData["message"] = string.Format(
+                    "Course '{0}' has been successfully deleted", courseToDelete.ID);
+            }
+
+            return Redirect(returnUrl);
+        }
 	}
 }

@@ -84,6 +84,12 @@ namespace OnlineDietManager.WebUI.Controllers
         {
             return base.Edit(courseVM);
         }
+
+        [HttpPost]
+        public new ActionResult Delete(int Id, string returnUrl)
+        {
+            return base.Delete(Id, returnUrl);
+        }
     }
 
     //public class CoursesController : Controller

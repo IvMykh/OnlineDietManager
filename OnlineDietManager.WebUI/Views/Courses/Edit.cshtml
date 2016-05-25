@@ -42,7 +42,7 @@
 
     @if (Model.SelectedDayId != null)
     {
-        @Html.Action("Index", "Days", new { courseRefId = Model.Course.ID, returnUrl = Request.Url })
+        @Html.Action("Edit", "Days", new { dayId = Model.SelectedDayId.Value, returnUrl = Request.Url })
     }
 </div>
 

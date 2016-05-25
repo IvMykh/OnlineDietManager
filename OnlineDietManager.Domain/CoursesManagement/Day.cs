@@ -17,6 +17,7 @@ namespace OnlineDietManager.Domain.CoursesManagement
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required]

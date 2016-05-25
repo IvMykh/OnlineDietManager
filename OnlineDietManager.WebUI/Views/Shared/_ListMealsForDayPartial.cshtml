@@ -1,0 +1,55 @@
+﻿@model OnlineDietManager.WebUI.Models.ListMealsForDayViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading text-centrified">
+        <p>Meals</p>
+    </div>
+
+    <div class="panel-body">
+        @foreach (var meal in Model.Meals)
+        {
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="text-center col-lg-5">
+                        <h5><span class="glyphicon glyphicon-time" /> @meal.Time.ToString() (@meal.Description)</h5>
+                    </div>
+                    <div class="panel-body col-lg-5">
+                        @foreach (var dish in meal.Dishes)
+                        {
+                            <p>
+                                @Html.ActionLink(
+                                            linkText: dish.Name,
+                                            actionName: "Edit",
+                                            controllerName: "Dishes",
+                                            routeValues: new { id = dish.ID, returnUrl = Request.Url },
+                                            htmlAttributes: null
+                                        ) (@dish.Caloricity kcal)
+                                    </p>
+                        }
+                    </div>
+                    <div class="col-lg-1">
+                        <a href="@Url.Action("Edit", "Meal")" class="btn btn-warning btn-xs">
+                            <span class="glyphicon glyphicon-edit" />
+                        </a>
+                        <a href="@Url.Action("Delete", "Meal")" class="btn btn-danger btn-xs">
+                            <span class="glyphicon glyphicon-remove" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="panel-footer">
+        @using (@Html.BeginForm("Create", "Meal"))
+        {
+            @Html.Hidden("DayId", Model.DayId)
+            @Html.Hidden("ReturnUrl", Request.Url)
+
+            <button type="submit" class="btn btn-success btn-md">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        }
+    </div>
+</div>
+
