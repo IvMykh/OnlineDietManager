@@ -6,7 +6,7 @@ using System.Web;
 
 namespace OnlineDietManager.WebUI.Models
 {
-    public class ListDayViewModel
+    public class ListDaysViewModel
     {
         public IEnumerable<Day> Days { get; set; }
         public int CourseRefId { get; set; }

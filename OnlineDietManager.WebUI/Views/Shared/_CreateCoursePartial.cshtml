@@ -1,0 +1,26 @@
+﻿@model OnlineDietManager.WebUI.Models.CourseViewModel
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Course.ID)
+        @Html.HiddenFor(model => model.Course.OwnerID)
+
+        @Html.HiddenFor(model => model.ReturnUrl)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Course.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Course.Description)
+                @Html.ValidationMessageFor(model => model.Course.Description)
+            </div>
+        </div>
+
+        @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+    </div>
+}

@@ -40,22 +40,18 @@ namespace OnlineDietManager.Domain.DishesManagement
         {
             get { return Components.Sum(comp => comp.Protein); }
         }
-
         public float Fat
         {
             get { return Components.Sum(comp => comp.Fat); }
         }
-
         public float Carbohydrates
         {
             get { return Components.Sum(comp => comp.Carbohydrates); }
         }
-
         public float Caloricity
         {
             get { return Components.Sum(comp => comp.Caloricity); }
         }
-
         public float Weight
         {
             get { return Components.Sum(comp => comp.Weight); }

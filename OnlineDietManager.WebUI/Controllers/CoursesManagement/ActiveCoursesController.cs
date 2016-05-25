@@ -12,13 +12,14 @@ namespace OnlineDietManager.WebUI.Controllers
 {
     public class ActiveCoursesController : Controller
     {
-        IUnitOfWork UnitOfWork;
-        // GET: ActiveCourses
+        private IUnitOfWork UnitOfWork;
+        
         public ActiveCoursesController(IUnitOfWork uow)
         {
             UnitOfWork = uow;
         }
 
+        // GET: ActiveCourses
         public ActionResult Index()
         {
             return View();
@@ -42,7 +43,7 @@ namespace OnlineDietManager.WebUI.Controllers
 
             var launchedCourse = new ActiveCourse
             {
-                Days = new List<Day>(),
+                //Days = new List<Day>(),
                 Description = courseToLaunch.Description,
                 OwnerID = user,
                 StartDate = DateTime.Now.Date

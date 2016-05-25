@@ -1,16 +1,10 @@
 ﻿@model OnlineDietManager.WebUI.Models.CourseViewModel
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    if (Model.Course.ID == 0)
-    {
+    if (Model.Course.ID == 0) {
         ViewBag.Title = "Create new Course";
-    }
-    else
-    {
-        ViewBag.Title = string.Format("Edit {0}", Model.Course.ID);
+    } else {
+        ViewBag.Title = string.Format("Edit Course '{0}'", Model.Course.ID);
     }
 }
 
@@ -25,8 +19,8 @@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true)
 
+                @Html.HiddenFor(model => model.Course.ID)
                 @Html.HiddenFor(model => model.Course.OwnerID)
-
                 @Html.HiddenFor(model => model.ReturnUrl)
 
                 <div class="form-group">
@@ -44,49 +38,12 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-2">
-        <div class="panel panel-default">
-            <div class="panel-heading text-centrified">
-                Days
-            </div>
-            <div class="panel-body">
-                <ol>
-                    @for (int i = 1; i <= Model.Course.Days.Count; ++i)
-                    {
-                        <li>@Html.ActionLink(i.ToString(), "ChooseDay", new { CVM = Model, index = i - 1 })</li>
-                    }
-                </ol>
-                @if (Model.Course.Days == null)
-                {
-                    <h1>jopa</h1>
-                }
-                else
-                {
-                    <h1>boobos</h1>
-                }
-            </div>
-            
-            <div class="panel-footer">
-                @*@Html.ActionLink("addday", "AddDay", new { Course = Model.Course, index = Model.index, ReturnUrl = Model.ReturnUrl})*@
-                @using (@Html.BeginForm("AddDay", "Courses"))
-                {
-                    @Html.HiddenFor(m => m.Course.ID)
-                    @Html.HiddenFor(m => m.Course.OwnerID)
-                    @Html.HiddenFor(m => m.Course.Description)
-                    @Html.HiddenFor(m => m.ReturnUrl)
-                    @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
-                    <button type="submit" class="btn">
-                        Add day
-                    </button>
-                }
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-9">
+    @Html.Action("Index", "Days", new { courseRefId = Model.Course.ID, returnUrl = Request.Url })
 
-    </div>
-    
-
+    @if (Model.SelectedDayId != null)
+    {
+        @Html.Action("Index", "Days", new { courseRefId = Model.Course.ID, returnUrl = Request.Url })
+    }
 </div>
 
 

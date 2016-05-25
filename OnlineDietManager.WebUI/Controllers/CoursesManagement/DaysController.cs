@@ -12,8 +12,9 @@ namespace OnlineDietManager.WebUI.Controllers
 {
     public class DaysController : Controller
     {
-        // GET: Days
         private IUnitOfWork OdmUnitOfWork { get; set; }
+        private int? selectedDay { get; set; }
+
 
         public DaysController(IUnitOfWork unitOfWork)
         {
@@ -26,29 +27,37 @@ namespace OnlineDietManager.WebUI.Controllers
             IEnumerable<Day> days =
                 OdmUnitOfWork.DaysRepository
                     .GetAll()
-                    .Where(dc => dc.CourseID== courseRefId)
+                    .Where(dc => dc.CourseID == courseRefId)
                     .ToList();
 
             Day referedDay = OdmUnitOfWork.DaysRepository.GetById(courseRefId);
 
-            return PartialView("_DayPartial", new ListDayViewModel
+            return PartialView("_ListDaysPartial", new ListDaysViewModel
             {
-                Days = days,
                 CourseRefId = courseRefId,
+                Days = days,
                 ReturnUrl = returnUrl
             });
         }
 
-        //[HttpGet]
+        [HttpPost]
         //[ChildActionOnly]
-        //public ActionResult Create(string returnUrl, int CourseRefId)
-        //{
+        public ActionResult Create(AddDayViewModel addDayVM)
+        {
+            var newDay = new Day { 
+                    CourseID = addDayVM.CourseId 
+                };
 
-                
-        //}
+            OdmUnitOfWork.DaysRepository.Insert(newDay);
+            OdmUnitOfWork.Save();
 
-        //[HttpPost]
-        //[ChildActionOnly]
-        //public ActionResult Create()
+            var uriBuilder = new UriBuilder(addDayVM.ReturnUrl);
+
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["selectedDayId"] = newDay.ID.ToString();
+            uriBuilder.Query = query.ToString();
+
+            return Redirect(uriBuilder.ToString());
+        }
     }
 }

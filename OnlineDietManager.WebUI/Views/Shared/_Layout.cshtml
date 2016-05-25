@@ -38,13 +38,20 @@
                         <li>@Html.ActionLink("General Dishes", "Index", "GeneralDishes")</li>
                     </ul>
                 </li>
-                <li>
-                   @Html.ActionLink("Courses", "Index", "Courses") 
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Courses<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("My Courses", "Index", "Courses")</li>
+                        <li>@Html.ActionLink("General Courses", "Index", "GeneralCourses")</li>
+                    </ul>
                 </li>
+
                 @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
                 {
                     <li>@Html.ActionLink("Manage users", "Index", "UserManagement")</li>                
                 }
+                
                 <li>@Html.Partial("_LoginPartial")</li>
             </ul>
         </div>

@@ -9,8 +9,8 @@ namespace OnlineDietManager.WebUI.Models
     public class CourseViewModel
     {
         public Course Course { get; set; }
-        public int index { get; set; }
         public string ReturnUrl { get; set; }
+        public int? SelectedDayId { get; set; }
     }
 
     public class CourseViewWithDayIdModel

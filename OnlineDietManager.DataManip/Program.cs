@@ -22,7 +22,7 @@ namespace OnlineDietManager.DataManip
                 var course = new Course {
                     Description = "Sample course",
                     OwnerID = ownerId,
-                    Days = new List<Day>()
+                    //Days = new List<Day>()
                 };
 
                 int courseDuration = 4;

@@ -25,7 +25,7 @@ namespace OnlineDietManager.Domain.CoursesManagement
         [ForeignKey("CourseID")]
         public virtual Course Course { get; set; }
 
-        [Required]
+        //[Required]
         public virtual IList<Meal> Meals { get; set; }
     }
 }
