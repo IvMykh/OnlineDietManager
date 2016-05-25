@@ -1,3 +1,27 @@
 ﻿@model OnlineDietManager.Domain.CoursesManagement.Day
 
+@if (Model == null)
+{
+    <div class="panel panel-warning">
+        <div class="panel-heading text-centrified"><h2>day is empty</h2></div>
+    </div>
+}
+else
+{
+    <div class="panel panel-success">
+        <div class="panel-heading text-centrified">
+            <h2>@Model.Description</h2>
+        </div>
+        <div class="panel-body">
+            @for (int i = 0; i < Model.Meals.Count; ++i)
+            {
+                var meal = Model.Meals[i];
+                @Html.Partial("_MealPartial", meal)
+            }
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("_StopEditCoursePartial")
+        </div>
+    </div>
+}
 
