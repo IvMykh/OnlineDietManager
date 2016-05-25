@@ -38,7 +38,11 @@
 </div>
 
 <div class="row">
-    @Html.Action("Index", "Days", new { courseRefId = Model.Course.ID, returnUrl = Request.Url })
+    @Html.Action("Index", "Days", new { 
+        courseRefId = Model.Course.ID, 
+        selectedDayId = Model.SelectedDayId,  //
+        returnUrl = Request.Url 
+    })
 
     @if (Model.SelectedDayId != null)
     {

@@ -12,7 +12,7 @@ namespace OnlineDietManager.WebUI.Controllers
     public class DaysController : Controller
     {
         private IUnitOfWork OdmUnitOfWork { get; set; }
-        private int? selectedDay { get; set; }
+        //private int? selectedDay { get; set; }
 
 
         public DaysController(IUnitOfWork unitOfWork)
@@ -22,7 +22,7 @@ namespace OnlineDietManager.WebUI.Controllers
 
         [HttpGet]
         [ChildActionOnly]
-        public ActionResult Index(int courseRefId, string returnUrl)
+        public ActionResult Index(int courseRefId, int? selectedDayId, string returnUrl) //
         {
             IEnumerable<Day> days =
                 OdmUnitOfWork.DaysRepository
@@ -36,7 +36,9 @@ namespace OnlineDietManager.WebUI.Controllers
             {
                 CourseRefId = courseRefId,
                 Days = days,
-                ReturnUrl = returnUrl
+                ReturnUrl = returnUrl,
+
+                SelectedDayId = selectedDayId //
             });
         }
 
@@ -100,6 +102,30 @@ namespace OnlineDietManager.WebUI.Controllers
             {
                 throw new NotImplementedException();
             }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int dayId, string returnUrl)
+        {
+            Day dayToDelete = OdmUnitOfWork.DaysRepository
+                                    .GetById(dayId);
+
+            if (dayToDelete != null)
+            {
+                OdmUnitOfWork.DaysRepository.Delete(dayId);
+                OdmUnitOfWork.Save();
+
+                TempData["message"] = string.Format(
+                    "Day '{0}' has been successfully deleted", dayToDelete.ID);
+            }
+
+            var uriBuilder = new UriBuilder(returnUrl);
+            
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query.Remove("selectedDayId");
+            uriBuilder.Query = query.ToString();
+            
+            return Redirect(uriBuilder.ToString());
         }
     }
 }

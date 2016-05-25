@@ -9,5 +9,9 @@ namespace OnlineDietManager.WebUI.Models
         public IEnumerable<Day> Days { get; set; }
         public int CourseRefId { get; set; }
         public string ReturnUrl { get; set; }
+
+        //
+        public int? SelectedDayId { get; set; }
+        //
     }
 }

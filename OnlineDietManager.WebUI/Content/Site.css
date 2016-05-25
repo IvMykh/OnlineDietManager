@@ -24,6 +24,15 @@ th, td {
     text-align: center;
 }
 
+.activeCourseHeading {
+    font-weight: bold;
+}
+
+.panelHeading {
+    font-weight: bold;
+    font-size: larger;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
