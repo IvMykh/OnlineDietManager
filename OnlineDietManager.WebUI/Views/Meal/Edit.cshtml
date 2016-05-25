@@ -1,0 +1,45 @@
+﻿@model OnlineDietManager.WebUI.Models.MealViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Meal.ID)
+    @Html.HiddenFor(model => model.Meal.Day_ID)
+
+    @Html.HiddenFor(model => model.returnUrl)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Meal.Description, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Meal.Description)
+            @Html.ValidationMessageFor(model => model.Meal.Description)
+        </div>
+    </div>
+
+    <table class="table table-striped table-condensed table-bordered">
+        <tr>
+            <th>Dishes</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model.Meal.Dishes)
+        {
+            @*show meals, add meal deletion(needs controller editing)*@
+        }
+
+    </table>
+
+    @*show list of dishes, add dish to table and model, when clicked*@
+    
+    @Html.Partial("_SaveCancelPartial", Model.returnUrl) <!--new NavigateToActionModel { Action = "Index" }-->
+</div>
+
+

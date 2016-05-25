@@ -199,6 +199,7 @@
     <Compile Include="Models\ListDayViewModel.cs" />
     <Compile Include="Models\ListDishComponentsViewModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
+    <Compile Include="Models\MealViewModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\SelectIngredientViewModel.cs" />
     <Compile Include="Models\AppUserViewModel.cs" />
@@ -243,6 +244,8 @@
     <Content Include="Views\Shared\_CourseSummary.cshtml" />
     <Content Include="Views\Shared\_ListDayPartial.cshtml" />
     <Content Include="Views\Shared\_AbstractDayPartial.cshtml" />
+    <Content Include="Views\Shared\_MealPartial.cshtml" />
+    <Content Include="Views\Meal\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -257,7 +260,6 @@
     <Folder Include="Views\ActiveCourse\" />
     <Folder Include="Views\App\" />
     <Folder Include="Views\Days\" />
-    <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineDietManager.Domain\OnlineDietManager.Domain.csproj">
