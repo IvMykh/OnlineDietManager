@@ -44,6 +44,7 @@ namespace OnlineDietManager.WebUI.Controllers
             var model = new MealViewModel
             {
                 Meal = new Domain.CoursesManagement.Meal(),
+                MealId = 0,
                 ReturnUrl = returnUrl_,
                 DayId = dayId,
                 AllDishes = allDishes,
@@ -67,6 +68,7 @@ namespace OnlineDietManager.WebUI.Controllers
             return View(new MealViewModel
             {
                 Meal = mealToEdit,
+                MealId = mealToEdit.ID,
                 ReturnUrl = returnUrl,
                 DayId = dayId,
                 AllDishes = allDishes,
@@ -77,12 +79,22 @@ namespace OnlineDietManager.WebUI.Controllers
         [HttpPost]
         public ActionResult Edit(MealViewModel model)
         {
-            if (ModelState.IsValid)
+            if (model.Meal == null)
             {
+                model.Meal = uow.MealsRepository.GetById(model.MealId);
+                var userId = User.Identity.GetUserId();
+                model.AllDishes = uow.DishesRepository.
+                    GetAll().
+                    Where(dish => dish.OwnerID == userId);
+            }
+
+            if (ModelState.IsValid)
+            { 
                 if (model.Meal.ID == 0)
                 {
                     model.Meal.Day_ID = model.DayId;
                     uow.MealsRepository.Insert(model.Meal);
+                    model.MealId = model.Meal.ID;
                 }
                 else
                 {
