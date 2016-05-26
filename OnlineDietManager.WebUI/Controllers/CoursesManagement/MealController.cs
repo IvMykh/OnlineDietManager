@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OnlineDietManager.Domain.CoursesManagement;
+using Microsoft.AspNet.Identity;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
@@ -34,29 +35,42 @@ namespace OnlineDietManager.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create(string returnUrl_)
+        public ActionResult Create(string returnUrl_, int dayId)
         {
+            var allDishes = uow.DishesRepository.
+                GetAll().
+                Where(dish => dish.OwnerID == User.Identity.GetUserId());
+
             var model = new MealViewModel
             {
                 Meal = new Domain.CoursesManagement.Meal(),
-                ReturnUrl = returnUrl_
+                ReturnUrl = returnUrl_,
+                DayId = dayId,
+                AllDishes = allDishes,
+                SelectedDishId = 0
             };
 
             return View("Edit", model);
         }
 
         [HttpGet]
-        public ActionResult Edit(int id, string returnUrl, int dayId)
+        public ActionResult Edit(int id, string returnUrl, int dayId, int selectedDishId = 0)
         {
             var mealToEdit = uow.MealsRepository.
                 GetAll().
                 FirstOrDefault(meal => meal.ID == id);
-
+            var userId = User.Identity.GetUserId();
+            var allDishes = uow.DishesRepository.
+                GetAll().
+                Where(dish => dish.OwnerID == userId);
+            
             return View(new MealViewModel
             {
                 Meal = mealToEdit,
                 ReturnUrl = returnUrl,
-                DayId = dayId
+                DayId = dayId,
+                AllDishes = allDishes,
+                SelectedDishId = selectedDishId
             });
         }
 
@@ -72,6 +86,14 @@ namespace OnlineDietManager.WebUI.Controllers
                 }
                 else
                 {
+                    uow.MealsRepository.Update(model.Meal);
+                }
+
+                if(model.SelectedDishId != 0)
+                {
+                    model.Meal.Dishes.Add(uow.DishesRepository
+                        .GetById(model.SelectedDishId));
+
                     uow.MealsRepository.Update(model.Meal);
                 }
 
@@ -97,5 +119,7 @@ namespace OnlineDietManager.WebUI.Controllers
             // TODO: implement.
             throw new NotImplementedException();
         }
+
+        
     }
 }
