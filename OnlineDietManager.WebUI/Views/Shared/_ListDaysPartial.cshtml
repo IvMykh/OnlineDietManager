@@ -25,19 +25,27 @@
         </div>
 
         <div class="panel-footer">
-            @using (@Html.BeginForm("Create", "Days"))
-            {
-                @Html.Hidden("CourseId", Model.CourseRefId)
-                @Html.Hidden("ReturnUrl", Request.Url)
-                
-                <button type="submit" class="btn btn-success btn-sm">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-                
-                @*<button type="submit" class="btn btn-group-justified">
-                    Add day
-                </button>*@
-            }
+            <div class="row">
+                @using (@Html.BeginForm("Create", "Days", FormMethod.Post, new { @class = "col-xs-3" }))
+                {
+                    @Html.Hidden("CourseId", Model.CourseRefId)
+                    @Html.Hidden("ReturnUrl", Request.Url)
+
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                }
+
+                @using (Html.BeginForm("Delete", "Days", FormMethod.Post, new { @class = "col-xs-3" }))
+                {
+                    @Html.Hidden("dayId", Model.SelectedDayId)
+                    @Html.Hidden("returnUrl", Request.Url)
+
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                }
+            </div>
         </div>
     </div>
 </div>

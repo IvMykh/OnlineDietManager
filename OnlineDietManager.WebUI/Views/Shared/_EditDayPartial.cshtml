@@ -1,6 +1,6 @@
 ﻿@model OnlineDietManager.WebUI.Models.EditDayViewModel
 
-<div class="col-xs-7">
+<div class="col-xs-4">
     <div>
         @using (Html.BeginForm("Edit", "Days"))
         {
@@ -12,7 +12,7 @@
                 @Html.HiddenFor(model => model.ReturnUrl)
             
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Day.Description, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Day.Description, new { @class = "control-label col-md-3" })
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.Day.Description)
                         @Html.ValidationMessageFor(model => model.Day.Description)
@@ -28,19 +28,10 @@
             </div>
         }
 
-        @using (Html.BeginForm("Delete", "Days", FormMethod.Post, new { @class = ""}))
-        {
-
-            @Html.Hidden("dayId", Model.Day.ID)
-            @Html.Hidden("returnUrl", Request.Url)
-
-            <button type="submit" class="btn btn-danger">
-                <span class="glyphicon glyphicon-remove"></span>
-            </button>
-        }
     </div>
 </div>
 
 <div class="col-xs-6">
     @Html.Action("Index", "Meal", new { dayRefId = Model.Day.ID, returnUrl = Request.Url })
 </div>
+
