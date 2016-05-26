@@ -4,64 +4,63 @@
     ViewBag.Title = "All my Courses";
 }
 
-<div class="panel-heading">
-    <h3>@ViewBag.Title</h3>
+<div class="panel">
+    <div class="panel-heading">
+        <p class="tableHeading text-center text-uppercase">@ViewBag.Title</p>
+    </div>
+    <div class="panel-body">
+        <p>
+            <a href="@Url.Action("Create", "Courses", new { returnUrl = Request.Url })" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus" />
+            </a>
+        </p>
+
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ID)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.ID.ToString(), "Edit", new { item.ID, returnUrl = Request.Url })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <div class="btn-group">
+                                @using (@Html.BeginForm("Launch", "ActiveCourses"))
+                                {
+                                    @Html.Hidden("idToLaunch", item.ID)
+                                    @Html.Hidden("returnUrl", Request.Url)
+
+                                    <button type="submit" class="btn btn-info btn-sm">
+                                        <div class="glyphicon glyphicon-play"></div>
+                                    </button>
+                                }
+                            </div>
+                            <div class="btn-group">
+                                @using (@Html.BeginForm("Delete", "Courses"))
+                                {
+                                    @Html.Hidden("Id", item.ID)
+                                    @Html.Hidden("returnUrl", Request.Url)
+
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <div class="glyphicon glyphicon-remove"></div>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
 </div>
-
-<p>
-    @Html.ActionLink(
-        linkText:   "Create New",
-        actionName: "Create",
-        routeValues: new { returnUrl = Request.Url },
-        htmlAttributes: new { @class = "btn btn-primary" }
-        )
-</p>
-
-<table class="table table-striped table-condensed table-bordered">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.ID)</th>
-        <th>@Html.DisplayNameFor(model => model.Description)</th>
-        <th>Actions</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td class="col-xs-1">
-                @Html.ActionLink(item.ID.ToString(), "Edit", new { item.ID, returnUrl = Request.Url })
-            </td>
-            <td class="col-xs-5">
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td class="row">
-                @using (@Html.BeginForm("Launch", "ActiveCourses",
-                    FormMethod.Post,
-                    new { @class = "col-xs-1" }))
-                {
-                    @Html.Hidden("idToLaunch", item.ID)
-                    @Html.Hidden("returnUrl", Request.Url)
-
-                    @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
-                    <button type="submit" class="btn btn-info btn-sm">
-                        <div class="glyphicon glyphicon-bell"></div>
-                    </button>
-                }
-
-                @using (@Html.BeginForm("Delete", "Courses",
-                    FormMethod.Post,
-                    new { @class = "col-xs-1" }))
-                {
-                    @Html.Hidden("Id", item.ID)
-                    @Html.Hidden("returnUrl", Request.Url)
-
-                    @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
-                    <button type="submit" class="btn btn-danger btn-sm">
-                        <div class="glyphicon glyphicon-remove"></div>
-                    </button>
-                }
-            </td>
-
-        </tr>
-    }
-
-</table>

@@ -254,6 +254,8 @@
     <Content Include="Views\Meal\Edit.cshtml" />
     <Content Include="Views\Shared\_EditDayPartial.cshtml" />
     <Content Include="Views\Shared\_ListMealsForDayPartial.cshtml" />
+    <Content Include="Views\Shared\_ActiveCoursePartial.cshtml" />
+    <Content Include="Views\Shared\_StopEditCoursePartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

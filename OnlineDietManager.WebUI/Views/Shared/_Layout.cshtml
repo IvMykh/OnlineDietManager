@@ -61,9 +61,10 @@
             <div class="alert alert-success">@TempData["message"]</div>
         }
         
-        @if (TempData["errorMessage"] != null){
+        @if (TempData["errorMessage"] != null) 
+        {
             var errors = TempData["errorMessage"] as List<string>;
-
+            
             foreach (var error in errors)
             {
                 <div class="alert alert-danger">@(error)</div>
@@ -73,7 +74,7 @@
         @RenderBody()
         <hr/>
         <footer class="panel panel-footer">
-            <p>&copy; @DateTime.Now.Year - Online Diet Manager</p>
+            <p class="myFooter text-center text-uppercase">&copy; @DateTime.Now.Year - Online Diet Manager</p>
         </footer>
     </div>
 </body>

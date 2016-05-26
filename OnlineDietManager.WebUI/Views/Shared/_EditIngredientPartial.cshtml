@@ -2,7 +2,6 @@
 
 @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.Ingredient.ID)
     @Html.HiddenFor(model => model.Ingredient.OwnerID)
@@ -10,52 +9,39 @@
     @Html.HiddenFor(model => model.ReturnUrl)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ingredient.Name, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Ingredient.Name)
-            @Html.ValidationMessageFor(model => model.Ingredient.Name)
-        </div>
+        @Html.LabelFor(model => model.Ingredient.Name)
+        @Html.TextBoxFor(model => model.Ingredient.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Ingredient.Name)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ingredient.Description, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Ingredient.Description)
-            @Html.ValidationMessageFor(model => model.Ingredient.Description)
-        </div>
+        @Html.LabelFor(model => model.Ingredient.Description)
+        @Html.TextAreaFor(model => model.Ingredient.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Ingredient.Description)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ingredient.Protein, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Ingredient.Protein)
-            @Html.ValidationMessageFor(model => model.Ingredient.Protein)
-        </div>
+        @Html.LabelFor(model => model.Ingredient.Protein)
+        @Html.TextBoxFor(model => model.Ingredient.Protein, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Ingredient.Protein)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ingredient.Fat, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Ingredient.Fat)
-            @Html.ValidationMessageFor(model => model.Ingredient.Fat)
-        </div>
+        @Html.LabelFor(model => model.Ingredient.Fat)
+        @Html.TextBoxFor(model => model.Ingredient.Fat, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Ingredient.Fat)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ingredient.Carbohydrates, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Ingredient.Carbohydrates)
-            @Html.ValidationMessageFor(model => model.Ingredient.Carbohydrates)
-        </div>
+        @Html.LabelFor(model => model.Ingredient.Carbohydrates)
+        @Html.TextBoxFor(model => model.Ingredient.Carbohydrates, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Ingredient.Carbohydrates)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ingredient.Caloricity, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Ingredient.Caloricity)
-            @Html.ValidationMessageFor(model => model.Ingredient.Caloricity)
-        </div>
+        @Html.LabelFor(model => model.Ingredient.Caloricity)
+        @Html.TextBoxFor(model => model.Ingredient.Caloricity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Ingredient.Caloricity)
     </div>
 
-    @Html.Partial("_SaveCancelPartial", Model.ReturnUrl) <!--new NavigateToActionModel { Action = "Index" }-->
-</div>
+    @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)

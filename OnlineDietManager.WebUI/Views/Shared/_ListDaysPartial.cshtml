@@ -1,32 +1,33 @@
 ﻿@model OnlineDietManager.WebUI.Models.ListDaysViewModel
 
-<div class="col-xs-2">
-    <div class="panel panel-info">
-        <div class="panel-heading text-centrified"><p class="panelHeading">Days</p></div>
-        <div class="panel-body">
-                @{
-                    int i = 1;
-                    foreach (var day in Model.Days)
-                    {                        
-                        @Html.ActionLink(
-                            linkText: string.Format("Day #{0}", i),
-                            actionName: "ChooseDay",
-                            controllerName: "Days",
-                            routeValues: new { dayId = day.ID, returnUrl = Request.Url },
-                            htmlAttributes: new { 
-                                @class = Model.SelectedDayId == day.ID ? 
-                                    "btn btn-info btn-group-justified" :
-                                    "btn btn-link btn-group-justified"
-                            }
-                        )
-                        ++i;
-                    }
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <p class="panelHeading text-center">Days</p>
+    </div>
+    <div class="panel-body">
+            @{
+                int i = 1;
+                foreach (var day in Model.Days)
+                {                   
+                    @Html.ActionLink(
+                        linkText: string.Format("Day #{0}", i),
+                        actionName: "ChooseDay",
+                        controllerName: "Days",
+                        routeValues: new { dayId = day.ID, returnUrl = Request.Url },
+                        htmlAttributes: new { 
+                            @class =  Model.SelectedDayId == day.ID ?
+                                "btn btn-info btn-group-justified" :
+                                "btn btn-link btn-group-justified"
+                        }
+                    )
+                    ++i;
                 }
-        </div>
-
-        <div class="panel-footer">
-            <div class="row">
-                @using (@Html.BeginForm("Create", "Days", FormMethod.Post, new { @class = "col-xs-3" }))
+            }
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group btn-group-sm">
+            <div class="btn-group">
+                @using (@Html.BeginForm("Create", "Days"))
                 {
                     @Html.Hidden("CourseId", Model.CourseRefId)
                     @Html.Hidden("ReturnUrl", Request.Url)
@@ -35,8 +36,10 @@
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 }
+            </div>
 
-                @using (Html.BeginForm("Delete", "Days", FormMethod.Post, new { @class = "col-xs-3" }))
+            <div class="btn-group">
+                @using (Html.BeginForm("Delete", "Days"))
                 {
                     @Html.Hidden("dayId", Model.SelectedDayId)
                     @Html.Hidden("returnUrl", Request.Url)
@@ -48,7 +51,4 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col-xs-9">
-
 </div>

@@ -10,11 +10,12 @@
     padding-right: 15px;
 }
 
-/* My styles*/
-.text-centrified {
-    text-align: center;
-}
 
+
+/* My styles*/
+.myFooter {
+    font-weight: bold;
+}
 #ingredients-list-box {
     height: 300px;
     overflow: scroll;
@@ -32,6 +33,28 @@ th, td {
     font-weight: bold;
     font-size: larger;
 }
+
+.tableHeading {
+    font-weight: bold;
+    font-size: large;
+}
+
+.activeCourseDateHeading {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.mealTime {
+    font-family: Consolas;
+    font-size: large;
+    font-weight: bold;
+}
+
+.mealDescription {
+    font-size: larger;
+    font-family: 'Century Gothic';
+}
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
