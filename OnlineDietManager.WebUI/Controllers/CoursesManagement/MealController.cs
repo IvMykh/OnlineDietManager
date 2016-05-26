@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OnlineDietManager.Domain.CoursesManagement;
+using Microsoft.AspNet.Identity;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
@@ -34,44 +35,77 @@ namespace OnlineDietManager.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create(string returnUrl_)
+        public ActionResult Create(string returnUrl_, int dayId)
         {
+            var allDishes = uow.DishesRepository.
+                GetAll().
+                Where(dish => dish.OwnerID == User.Identity.GetUserId());
+
             var model = new MealViewModel
             {
                 Meal = new Domain.CoursesManagement.Meal(),
-                ReturnUrl = returnUrl_
+                MealId = 0,
+                ReturnUrl = returnUrl_,
+                DayId = dayId,
+                AllDishes = allDishes,
+                SelectedDishId = 0
             };
 
             return View("Edit", model);
         }
 
         [HttpGet]
-        public ActionResult Edit(int id, string returnUrl, int dayId)
+        public ActionResult Edit(int id, string returnUrl, int dayId, int selectedDishId = 0)
         {
             var mealToEdit = uow.MealsRepository.
                 GetAll().
                 FirstOrDefault(meal => meal.ID == id);
-
+            var userId = User.Identity.GetUserId();
+            var allDishes = uow.DishesRepository.
+                GetAll().
+                Where(dish => dish.OwnerID == userId);
+            
             return View(new MealViewModel
             {
                 Meal = mealToEdit,
+                MealId = mealToEdit.ID,
                 ReturnUrl = returnUrl,
-                DayId = dayId
+                DayId = dayId,
+                AllDishes = allDishes,
+                SelectedDishId = selectedDishId
             });
         }
 
         [HttpPost]
         public ActionResult Edit(MealViewModel model)
         {
-            if (ModelState.IsValid)
+            if (model.Meal == null)
             {
+                model.Meal = uow.MealsRepository.GetById(model.MealId);
+                var userId = User.Identity.GetUserId();
+                model.AllDishes = uow.DishesRepository.
+                    GetAll().
+                    Where(dish => dish.OwnerID == userId);
+            }
+
+            if (ModelState.IsValid)
+            { 
                 if (model.Meal.ID == 0)
                 {
                     model.Meal.Day_ID = model.DayId;
                     uow.MealsRepository.Insert(model.Meal);
+                    model.MealId = model.Meal.ID;
                 }
                 else
                 {
+                    uow.MealsRepository.Update(model.Meal);
+                }
+
+                if(model.SelectedDishId != 0)
+                {
+                    model.Meal.Dishes.Add(uow.DishesRepository
+                        .GetById(model.SelectedDishId));
+
                     uow.MealsRepository.Update(model.Meal);
                 }
 
@@ -97,5 +131,7 @@ namespace OnlineDietManager.WebUI.Controllers
             // TODO: implement.
             throw new NotImplementedException();
         }
+
+        
     }
 }
