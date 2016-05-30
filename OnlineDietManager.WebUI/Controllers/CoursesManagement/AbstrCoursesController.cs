@@ -26,8 +26,20 @@ namespace OnlineDietManager.WebUI.Controllers
             string actionName, 
             object routeParams = null);
 
-        protected abstract object GetIndexModel();
         protected abstract string GetOwnerName();
+
+        private object GetIndexModel()
+        {
+            string userId = GetOwnerName();
+
+            var model = OdmUnitOfWork.CoursesRepository.GetAll()
+                            .Where(course => course.OwnerID == userId)
+                            .OrderBy(course => course.ID)
+                            .ToList<Course>();
+
+            return model;
+        }
+
 
         public ActionResult Index()
         {

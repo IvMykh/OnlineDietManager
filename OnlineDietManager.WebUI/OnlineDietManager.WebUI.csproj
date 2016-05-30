@@ -168,9 +168,11 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CoursesManagement\AbstrCoursesController.cs" />
+    <Compile Include="Controllers\CoursesManagement\GeneralCoursesController.cs" />
     <Compile Include="Controllers\DishesManagement\AbstrDishesController.cs" />
     <Compile Include="Controllers\DishesManagement\AbstrIngredientsController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EntityCopyer.cs" />
+    <Compile Include="Controllers\SessionManagement\AccountController.cs" />
     <Compile Include="Controllers\CoursesManagement\ActiveCoursesController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\CoursesManagement\CoursesController.cs" />
@@ -182,7 +184,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DishesManagement\IngredientsController.cs" />
     <Compile Include="Controllers\CoursesManagement\MealController.cs" />
-    <Compile Include="Controllers\UserManagementController.cs" />
+    <Compile Include="Controllers\UserManagement\UserManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,6 +258,9 @@
     <Content Include="Views\Shared\_ListMealsForDayPartial.cshtml" />
     <Content Include="Views\Shared\_ActiveCoursePartial.cshtml" />
     <Content Include="Views\Shared\_StopEditCoursePartial.cshtml" />
+    <Content Include="Views\GeneralCourses\Create.cshtml" />
+    <Content Include="Views\GeneralCourses\Index.cshtml" />
+    <Content Include="Views\GeneralCourses\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

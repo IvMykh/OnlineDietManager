@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnlineDietManager.Domain.Abstract;
+using OnlineDietManager.Domain.DishesManagement;
 
 namespace OnlineDietManager.Domain.CoursesManagement
 {
@@ -26,7 +27,6 @@ namespace OnlineDietManager.Domain.CoursesManagement
         [ForeignKey("CourseID")]
         public virtual Course Course { get; set; }
 
-        //[Required]
         public virtual IList<Meal> Meals { get; set; }
     }
 }

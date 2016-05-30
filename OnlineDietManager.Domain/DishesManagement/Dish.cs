@@ -21,7 +21,7 @@ namespace OnlineDietManager.Domain.DishesManagement
         public virtual IList<DishComponent> Components
         {
             get;
-            private set;
+            set;
         }
 
         //[Required]
@@ -55,6 +55,31 @@ namespace OnlineDietManager.Domain.DishesManagement
         public float Weight
         {
             get { return Components.Sum(comp => comp.Weight); }
+        }
+
+        public Dish CopyFor(string ownerId)
+        {
+            Dish dishPersonalCopy = new Dish {
+                ID          = this.ID,
+                Name        = this.Name,
+                Description = this.Description,
+                Meals       = new List<Meal>(),
+                OwnerID     = ownerId,
+            };
+
+
+            foreach (DishComponent comp in this.Components)
+            {
+                Ingredient ingredientPersonalCopy = comp.Ingredient.CopyFor(ownerId);
+
+                dishPersonalCopy.Components.Add(new DishComponent {
+                    Dish        = dishPersonalCopy,
+                    Ingredient  = ingredientPersonalCopy,
+                    Weight      = comp.Weight
+                });
+            }
+
+            return dishPersonalCopy;
         }
     }
 }

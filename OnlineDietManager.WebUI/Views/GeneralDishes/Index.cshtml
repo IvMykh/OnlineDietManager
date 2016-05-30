@@ -13,13 +13,6 @@
         @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
         {
             <p>
-                @*@Html.ActionLink(
-                    linkText: "Create New",
-                    actionName: "Create",
-                    routeValues: new { returnUrl = Request.Url },
-                    htmlAttributes: new { @class = "btn btn-primary" }
-                    )*@
-
                 <a href="@Url.Action("Create", "GeneralDishes", new { returnUrl = Request.Url })" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus" />
                 </a>

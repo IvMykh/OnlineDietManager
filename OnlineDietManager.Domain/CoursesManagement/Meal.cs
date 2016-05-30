@@ -30,6 +30,5 @@ namespace OnlineDietManager.Domain.CoursesManagement
 
         [ForeignKey("Day_ID")]
         public virtual Day Day { get; set; }
-
     }
 }

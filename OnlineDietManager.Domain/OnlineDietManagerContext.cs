@@ -31,6 +31,8 @@ namespace OnlineDietManager.Domain
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Day> Days { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<ActiveCourse> ActiveCourses { get; set; }
+
 
         public void Dispose()
         {

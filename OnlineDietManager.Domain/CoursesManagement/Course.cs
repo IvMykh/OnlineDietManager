@@ -20,7 +20,7 @@ namespace OnlineDietManager.Domain.CoursesManagement
         public int ID { get; set; }
 
         //[Required]
-        public virtual IList<Day> Days { get; private set; }
+        public virtual IList<Day> Days { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }

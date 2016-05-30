@@ -1,22 +1,19 @@
-﻿using Microsoft.AspNet.Identity;
-using OnlineDietManager.Domain.CoursesManagement;
-using OnlineDietManager.Domain.DishesManagement;
-using OnlineDietManager.Domain.UnitsOfWork;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using OnlineDietManager.Domain.CoursesManagement;
+using OnlineDietManager.Domain.UnitsOfWork;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
     public class ActiveCoursesController : Controller
     {
-        private IUnitOfWork UnitOfWork;
+        private IUnitOfWork odmUnitOfWork { get; set; }
         
         public ActiveCoursesController(IUnitOfWork uow)
         {
-            UnitOfWork = uow;
+            odmUnitOfWork = uow;
         }
 
         // GET: ActiveCourses
@@ -25,60 +22,46 @@ namespace OnlineDietManager.WebUI.Controllers
             return View();
         }
 
+        private void stopPlayingCourseIfAny()
+        {
+            var owner = User.Identity.GetUserId();
+
+            var presentActive = odmUnitOfWork.ActiveCoursesRepository.GetAll()
+                                    .Where(course => course.Course.OwnerID == owner)
+                                    .FirstOrDefault();
+
+            if (presentActive != null)
+            {
+                odmUnitOfWork.ActiveCoursesRepository.Delete(presentActive.ID);
+                odmUnitOfWork.Save();
+            }
+        }
+
         [HttpPost]
         public ActionResult Launch(int idToLaunch, string returnUrl)
         {
-            var courseToLaunch = UnitOfWork.CoursesRepository.GetById(idToLaunch);
-            var user = User.Identity.GetUserId();
-            var presentActive = UnitOfWork.ActiveCoursesRepository.
-                GetAll().
-                Where(course => course.OwnerID == user).
-                ToList<Course>();
+            var courseToLaunch = odmUnitOfWork.CoursesRepository.GetById(idToLaunch);
+            var owner = User.Identity.GetUserId();
 
-            if (presentActive.Count != 0)
+            stopPlayingCourseIfAny();
+
+
+            Course finalCourseToLaunch = null;
+
+            if (courseToLaunch.OwnerID != null)
             {
-                UnitOfWork.ActiveCoursesRepository.Delete(presentActive[0].ID);
-                UnitOfWork.Save();
+                finalCourseToLaunch = courseToLaunch;
+            }
+            else
+            {
+                finalCourseToLaunch = EntityCopyer.Instance.CopyCourse(courseToLaunch, owner, odmUnitOfWork);
             }
 
-            var launchedCourse = new ActiveCourse
-            {
-                //Days = new List<Day>(),
-                Description = courseToLaunch.Description,
-                OwnerID = user,
+            odmUnitOfWork.ActiveCoursesRepository.Insert(new ActiveCourse() {
+                Course = finalCourseToLaunch,
                 StartDate = DateTime.Now.Date
-            };
-
-            foreach (var day in courseToLaunch.Days)
-            {
-                var dayCopy = new Day
-                {
-                    Description = day.Description,
-                    Meals = new List<Meal>()
-                };
-
-                foreach (var meal in day.Meals)
-                {
-                    var mealCopy = new Meal
-                    {
-                        Description = meal.Description,
-                        Time = meal.Time,
-                        Dishes = new List<Dish>()
-                    };
-
-                    foreach (var dish in meal.Dishes)
-                    {
-                        mealCopy.Dishes.Add(dish);
-                    }
-
-                    dayCopy.Meals.Add(mealCopy);
-                }
-
-                launchedCourse.Days.Add(dayCopy);
-            }
-
-            UnitOfWork.ActiveCoursesRepository.Insert(launchedCourse);
-            UnitOfWork.Save();
+            });
+            odmUnitOfWork.Save();
 
             TempData["message"] = string.Format(
                     "{0} has been successfully launched", idToLaunch);

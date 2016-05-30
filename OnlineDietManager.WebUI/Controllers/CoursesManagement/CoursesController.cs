@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
-using OnlineDietManager.Domain.CoursesManagement;
-using OnlineDietManager.Domain.DishesManagement;
-using OnlineDietManager.Domain.UnitsOfWork;
-using OnlineDietManager.Domain.UsersManagement;
-using OnlineDietManager.WebUI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using OnlineDietManager.Domain.CoursesManagement;
+using OnlineDietManager.Domain.UnitsOfWork;
+using OnlineDietManager.WebUI.Models;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
@@ -20,7 +15,7 @@ namespace OnlineDietManager.WebUI.Controllers
         {
         }
 
-        //
+        
         protected override ViewResult GetViewResultFor(string viewName = null, object model = null)
         {
             if (viewName == null && model == null)
@@ -43,22 +38,12 @@ namespace OnlineDietManager.WebUI.Controllers
 
             return RedirectToAction(actionName, routeParams);
         }
-
-        protected override object GetIndexModel()
-        {
-            string userId = User.Identity.GetUserId();
-
-            var model = OdmUnitOfWork.CoursesRepository.GetAll()
-                            .Where(course => course.OwnerID == userId)
-                            .OrderBy(course => course.ID)
-                            .ToList<Course>();
-
-            return model;
-        }
         protected override string GetOwnerName()
         {
             return User.Identity.GetUserId();
         }
+
+
 
         [HttpGet]
         public new ActionResult Create(string returnUrl)

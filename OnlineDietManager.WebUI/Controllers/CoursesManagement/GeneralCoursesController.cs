@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
-using Microsoft.AspNet.Identity;
-
-using OnlineDietManager.Domain.DishesManagement;
+using OnlineDietManager.Domain.CoursesManagement;
 using OnlineDietManager.Domain.UnitsOfWork;
 using OnlineDietManager.WebUI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace OnlineDietManager.WebUI.Controllers
 {
-    public class GeneralDishesController 
-        : AbstrDishesController
+    public class GeneralCoursesController 
+        : AbstrCoursesController
     {
-        public GeneralDishesController(IUnitOfWork unitOfWork)
+         public GeneralCoursesController(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
         }
@@ -42,16 +40,6 @@ namespace OnlineDietManager.WebUI.Controllers
 
             return RedirectToAction(actionName, routeParams);
         }
-
-        protected override object GetIndexModel()
-        {
-            var model = OdmUnitOfWork.DishesRepository.GetAll()
-                            .Where(dish => dish.OwnerID == null)
-                            .OrderBy(dish => dish.Name)
-                            .ToList<Dish>();
-
-            return model;
-        }
         protected override string GetOwnerName()
         {
             return null;
@@ -66,24 +54,24 @@ namespace OnlineDietManager.WebUI.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public new ActionResult Create(DishViewModel newDishVM)
+        public new ActionResult Create(CourseViewModel newDishVM)
         {
             return base.Create(newDishVM);
         }
 
-        
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public new ActionResult Edit(int Id, string returnUrl)
+        public new ActionResult Edit(int Id, int? selectedDayId, string returnUrl)
         {
-            return base.Edit(Id, returnUrl);
+            return base.Edit(Id, selectedDayId, returnUrl);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public new ActionResult Edit(DishViewModel dishVM)
+        public new ActionResult Edit(CourseViewModel courseVM)
         {
-            return base.Edit(dishVM);
+            return base.Edit(courseVM);
         }
 
         [HttpPost]
@@ -96,20 +84,21 @@ namespace OnlineDietManager.WebUI.Controllers
         [HttpPost]
         public ActionResult AddToPersonal(int Id, string returnUrl)
         {
-            Dish dishToAdd = OdmUnitOfWork.DishesRepository.GetById(Id);
+            Course courseToAdd = OdmUnitOfWork.CoursesRepository.GetById(Id);
 
-            if (dishToAdd != null)
+            if (courseToAdd != null)
             {
-                Dish dishPersonalCopy = dishToAdd.CopyFor(User.Identity.GetUserId());
+                Course coursePersonalCopy = 
+                    EntityCopyer.Instance.CopyCourse(courseToAdd, User.Identity.GetUserId(), OdmUnitOfWork);
 
-                OdmUnitOfWork.DishesRepository.Insert(dishPersonalCopy);
+                OdmUnitOfWork.CoursesRepository.Insert(coursePersonalCopy);
                 OdmUnitOfWork.Save();
 
                 TempData["message"] = string.Format(
-                    "{0} has been successfully added to personal dishes", dishToAdd.Name);
+                    "Course '{0}' has been successfully added to personal courses", courseToAdd.ID);
             }
 
             return Redirect(returnUrl);
         }
-	}
+    }
 }

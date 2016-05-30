@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<OnlineDietManager.Domain.CoursesManagement.Course>
+@using OnlineDietManager.Domain.UsersManagement
 
 @{
-    ViewBag.Title = "All my Courses";
+    ViewBag.Title = "All general Courses";
 }
 
 <div class="panel">
@@ -9,11 +10,14 @@
         <p class="tableHeading text-center text-uppercase">@ViewBag.Title</p>
     </div>
     <div class="panel-body">
-        <p>
-            <a href="@Url.Action("Create", "Courses", new { returnUrl = Request.Url })" class="btn btn-success">
-                <span class="glyphicon glyphicon-plus" />
-            </a>
-        </p>
+        @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+        {
+            <p>
+                <a href="@Url.Action("Create", "GeneralCourses", new { returnUrl = Request.Url })" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus" />
+                </a>
+            </p>
+        }
 
         <table class="table table-striped table-condensed table-bordered">
             <tr>
@@ -26,7 +30,14 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(item.ID.ToString(), "Edit", new { item.ID, returnUrl = Request.Url })
+                        @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+                        {
+                            @Html.ActionLink(item.ID.ToString(), "Edit", new { item.ID, returnUrl = Request.Url })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.ID)
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
@@ -45,14 +56,28 @@
                                 }
                             </div>
                             <div class="btn-group">
-                                @using (@Html.BeginForm("Delete", "Courses"))
+                                @using (@Html.BeginForm("AddToPersonal", "GeneralCourses"))
                                 {
                                     @Html.Hidden("Id", item.ID)
                                     @Html.Hidden("returnUrl", Request.Url)
 
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <div class="glyphicon glyphicon-remove"></div>
+                                    <button type="submit" class="btn btn-info btn-sm">
+                                        <div class="glyphicon glyphicon-star"></div>
                                     </button>
+                                }
+                            </div>
+                            <div class="btn-group">
+                                @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+                                {
+                                    using (@Html.BeginForm("Delete", "GeneralCourses"))
+                                    {
+                                        @Html.Hidden("Id", item.ID)
+                                        @Html.Hidden("returnUrl", Request.Url)
+
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <div class="glyphicon glyphicon-remove"></div>
+                                        </button>
+                                    }
                                 }
                             </div>
                         </div>
