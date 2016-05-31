@@ -38,6 +38,13 @@ namespace OnlineDietManager.WebUI.Controllers
         }
 
         [HttpPost]
+        public ActionResult StopCourse(string returnUrl)
+        {
+            stopPlayingCourseIfAny();
+            return Redirect(returnUrl);
+        }
+
+        [HttpPost]
         public ActionResult Launch(int idToLaunch, string returnUrl)
         {
             var courseToLaunch = odmUnitOfWork.CoursesRepository.GetById(idToLaunch);

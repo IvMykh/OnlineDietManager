@@ -16,7 +16,7 @@ namespace OnlineDietManager.Domain.CoursesManagement
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
-        [Key, Column(Order = 1)]
+        //[Key, Column(Order = 1)]
         public DateTime StartDate { get; set; }
 
         [ForeignKey("ID")]

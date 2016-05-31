@@ -42,6 +42,22 @@ namespace OnlineDietManager.WebUI.Controllers
             });
         }
 
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult ViewNutritionalSummary(int dayId)
+        {
+            Day day = OdmUnitOfWork.DaysRepository.GetById(dayId);
+            return PartialView("_NutritionalSummaryPartial", 
+                new NutritionalSummary {
+                    PanelCaption    = "Day's Nutritional Summary",
+                    Protein         = day.Meals.Sum(m => m.Protein),
+                    Fat             = day.Meals.Sum(m => m.Fat),
+                    Carbohydrates   = day.Meals.Sum(m => m.Carbohydrates),
+                    Caloricity      = day.Meals.Sum(m => m.Caloricity),
+                    Weight          = day.Meals.Sum(m => m.Weight)
+            });
+        }
+
         [HttpPost]
         public ActionResult Create(AddDayViewModel addDayVM)
         {

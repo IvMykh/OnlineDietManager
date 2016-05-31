@@ -206,6 +206,7 @@
     <Compile Include="Models\ListMealsForDayViewModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\MealViewModel.cs" />
+    <Compile Include="Models\NutritionalSummary.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\SelectIngredientViewModel.cs" />
     <Compile Include="Models\AppUserViewModel.cs" />
@@ -261,6 +262,7 @@
     <Content Include="Views\GeneralCourses\Create.cshtml" />
     <Content Include="Views\GeneralCourses\Index.cshtml" />
     <Content Include="Views\GeneralCourses\Edit.cshtml" />
+    <Content Include="Views\Shared\_NutritionalSummaryPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

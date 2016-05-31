@@ -17,7 +17,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
@@ -39,8 +39,11 @@
                     </div>
                 }
             </div>
-            <div>
-                Nutritional summary
+            <div class="col-xs-4 col-xs-offset-1">
+                @if (Model.SelectedDayId != null)
+                {
+                    @Html.Action("ViewNutritionalSummary", "Days", new { dayId = Model.SelectedDayId });
+                }
             </div>
         </div>
 

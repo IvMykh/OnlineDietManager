@@ -1,4 +1,5 @@
 ﻿@model OnlineDietManager.WebUI.Models.DishViewModel
+@using OnlineDietManager.WebUI.Models
 
 <div class="panel">
     <div class="panel-heading">
@@ -35,7 +36,15 @@
                 }
             </div>
             <div class="col-xs-4 col-xs-offset-1">
-                @Html.Partial("_DishNutritionalSummary", Model.Dish)
+                @Html.Partial("_NutritionalSummaryPartial", 
+                new NutritionalSummary {
+                    PanelCaption    = "Nutritional Summary",
+                    Protein         = Model.Dish.Protein,
+                    Fat             = Model.Dish.Fat,
+                    Carbohydrates   = Model.Dish.Carbohydrates,
+                    Caloricity      = Model.Dish.Caloricity,
+                    Weight          = Model.Dish.Weight
+                })
             </div>
         </div>
 
