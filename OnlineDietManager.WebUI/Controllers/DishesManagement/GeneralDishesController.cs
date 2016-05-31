@@ -93,6 +93,13 @@ namespace OnlineDietManager.WebUI.Controllers
             return base.Delete(Id, returnUrl);
         }
 
+        [HttpGet]
+        [ChildActionOnly]
+        public new ActionResult ViewNutritionalSummary(int dishId)
+        {
+            return base.ViewNutritionalSummary(dishId);
+        }
+
         [HttpPost]
         public ActionResult AddToPersonal(int Id, string returnUrl)
         {

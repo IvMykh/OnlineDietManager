@@ -127,5 +127,21 @@ namespace OnlineDietManager.WebUI.Controllers
 
             return Redirect(returnUrl);
         }
+
+
+        public ActionResult ViewNutritionalSummary(int dishId)
+        {
+            Dish dish = OdmUnitOfWork.DishesRepository.GetById(dishId);
+            return PartialView("_NutritionalSummaryPartial",
+                new NutritionalSummary
+                {
+                    PanelCaption    = "Nutritional Summary",
+                    Protein         = dish.Protein,
+                    Fat             = dish.Fat,
+                    Carbohydrates   = dish.Carbohydrates,
+                    Caloricity      = dish.Caloricity,
+                    Weight          = dish.Weight
+                });
+        }
 	}
 }

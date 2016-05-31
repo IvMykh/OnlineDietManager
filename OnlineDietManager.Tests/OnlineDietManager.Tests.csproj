@@ -117,6 +117,7 @@
     <Compile Include="DishesManagement\GeneralDishesControllerTests.cs" />
     <Compile Include="DishesManagement\GeneralIngredientsControllerTests.cs" />
     <Compile Include="IngredientsControllerTests.cs" />
+    <Compile Include="NutritionalSummary\NutrSummaryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

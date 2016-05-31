@@ -36,7 +36,7 @@
                 }
             </div>
             <div class="col-xs-4 col-xs-offset-1">
-                @Html.Partial("_NutritionalSummaryPartial", 
+                @*@Html.Partial("_NutritionalSummaryPartial", 
                 new NutritionalSummary {
                     PanelCaption    = "Nutritional Summary",
                     Protein         = Model.Dish.Protein,
@@ -44,7 +44,9 @@
                     Carbohydrates   = Model.Dish.Carbohydrates,
                     Caloricity      = Model.Dish.Caloricity,
                     Weight          = Model.Dish.Weight
-                })
+                })*@
+
+                @Html.Action("ViewNutritionalSummary", new { dishId = Model.Dish.ID })
             </div>
         </div>
 
