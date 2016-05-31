@@ -52,7 +52,6 @@ namespace OnlineDietManager.WebUI.Controllers
 
             stopPlayingCourseIfAny();
 
-
             Course finalCourseToLaunch = null;
 
             if (courseToLaunch.OwnerID != null)

@@ -111,9 +111,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
-    <Compile Include="DishComponentsControllerTests.cs" />
-    <Compile Include="GeneralDishesControllerTests.cs" />
-    <Compile Include="GeneralIngredientsControllerTests.cs" />
+    <Compile Include="CoursesManagement\CoursesControllerTests.cs" />
+    <Compile Include="CoursesManagement\ActiveCoursesControllerTests.cs" />
+    <Compile Include="DishesManagement\DishComponentsControllerTests.cs" />
+    <Compile Include="DishesManagement\GeneralDishesControllerTests.cs" />
+    <Compile Include="DishesManagement\GeneralIngredientsControllerTests.cs" />
     <Compile Include="IngredientsControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -122,8 +124,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CoursesManagement\" />
-    <Folder Include="DishesManagement\" />
     <Folder Include="UsersManagement\" />
   </ItemGroup>
   <ItemGroup>
