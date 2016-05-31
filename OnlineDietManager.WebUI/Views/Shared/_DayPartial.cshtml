@@ -19,7 +19,9 @@
                         <div class="col-md-6">
                             <p class="text-center">
                                 <span class="glyphicon glyphicon-time" /> 
-                                <span class="mealTime">@meal.Time.ToString()</span>
+                                <span class="mealTime">
+                                    @string.Format("{0:D2}:{1:D2}", meal.Time.Hours, meal.Time.Minutes)
+                                </span>
                             </p>
                             <p class="mealDescription text-center">@meal.Description</p>
                         </div>

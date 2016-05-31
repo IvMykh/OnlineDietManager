@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using OnlineDietManager.Domain.CoursesManagement;
+using OnlineDietManager.Domain.DishesManagement;
 using OnlineDietManager.Domain.UnitsOfWork;
 using OnlineDietManager.Domain.UsersManagement;
 using OnlineDietManager.WebUI.Infrastructure;
-
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using OnlineDietManager.WebUI.Models;
-using OnlineDietManager.Domain.DishesManagement;
-using OnlineDietManager.Domain.CoursesManagement;
 
 
 namespace OnlineDietManager.WebUI.Controllers
@@ -140,6 +138,15 @@ namespace OnlineDietManager.WebUI.Controllers
         }
         private void deleteCourses(string userId)
         {
+            ActiveCourse activeCourse = OdmUnitOfWork.ActiveCoursesRepository.GetAll()
+                                        .Where(ac => ac.Course.OwnerID == userId)
+                                        .FirstOrDefault();
+
+            if (activeCourse != null)
+            {
+                OdmUnitOfWork.ActiveCoursesRepository.Delete(activeCourse);
+            }
+
             IEnumerable<Course> courses = OdmUnitOfWork.CoursesRepository
                                                         .GetAll()
                                                         .Where(course => course.OwnerID == userId);

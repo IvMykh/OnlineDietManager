@@ -1,0 +1,16 @@
+﻿@model OnlineDietManager.WebUI.Models.SelectDishViewModel
+
+@using (Html.BeginForm("AddNew", "DishMeal"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.Hidden("DishId", Model.Dish.ID)
+
+    @Html.Hidden("MealRefId", Model.MealRefId)
+    @Html.Hidden("ReturnUrl", Model.ReturnUrl)
+
+    <button type="submit" class="btn btn-link btn-group-justified">
+        @Model.Dish.Name
+    </button>
+}

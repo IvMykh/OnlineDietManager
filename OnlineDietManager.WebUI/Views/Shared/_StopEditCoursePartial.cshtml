@@ -1,17 +1,6 @@
 ﻿@model OnlineDietManager.Domain.CoursesManagement.ActiveCourse
 @using OnlineDietManager.Domain.UsersManagement
 
-@*<div class="form-group">
-    <div class="center-block">
-        <a href="#" class="btn btn-primary">
-            <span class="glyphicon glyphicon-edit"/>
-        </a>
-        <a href="#" class="btn btn-warning">
-            <span class="glyphicon glyphicon-stop" />
-        </a>
-    </div>
-</div>*@
-
 <div class="btn-group btn-group-sm">
     <div class="btn-group">
         @using (@Html.BeginForm("StopCourse", "ActiveCourses"))
@@ -25,7 +14,8 @@
     </div>
 
     <div class="btn-group">
-        <a href="@Url.Action("Edit", "Courses", new { Id = Model.ID, returnUrl = Request.Url })" class="btn btn-primary btn-sm">
+        <a href="@Url.Action("Edit", "Courses", new { Id = Model.ID, returnUrl = Request.Url })" 
+           class="btn btn-primary btn-sm">
             <span class="glyphicon glyphicon-edit" />
         </a>
     </div>

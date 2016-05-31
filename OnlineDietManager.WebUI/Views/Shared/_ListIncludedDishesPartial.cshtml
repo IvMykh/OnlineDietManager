@@ -1,0 +1,60 @@
+﻿@model OnlineDietManager.WebUI.Models.ListIncludedDishesViewModel
+
+<div class="row panel">
+    <div class="col-md-3">
+        @Html.Action("ListAvailableDishes", "DishMeal",
+            new
+            {
+                mealRefId = Model.MealRefId,
+                returnUrl = Request.Url,
+                ownerPolicy = Model.OwnerPolicy
+            })
+    </div>
+
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <p class="panelHeading text-center text-uppercase">Dishes in Meal</p>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-condensed table-bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Weight</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    @foreach (var item in Model.IncludedDishes)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(
+                                    linkText: item.Name,
+                                    actionName: "Edit",
+                                    controllerName: item.OwnerID == null ? "GeneralDishes" : "Dishes",
+                                    routeValues: new { Id = item.ID, returnUrl = Request.Url },
+                                    htmlAttributes: null
+                                )
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Weight)
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Delete", "DishMeal"))
+                                {
+                                    @Html.Hidden("dishId", item.ID)
+                                    @Html.Hidden("mealRefId", Model.MealRefId)
+                                    @Html.Hidden("returnUrl", Request.Url)
+
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <div class="glyphicon glyphicon-remove"></div>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
