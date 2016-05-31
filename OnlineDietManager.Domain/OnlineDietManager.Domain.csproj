@@ -93,7 +93,15 @@
     <Compile Include="DishesManagement\FoodComponent.cs" />
     <Compile Include="DishesManagement\Ingredient.cs" />
     <Compile Include="DishesManagement\SpecialData.cs" />
-
+    <Compile Include="Migrations\201605181213096_Mig_1.cs" />
+    <Compile Include="Migrations\201605181213096_Mig_1.Designer.cs">
+      <DependentUpon>201605181213096_Mig_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605181222054_Mig_2.cs" />
+    <Compile Include="Migrations\201605181222054_Mig_2.Designer.cs">
+      <DependentUpon>201605181222054_Mig_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyApp.cs" />
     <Compile Include="OnlineDietManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,7 +116,14 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605181213096_Mig_1.resx">
+      <DependentUpon>201605181213096_Mig_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605181222054_Mig_2.resx">
+      <DependentUpon>201605181222054_Mig_2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

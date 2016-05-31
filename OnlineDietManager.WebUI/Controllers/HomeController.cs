@@ -28,7 +28,7 @@ namespace OnlineDietManager.WebUI.Controllers
 
             ActiveCourse activeCourse = OdmUnitOfWork.ActiveCoursesRepository
                 .GetAll()
-                .Where(ac => ac.OwnerID == userId)
+                .Where(ac => ac.Course.OwnerID == userId)
                 .FirstOrDefault();
 
             return View(activeCourse);

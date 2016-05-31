@@ -1,11 +1,11 @@
-﻿@model OnlineDietManager.Domain.DishesManagement.Dish
+﻿@model OnlineDietManager.Domain.CoursesManagement.Course
 
 <div class="panel panel-default">
     <div class="panel-heading text-centrified"><h4>Nutritional summary</h4></div>
     <div class="panel-body">
         <div class="row">
             <p class="col-xs-4" style="font-weight: bold">Protein:</p>
-            <p class="col-xs-4">@Model.Protein g</p>
+            <p class="col-xs-4">@Model.Days. g</p>
         </div>
         <div class="row">
             <p class="col-xs-4" style="font-weight: bold">Fat:</p>
@@ -16,10 +16,10 @@
             <p class="col-xs-4">@Model.Carbohydrates g</p>
         </div>
         <div class="row">
-            <p class="col-xs-4" style="font-weight: bold">Caloricity:</p> 
+            <p class="col-xs-4" style="font-weight: bold">Caloricity:</p>
             <p class="col-xs-4">@Model.Caloricity g</p>
         </div>
-        <div class="row" >
+        <div class="row">
             <p class="col-xs-4" style="font-weight: bold">Weight:</p>
             <p class="col-xs-4">@Model.Weight g</p>
         </div>

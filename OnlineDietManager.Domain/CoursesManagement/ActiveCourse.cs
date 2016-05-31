@@ -10,13 +10,16 @@ namespace OnlineDietManager.Domain.CoursesManagement
 {
     [Table("ActiveCourses")]
     public class ActiveCourse
-        : Course
+        //: Course
     {
         [Key, Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public new int ID { get; set; }
+        public int ID { get; set; }
 
-        [Key, Column(Order = 1)]
+        //[Key, Column(Order = 1)]
         public DateTime StartDate { get; set; }
+
+        [ForeignKey("ID")]
+        public virtual Course Course { get; set; }
     }
 }

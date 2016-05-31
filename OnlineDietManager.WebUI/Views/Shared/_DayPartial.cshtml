@@ -1,36 +1,47 @@
 ﻿@model OnlineDietManager.WebUI.Models.DayViewModel
 
 <div class="panel @(Model.CalendarDate.Date.Equals(DateTime.Today) ? "panel-primary" : "panel-info")" >
-    <div class="panel-heading text-center">
-        <h4>
+    <div class="panel-heading">
+        <p class="activeCourseDateHeading text-center">
             <span class="glyphicon glyphicon-calendar"></span> @Model.CalendarDate.ToShortDateString()
-        </h4>
-        <h5>@Model.Day.Description (@Model.Day.Meals.Sum(meal => meal.Dishes.Sum(d => d.Caloricity)) kcal)</h5>
+        </p>
+        <h5 class="text-center">
+            <b>@Model.Day.Description</b> (@Model.Day.Meals.Sum(meal => meal.Dishes.Sum(d => d.Caloricity)) kcal)
+        </h5>
     </div>
+
     <div class="panel-body">
-        <div class="row">
-            @foreach (var meal in Model.Day.Meals)
-            {
-                <div class="panel panel-default">
+        @foreach (var meal in Model.Day.Meals)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
                     <div class="row">
-                        <div class="text-center col-lg-5">
-                            <h5><span class="glyphicon glyphicon-time" /> @meal.Time.ToString() (@meal.Description)</h5>
+                        <div class="col-md-6">
+                            <p class="text-center">
+                                <span class="glyphicon glyphicon-time" /> 
+                                <span class="mealTime">
+                                    @string.Format("{0:D2}:{1:D2}", meal.Time.Hours, meal.Time.Minutes)
+                                </span>
+                            </p>
+                            <p class="mealDescription text-center">@meal.Description</p>
                         </div>
-                        <div class="panel-body col-lg-5">
+                        <div class="col-md-6">
                             @foreach (var dish in meal.Dishes)
                             {
-                                <p>@Html.ActionLink(
-                                    linkText: dish.Name,
-                                    actionName: "Edit",
-                                    controllerName: "Dishes",
-                                    routeValues: new { id = dish.ID, returnUrl = Request.Url },
-                                    htmlAttributes: null
-                                ) (@dish.Caloricity kcal)</p>
+                                <p>
+                                    @Html.ActionLink(
+                                        linkText: dish.Name,
+                                        actionName: "Edit",
+                                        controllerName: "Dishes",
+                                        routeValues: new { id = dish.ID, returnUrl = Request.Url },
+                                        htmlAttributes: null
+                                    ) (@dish.Caloricity kcal)
+                                </p>
                             }
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
 </div>

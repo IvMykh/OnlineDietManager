@@ -33,5 +33,22 @@ namespace OnlineDietManager.Domain.DishesManagement
         [Required(ErrorMessage = "Please, specify the caloricity")]
         [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a non-negative caloricity")]
         public float Caloricity { get; set; }
+
+
+        public Ingredient CopyFor(string ownerId)
+        {
+            Ingredient copy = new Ingredient {
+                ID              = this.ID,
+                Name            = this.Name,
+                Description     = this.Description,
+                Protein         = this.Protein,
+                Fat             = this.Fat,
+                Carbohydrates   = this.Carbohydrates,
+                Caloricity      = this.Caloricity,
+                OwnerID         = ownerId
+            };
+
+            return copy;
+        }
     }
 }

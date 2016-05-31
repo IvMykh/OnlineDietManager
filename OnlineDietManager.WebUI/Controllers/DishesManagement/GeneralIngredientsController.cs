@@ -90,22 +90,13 @@ namespace OnlineDietManager.WebUI.Controllers
 
             if (ingredientToAdd != null)
             {
-                Ingredient personalCopy = new Ingredient
-                    {
-                        Name            = ingredientToAdd.Name,
-                        Description     = ingredientToAdd.Description,
-                        Protein         = ingredientToAdd.Protein,
-                        Fat             = ingredientToAdd.Fat,
-                        Carbohydrates   = ingredientToAdd.Carbohydrates,
-                        Caloricity      = ingredientToAdd.Caloricity,
-                        OwnerID         = User.Identity.GetUserId()
-                    };
-
+                Ingredient personalCopy = ingredientToAdd.CopyFor(User.Identity.GetUserId());
+                
                 OdmUnitOfWork.IngredientsRepository.Insert(personalCopy);
                 OdmUnitOfWork.Save();
 
                 TempData["message"] = string.Format(
-                    "{0} has been successfully added to personal ingredients", ingredientToAdd.Name);
+                    "{0} has been successfully added to personal ingredients", personalCopy.Name);
             }
 
             return Redirect(returnUrl);

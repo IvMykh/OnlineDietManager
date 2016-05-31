@@ -1,0 +1,59 @@
+﻿@model OnlineDietManager.WebUI.Models.MealViewModel
+@using OnlineDietManager.WebUI.Models
+
+@{
+    ViewBag.Title = "Edit Meal";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <p class="tableHeading text-center text-uppercase">@ViewBag.Title</p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                @using (Html.BeginForm("Edit", "Meal"))
+                {
+                    @Html.AntiForgeryToken()
+                
+                    <div>
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.Meal.ID)
+                        @Html.HiddenFor(model => model.Meal.Day_ID)
+                
+                        @Html.HiddenFor(model => model.ReturnUrl)
+                
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Meal.Description)
+                            @Html.TextAreaFor(model => model.Meal.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Meal.Description)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Meal.Time)
+                                @Html.TextBoxFor(model => model.Meal.Time, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Meal.Time)
+                        </div>
+
+                
+                        @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+                    </div>
+                }
+            </div>
+            <div class="col-xs-4 col-xs-offset-1">
+                @Html.Partial("_NutritionalSummaryPartial",
+                new NutritionalSummary {
+                    PanelCaption    = "Nutritional Summary",
+                    Protein         = Model.Meal.Protein,
+                    Fat             = Model.Meal.Fat,
+                    Carbohydrates   = Model.Meal.Carbohydrates,
+                    Caloricity      = Model.Meal.Caloricity,
+                    Weight          = Model.Meal.Weight
+                })
+            </div>
+
+            <div class="row">
+                @Html.Action("IndexIncludedDishes", "DishMeal", new { mealRefId = Model.Meal.ID, returnUrl = Request.Url })
+            </div>
+    </div>
+</div>

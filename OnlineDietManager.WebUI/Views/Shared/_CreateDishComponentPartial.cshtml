@@ -18,9 +18,9 @@ using (Html.BeginForm("Create", "DishComponents"))
 
 @model IEnumerable<OnlineDietManager.WebUI.Models.SelectIngredientViewModel>
 
-<div class="panel panel-default">
+<div class="panel panel-info">
     <div class="panel-heading text-centrified">
-        <h4>Ingredients box</h4>
+        <p class="panelHeading text-center text-uppercase">Ingredients</p>
     </div>
     <div id="ingredients-list-box" class="panel-body">
         @foreach (var selectIngredientVM in Model)

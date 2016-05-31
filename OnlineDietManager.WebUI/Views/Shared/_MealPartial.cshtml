@@ -1,0 +1,22 @@
+﻿@model OnlineDietManager.WebUI.Models.MealViewModel
+
+<div class="panel-body col-lg-5">
+    @foreach (var dish in Model.Meal.Dishes)
+    {
+        <div class="text-center col-lg-5">
+            <h5> @Model.Meal.Description</h5>
+        </div>
+        <p>
+            @Html.ActionLink(
+                linkText: dish.Name,
+                actionName: "Edit",
+                controllerName: "Dishes",
+                routeValues: new { id = dish.ID, returnUrl = Request.Url },
+                htmlAttributes: null
+            ) (@dish.Caloricity kcal)
+        </p>
+    }
+
+    @Html.ActionLink("Edit", "Edit")
+</div>
+

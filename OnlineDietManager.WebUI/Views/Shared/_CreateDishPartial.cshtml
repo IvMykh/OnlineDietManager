@@ -1,34 +1,40 @@
 ﻿@model OnlineDietManager.WebUI.Models.DishViewModel
 
-<h2>@ViewBag.Title</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Dish.ID)
-        @Html.HiddenFor(model => model.Dish.OwnerID)
-
-        @Html.HiddenFor(model => model.ReturnUrl)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dish.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Dish.Name)
-                @Html.ValidationMessageFor(model => model.Dish.Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dish.Description, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Dish.Description)
-                @Html.ValidationMessageFor(model => model.Dish.Description)
-            </div>
-        </div>
-
-        @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+<div class="panel">
+    <div class="panel-heading">
+        <p class="tableHeading text-center text-uppercase">@ViewBag.Title</p>
     </div>
-}
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Dish.ID)
+                    @Html.HiddenFor(model => model.Dish.OwnerID)
+
+                    @Html.HiddenFor(model => model.ReturnUrl)
+
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.Dish.Name)
+                            @Html.TextBoxFor(model => model.Dish.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Dish.Name)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.Dish.Description)
+                            @Html.TextAreaFor(model => model.Dish.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Dish.Description)
+                        </div>
+                    </div>
+
+                    @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+                </div>
+            </div>
+        }
+    </div>
+</div>

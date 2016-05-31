@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: Verdana;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,11 +10,12 @@
     padding-right: 15px;
 }
 
-/* My styles*/
-.text-centrified {
-    text-align: center;
-}
 
+
+/* My styles*/
+.myFooter {
+    font-weight: bold;
+}
 #ingredients-list-box {
     height: 300px;
     overflow: scroll;
@@ -22,6 +24,37 @@
 th, td {
     text-align: center;
 }
+
+.activeCourseHeading {
+    font-weight: bold;
+}
+
+.panelHeading {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.tableHeading {
+    font-weight: bold;
+    font-size: large;
+}
+
+.activeCourseDateHeading {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.mealTime {
+    font-family: Consolas;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.mealDescription {
+    font-size: larger;
+    font-family: 'Century Gothic';
+}
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,

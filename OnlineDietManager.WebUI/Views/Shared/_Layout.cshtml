@@ -38,13 +38,20 @@
                         <li>@Html.ActionLink("General Dishes", "Index", "GeneralDishes")</li>
                     </ul>
                 </li>
-                <li>
-                   @Html.ActionLink("Courses", "Index", "Courses") 
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Courses<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("My Courses", "Index", "Courses")</li>
+                        <li>@Html.ActionLink("General Courses", "Index", "GeneralCourses")</li>
+                    </ul>
                 </li>
+
                 @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
                 {
                     <li>@Html.ActionLink("Manage users", "Index", "UserManagement")</li>                
                 }
+                
                 <li>@Html.Partial("_LoginPartial")</li>
             </ul>
         </div>
@@ -54,9 +61,10 @@
             <div class="alert alert-success">@TempData["message"]</div>
         }
         
-        @if (TempData["errorMessage"] != null){
+        @if (TempData["errorMessage"] != null) 
+        {
             var errors = TempData["errorMessage"] as List<string>;
-
+            
             foreach (var error in errors)
             {
                 <div class="alert alert-danger">@(error)</div>
@@ -66,7 +74,7 @@
         @RenderBody()
         <hr/>
         <footer class="panel panel-footer">
-            <p>&copy; @DateTime.Now.Year - Online Diet Manager</p>
+            <p class="myFooter text-center text-uppercase">&copy; @DateTime.Now.Year - Online Diet Manager</p>
         </footer>
     </div>
 </body>

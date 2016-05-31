@@ -12,7 +12,7 @@ namespace OnlineDietManager.Domain.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(OnlineDiuppdaetManager.Domain.OnlineDietManagerContext context)
+        protected override void Seed(OnlineDietManager.Domain.OnlineDietManagerContext context)
         {
             //  This method will be called after migrating to the latest version.
 

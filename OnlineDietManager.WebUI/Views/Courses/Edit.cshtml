@@ -1,0 +1,70 @@
+﻿@model OnlineDietManager.WebUI.Models.CourseViewModel
+
+@{
+    if (Model.Course.ID == 0) {
+        ViewBag.Title = "Create new Course";
+    } else {
+        ViewBag.Title = string.Format("Edit Course '{0}'", Model.Course.ID);
+    }
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <p class="tableHeading text-center text-uppercase">@ViewBag.Title</p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div>
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.Course.ID)
+                        @Html.HiddenFor(model => model.Course.OwnerID)
+                        @Html.HiddenFor(model => model.ReturnUrl)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Course.Description)
+                            @Html.TextAreaFor(model => model.Course.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Course.Description)
+                        </div>
+
+                        @Html.Partial("_SaveCancelPartial", Model.ReturnUrl)
+                    </div>
+                }
+            </div>
+            <div class="col-xs-4 col-xs-offset-1">
+                @if (Model.SelectedDayId != null)
+                {
+                    @Html.Action("ViewNutritionalSummary", "Days", new { dayId = Model.SelectedDayId });
+                }
+            </div>
+        </div>
+        
+        <hr />
+
+        <div class="row">
+            <div class="col-md-2">
+                @Html.Action("Index", "Days",
+                new {
+                    courseRefId = Model.Course.ID,
+                    selectedDayId = Model.SelectedDayId,  //
+                    returnUrl = Request.Url
+                })
+            </div>
+            <div class="col-md-10">
+                @if (Model.SelectedDayId != null)
+                {
+                    @Html.Action("Edit", "Days",
+                    new {
+                        dayId = Model.SelectedDayId.Value,
+                        returnUrl = Request.Url
+                    })
+                }
+            </div>
+        </div>
+    </div>
+</div>

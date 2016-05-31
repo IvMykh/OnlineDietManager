@@ -1,0 +1,72 @@
+﻿@model OnlineDietManager.WebUI.Models.ListMealsForDayViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <p class="panelHeading text-center">Meals</p>
+    </div>
+
+    <div class="panel-body">
+        @foreach (var meal in Model.Meals)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p class="text-center ">
+                                <span class="glyphicon glyphicon-time" /> 
+                                <span class="mealTime">
+                                    @string.Format("{0:D2}:{1:D2}", meal.Time.Hours, meal.Time.Minutes)
+                                </span> 
+                            </p>
+                            <p class="mealDescription, text-center">(@meal.Description)</p>
+                        </div>
+                        <div class="col-md-5">
+                            @foreach (var dish in meal.Dishes)
+                            {
+                                <p>
+                                    @Html.ActionLink(
+                                            linkText: dish.Name,
+                                            actionName: "Edit",
+                                            controllerName: "Dishes",
+                                            routeValues: new { id = dish.ID, returnUrl = Request.Url },
+                                            htmlAttributes: null
+                                        ) (@dish.Caloricity kcal)
+                                    </p>
+                            }
+                        </div>
+                        <div class="col-md-1 col-md-offset-1">
+                            <a href="@Url.Action("Edit", "Meal", new { id = meal.ID, returnUrl = Request.Url })" @*, dayid=Model.DayId*@
+                               class="btn btn-warning btn-xs">
+                                <span class="glyphicon glyphicon-edit" />
+                            </a>
+
+                            @using (@Html.BeginForm("Delete", "Meal"))
+                            {
+                                @Html.Hidden("mealId", meal.ID)
+                                @Html.Hidden("returnUrl", Request.Url)
+
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <span class="glyphicon glyphicon-remove" />
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="panel-footer">
+        @using (@Html.BeginForm("Create", "Meal"))
+        {
+            @Html.Hidden("dayId", Model.DayId)
+            @Html.Hidden("returnUrl", Request.Url)
+
+            <button type="submit" class="btn btn-success btn-md">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        }
+
+    </div>
+</div>
+

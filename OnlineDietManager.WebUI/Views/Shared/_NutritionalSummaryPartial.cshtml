@@ -1,0 +1,31 @@
+﻿@model OnlineDietManager.WebUI.Models.NutritionalSummary
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <p class="panelHeading text-center text-uppercase">@Model.PanelCaption</p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <p class="col-sm-6" style="font-weight: bold">Protein:</p>
+            <p class="col-sm-6">@Model.Protein g</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-6" style="font-weight: bold">Fat:</p>
+            <p class="col-sm-6">@Model.Fat g</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-6" style="font-weight: bold">Carbohydrates:</p>
+            <p class="col-sm-6">@Model.Carbohydrates g</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-6" style="font-weight: bold">Caloricity:</p>
+            <p class="col-sm-6">@Model.Caloricity g</p>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <p class="col-sm-6" style="font-weight: bold">Weight:</p>
+            <p class="col-sm-6">@Model.Weight g</p>
+        </div>
+    </div>
+</div>

@@ -5,73 +5,73 @@
     ViewBag.Title = "All general Dishes";
 }
 
-<div class="panel-heading">
-    <h3>@ViewBag.Title</h3>
-</div>
+<div class="panel">
+    <div class="panel-heading">
+        <p class="tableHeading text-center text-uppercase">@ViewBag.Title</p>
+    </div>
+    <div class="panel-body">
+        @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+        {
+            <p>
+                <a href="@Url.Action("Create", "GeneralDishes", new { returnUrl = Request.Url })" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus" />
+                </a>
+            </p>
+        }
 
-@if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin))) 
-{
-    <p>
-    @Html.ActionLink(
-        linkText: "Create New",
-        actionName: "Create",
-        routeValues: new { returnUrl = Request.Url },
-        htmlAttributes: new { @class = "btn btn-primary" }
-        )
-    </p>
-}
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>Actions</th>
+            </tr>
 
-<table class="table table-striped table-condensed table-bordered">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.Description)</th>
-        <th>Actions</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-                @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin))) {                
-                    <td>@Html.ActionLink(item.Name, "Edit", new { item.ID, returnUrl = Request.Url })</td>
-                }
-                else
-                {
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                }
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td class="row">
-                @using (@Html.BeginForm("AddToPersonal", "GeneralDishes",
-                    FormMethod.Post,
-                    new { @class = "col-xs-2" }))
-                {
-                    @Html.Hidden("ID", item.ID)
-                    @Html.Hidden("returnUrl", Request.Url)
-
-                    @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
-                    <button type="submit" class="btn btn-info btn-sm">
-                        <div class="glyphicon glyphicon-star"></div>
-                    </button>
-                }
-
-                @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
-                {
-                    using (@Html.BeginForm("Delete", "GeneralDishes",
-                        FormMethod.Post,
-                        new { @class = "col-xs-2" }))
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
                     {
-                        @Html.Hidden("ID", item.ID)
-                        @Html.Hidden("returnUrl", Request.Url)
-
-                        @*<input type="submit" class="btn btn-default btn-xs" value="Delete" />*@
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            <div class="glyphicon glyphicon-remove"></div>
-                        </button>
+                        <td>@Html.ActionLink(item.Name, "Edit", new { item.ID, returnUrl = Request.Url })</td>
                     }
-                }
-            </td>
-        </tr>
-    }
+                    else
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <div class="btn-group">
+                                @using (@Html.BeginForm("AddToPersonal", "GeneralDishes"))
+                                {
+                                    @Html.Hidden("ID", item.ID)
+                                    @Html.Hidden("returnUrl", Request.Url)
 
-</table>
+                                    <button type="submit" class="btn btn-info btn-sm">
+                                        <div class="glyphicon glyphicon-star"></div>
+                                    </button>
+                                }
+                            </div>
+
+                            @if (User.IsInRole(AppRole.RoleTypeToString(AppRole.RoleType.Admin)))
+                            {
+                                <div class="btn-group">
+                                    @using (@Html.BeginForm("Delete", "GeneralDishes"))
+                                    {
+                                        @Html.Hidden("ID", item.ID)
+                                        @Html.Hidden("returnUrl", Request.Url)
+
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <div class="glyphicon glyphicon-remove"></div>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

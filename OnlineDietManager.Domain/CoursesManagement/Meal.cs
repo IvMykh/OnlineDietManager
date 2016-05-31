@@ -23,7 +23,7 @@ namespace OnlineDietManager.Domain.CoursesManagement
         [Required]
         public TimeSpan Time { get; set; } //DateTime
 
-        [Required]
+        //[Required]
         public virtual IList<Dish> Dishes { get; set; }
 
         public int Day_ID { get; set; }
@@ -31,5 +31,31 @@ namespace OnlineDietManager.Domain.CoursesManagement
         [ForeignKey("Day_ID")]
         public virtual Day Day { get; set; }
 
+        public Meal()
+        {
+            Dishes = new List<Dish>();
+        }
+
+
+        public float Protein
+        {
+            get { return Dishes.Sum(d => d.Protein); }
+        }
+        public float Fat
+        {
+            get { return Dishes.Sum(d => d.Fat); }
+        }
+        public float Carbohydrates
+        {
+            get { return Dishes.Sum(d => d.Carbohydrates); }
+        }
+        public float Caloricity
+        {
+            get { return Dishes.Sum(d => d.Caloricity); }
+        }
+        public float Weight
+        {
+            get { return Dishes.Sum(comp => comp.Weight); }
+        }
     }
 }

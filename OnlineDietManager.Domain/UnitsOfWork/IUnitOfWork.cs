@@ -12,13 +12,13 @@ namespace OnlineDietManager.Domain.UnitsOfWork
 {
     public interface IUnitOfWork
     {
-        IRepository<Ingredient> IngredientsRepository { get; }
-        IRepository<DishComponent> DishComponentsRepository { get; }
-        IRepository<Dish> DishesRepository { get; }
-        IRepository<Meal> MealsRepository { get; }
-        IRepository<Day> DaysRepository { get; }
-        IRepository<Course> CoursesRepository { get; }
-        IRepository<ActiveCourse> ActiveCoursesRepository { get; }
+        IRepository<Ingredient>     IngredientsRepository { get; }
+        IRepository<DishComponent>  DishComponentsRepository { get; }
+        IRepository<Dish>           DishesRepository { get; }
+        IRepository<Meal>           MealsRepository { get; }
+        IRepository<Day>            DaysRepository { get; }
+        IRepository<Course>         CoursesRepository { get; }
+        IRepository<ActiveCourse>   ActiveCoursesRepository { get; }
 
         void Save();
     }

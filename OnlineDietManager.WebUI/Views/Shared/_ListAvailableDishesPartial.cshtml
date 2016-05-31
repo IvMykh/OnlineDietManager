@@ -1,0 +1,13 @@
+﻿@model IEnumerable<OnlineDietManager.WebUI.Models.SelectDishViewModel>
+
+<div class="panel panel-info">
+    <div class="panel-heading text-centrified">
+        <p class="panelHeading text-center text-uppercase">Dishes</p>
+    </div>
+    <div id="ingredients-list-box" class="panel-body">
+        @foreach (var selectDishVM in Model)
+        {
+            @Html.Partial("_SelectDishPartial", selectDishVM)
+        }
+    </div>
+</div>

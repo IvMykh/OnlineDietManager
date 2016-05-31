@@ -52,6 +52,7 @@ namespace OnlineDietManager.Domain.DishesManagement
         {
             get { return Ingredient.Caloricity / SpecialData.STANDARD_PORTION * Weight; }
         }
+
         public string Description
         {
             get { return Ingredient.Description; }
