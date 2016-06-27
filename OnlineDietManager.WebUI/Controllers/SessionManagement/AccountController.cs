@@ -78,6 +78,25 @@ namespace OnlineDietManager.WebUI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        private void setupRolesIfNecessary()
+        {
+            string roleName = AppRole.RoleTypeToString(AppRole.RoleType.User);
+            if (!RoleManager.RoleExists(roleName))
+            {
+                var role = new AppRole();
+                role.Name = roleName;
+                RoleManager.Create(role);
+            }
+
+            roleName = AppRole.RoleTypeToString(AppRole.RoleType.Admin);
+            if (!RoleManager.RoleExists(roleName))
+            {
+                var role = new AppRole();
+                role.Name = roleName;
+                RoleManager.Create(role);
+            }
+        }
+
         [HttpGet]
         public ActionResult Register()
         {
@@ -87,6 +106,8 @@ namespace OnlineDietManager.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(RegisterModel model)
         {
+            setupRolesIfNecessary();
+            
             if (!ModelState.IsValid)
             {
                 return View();

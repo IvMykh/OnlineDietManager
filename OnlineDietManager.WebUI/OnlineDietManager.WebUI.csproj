@@ -152,6 +152,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Helpers\TextFile1.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -161,7 +162,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -217,7 +220,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -249,7 +254,6 @@
     <Content Include="Views\UserManagement\Index.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Shared\_DayPartial.cshtml" />
-
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Shared\_CourseSummary.cshtml" />
     <Content Include="Views\Shared\_AbstractDayPartial.cshtml" />
@@ -269,7 +273,6 @@
     <Content Include="Views\Shared\_ListIncludedDishesPartial.cshtml" />
     <Content Include="Views\Shared\_ListAvailableDishesPartial.cshtml" />
     <Content Include="Views\Shared\_SelectDishPartial.cshtml" />
-
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

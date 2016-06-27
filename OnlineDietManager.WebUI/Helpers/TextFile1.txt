@@ -1,0 +1,91 @@
+﻿// class PagingInfo
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace SportsStore.WebUI.Models
+{
+    public class PagingInfo
+    {
+        public int TotalItems { get; set; }
+        public int ItemsPerPage { get; set; }
+        public int CurrentPage { get; set; }
+
+        public int TotalPages {
+            get { return (int)Math.Ceiling(
+                    ((decimal)TotalItems / ItemsPerPage)); } 
+        }
+    }
+}
+
+// PagingHelpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using SportsStore.WebUI.Models;
+
+namespace SportsStore.WebUI.HtmlHelpers
+{
+    public static class PagingHelpers
+    {
+        public static MvcHtmlString PageLinks(
+            this HtmlHelper html, 
+            PagingInfo pagingInfo, 
+            Func<int, string> pageUrl)
+        {
+            var result = new StringBuilder();
+            for (int i = 1; i <= pagingInfo.TotalPages; i++)
+            {
+                var tagBuilder = new TagBuilder("a");
+                tagBuilder.MergeAttribute("href", pageUrl(i));
+                tagBuilder.InnerHtml = i.ToString();
+                
+                if (i == pagingInfo.CurrentPage)
+                {
+                    tagBuilder.AddCssClass("selected");
+                    tagBuilder.AddCssClass("btn-primary");
+                }
+                
+                tagBuilder.AddCssClass("btn btn-default");
+                
+                result.Append(tagBuilder.ToString());
+            }
+
+            return MvcHtmlString.Create(result.ToString());
+        }
+    }
+}
+
+
+// View;
+<div class="btn-group pull-right">
+    @Html.PageLinks(
+    Model.PagingInfo, 
+    x => Url.Action("List", new { category = Model.CurrentCategory, page = x }))
+</div>
+
+// Controller;
+public ActionResult List(string category, int page = 1) {
+            var model = new ProductsListViewModel
+            {
+                Products = repository.Products
+                    .Where(p => category == null || p.Category == category)
+                    .OrderBy(p => p.ProductID)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize),
+                PagingInfo = new PagingInfo { 
+                        CurrentPage     = page, 
+                        ItemsPerPage    = PageSize, 
+                        TotalItems      = (category == null)? 
+                            repository.Products.Count() : 
+                            repository.Products
+                            .Where(p => p.Category == category).Count()
+                    },
+                CurrentCategory = category
+            };
+            return View(model);
+        }

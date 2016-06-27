@@ -23,6 +23,7 @@ namespace OnlineDietManager.Domain
         public OnlineDietManagerContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer<OnlineDietManagerContext>(new CreateDatabaseIfNotExists<OnlineDietManagerContext>());
         }
 
         public DbSet<Ingredient> Ingredients { get; set; }
